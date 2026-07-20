@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>snap</title>
+<style>
+  html, body { margin: 0; background: #101010; }
+  iframe { width: 900px; height: 1200px; border: 0; position: absolute; left: 0; top: 0; }
+</style>
+</head>
+<body>
+<iframe id="frame" scrolling="no"></iframe>
+<script src="https://unpkg.com/html-to-image@1.11.13/dist/html-to-image.js"></script>
+<script>
+  window.__status = 'loading';
+  const q = new URLSearchParams(location.search);
+  const file = q.get('f');
+  const name = q.get('name') || file.replace(/\.html$/, '');
+  const ratio = parseFloat(q.get('r') || '0.5');
+  const frame = document.getElementById('frame');
+  frame.src = file;
+  frame.onload = async () => {
+    try {
+      const doc = frame.contentDocument;
+      const st = doc.createElement('style');
+      st.textContent = '*, *::before, *::after { animation: none !important; transition: none !important; }';
+      doc.head.appendChild(st);
+      await doc.fonts.ready;
+      await new Promise(res => setTimeout(res, 600));
+      const node = doc.getElementById('card') || doc.body;
+      window.__status = 'rendering';
+      const dataUrl = await htmlToImage.toPng(node, { pixelRatio: ratio, width: 900, height: 1200 });
+      window.__status = 'posting';
+      const resp = await fetch('/__snap?name=' + encodeURIComponent(name), { method: 'POST', body: dataUrl });
+      window.__status = 'done:' + await resp.text();
+    } catch (e) {
+      window.__status = 'error:' + (e && (e.message || e));
+      console.error(e);
+    }
+  };
+</script>
+</body>
+</html>

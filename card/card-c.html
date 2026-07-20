@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=900">
+<title>GAMBARDINI ЛАЙТ — Крючок самоклеящийся тройной</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Jost:wght@300..700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F2EDE4; --bg-2:#EAE3D4; --bg-3:#E2D9C6;
+    --ink:#2B2118; --noce:#5C4432; --brass:#B08D57; --brass-ink:#8F6B33; --muted:#7D6F5C;
+  }
+  html,body{margin:0;padding:0;overflow:hidden;background:var(--bg)}
+  *{box-sizing:border-box;font-feature-settings:"kern"}
+
+  #card{
+    position:relative;width:900px;height:1200px;overflow:hidden;
+    background:
+      radial-gradient(1100px 800px at 18% 8%, rgba(255,252,244,.75) 0%, rgba(255,252,244,0) 55%),
+      linear-gradient(168deg, #F4EFE7 0%, var(--bg) 38%, var(--bg-2) 72%, var(--bg-3) 100%);
+    font-family:"Jost",system-ui,sans-serif;color:var(--ink);
+  }
+
+  /* ── grain ─────────────────────────────────────────── */
+  .grain{
+    position:absolute;inset:0;z-index:40;pointer-events:none;
+    opacity:.05;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* ── header ────────────────────────────────────────── */
+  .head{
+    position:absolute;left:72px;right:72px;top:64px;z-index:20;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .wordmark{
+    font-family:"Bodoni Moda",serif;font-weight:500;font-size:22px;
+    letter-spacing:.32em;color:var(--ink);
+  }
+  .origin{
+    font-size:12px;font-weight:500;letter-spacing:.14em;color:var(--muted);
+    text-transform:uppercase;
+  }
+  .head-rule{
+    position:absolute;left:72px;right:72px;top:118px;height:1px;z-index:20;
+    background:rgba(43,33,24,.14);
+  }
+
+  /* ── title ─────────────────────────────────────────── */
+  .title-block{position:absolute;left:72px;top:152px;z-index:20}
+  .eyebrow{
+    display:flex;align-items:center;gap:12px;
+    font-size:13px;font-weight:500;letter-spacing:.15em;
+    color:var(--brass-ink);text-transform:uppercase;
+  }
+  .eyebrow::before{content:"";width:30px;height:2px;background:var(--brass)}
+  h1{
+    margin:14px 0 0;font-family:"Bodoni Moda",serif;font-weight:500;
+    font-size:63px;line-height:1.06;letter-spacing:.005em;color:var(--ink);
+  }
+  h1 em{font-style:italic;font-weight:500;color:var(--brass-ink)}
+
+  /* ── hero art ──────────────────────────────────────── */
+  .hero{position:absolute;inset:0;z-index:10;display:block}
+
+  .caption{
+    position:absolute;left:230px;top:757px;z-index:20;
+    font-size:13.5px;font-weight:400;letter-spacing:.04em;color:var(--muted);
+  }
+  .caption b{font-weight:400;color:var(--brass);padding:0 3px}
+
+  /* ── benefit chips ─────────────────────────────────── */
+  .chips{position:absolute;left:72px;top:972px;z-index:20;display:flex;gap:14px}
+  .chip{
+    height:84px;display:flex;align-items:center;gap:14px;
+    padding:0 25px;border-radius:14px;
+    font-size:38px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .chip svg{flex:0 0 auto}
+  .chip-dark{
+    background:linear-gradient(180deg,#34281C 0%, #241B12 100%);
+    color:#F2EAD9;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 14px 28px -14px rgba(43,33,24,.45);
+  }
+  .chip-line{
+    border:1.5px solid var(--brass);
+    background:rgba(255,253,247,.5);
+    color:var(--ink);
+  }
+
+  /* ── footer ────────────────────────────────────────── */
+  .foot{
+    position:absolute;left:72px;right:72px;bottom:64px;z-index:20;
+    border-top:1px solid rgba(43,33,24,.14);padding-top:18px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .steel{font-size:16px;font-weight:500;letter-spacing:.01em;color:var(--ink)}
+  .steel span{color:var(--muted);font-weight:400}
+  .colors{display:flex;align-items:center;gap:18px}
+  .colors-label{font-size:13px;font-weight:400;color:var(--muted);margin-right:2px}
+  .sw{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .dot{width:20px;height:20px;border-radius:50%;box-shadow:inset 0 1px 2px rgba(0,0,0,.08)}
+  .dot-1{background:#FFFFFF;border:1px solid rgba(43,33,24,.22)}
+  .dot-2{background:#1A1A1A}
+  .dot-3{background:#6E6E6E}
+  .dot-4{background:#D6B36A}
+  .sw i{font-style:normal;font-size:10.5px;letter-spacing:.02em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div id="card">
+
+  <!-- header -->
+  <div class="head">
+    <div class="wordmark">GAMBARDINI</div>
+    <div class="origin">Сделано в&nbsp;России</div>
+  </div>
+  <div class="head-rule"></div>
+
+  <!-- title -->
+  <div class="title-block">
+    <div class="eyebrow">Серия GAMBARDINI Лайт</div>
+    <h1>Крючок<br>самоклеящийся<br><em>тройной</em></h1>
+  </div>
+
+  <!-- hero: giant 3 + product -->
+  <svg class="hero" viewBox="0 0 900 1200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#6E543A"/>
+        <stop offset=".45" stop-color="#55402B"/>
+        <stop offset="1" stop-color="#3C2C1D"/>
+      </linearGradient>
+      <linearGradient id="gPlank" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#FFFFFF"/>
+        <stop offset=".55" stop-color="#F5F2EC"/>
+        <stop offset="1" stop-color="#E8E3D7"/>
+      </linearGradient>
+      <radialGradient id="gDisc" cx=".35" cy=".3" r=".85">
+        <stop offset="0" stop-color="#FFFFFF"/>
+        <stop offset=".55" stop-color="#F0ECE3"/>
+        <stop offset="1" stop-color="#D8D2C4"/>
+      </radialGradient>
+      <linearGradient id="gTowel" gradientUnits="userSpaceOnUse" x1="558" y1="0" x2="682" y2="0">
+        <stop offset="0"   stop-color="#EBDFC6"/>
+        <stop offset=".10" stop-color="#F5EDDC"/>
+        <stop offset=".20" stop-color="#E7D9BC"/>
+        <stop offset=".34" stop-color="#F3EBD8"/>
+        <stop offset=".48" stop-color="#E9DDC2"/>
+        <stop offset=".62" stop-color="#F6EFDF"/>
+        <stop offset=".78" stop-color="#E8DBC0"/>
+        <stop offset=".90" stop-color="#F2E9D5"/>
+        <stop offset="1"   stop-color="#E9DCC1"/>
+      </linearGradient>
+      <linearGradient id="gTowelShade" gradientUnits="userSpaceOnUse" x1="0" y1="694" x2="0" y2="942">
+        <stop offset="0"   stop-color="#5C4432" stop-opacity=".16"/>
+        <stop offset=".07" stop-color="#5C4432" stop-opacity=".02"/>
+        <stop offset=".6"  stop-color="#5C4432" stop-opacity=".02"/>
+        <stop offset="1"   stop-color="#5C4432" stop-opacity=".10"/>
+      </linearGradient>
+      <filter id="b18" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="18"/></filter>
+      <filter id="b8"  x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"/></filter>
+      <filter id="b4"  x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4"/></filter>
+      <clipPath id="towelClip">
+        <path d="M594 694 C584 728 562 756 558 800 L558 926 Q558 942 574 942 L666 942 Q682 942 682 926 L682 800 C678 756 656 728 646 694 Z"/>
+      </clipPath>
+    </defs>
+
+    <!-- brass echo of the 3 -->
+    <text x="628" y="962" text-anchor="middle" font-family="'Bodoni Moda',serif" font-weight="500"
+          font-size="800" fill="none" stroke="#B08D57" stroke-width="2.5" opacity=".85"
+          style="font-feature-settings:'lnum' 1;font-variant-numeric:lining-nums">3</text>
+    <!-- the 3 -->
+    <text x="610" y="948" text-anchor="middle" font-family="'Bodoni Moda',serif" font-weight="500"
+          font-size="800" fill="url(#g3)"
+          style="font-feature-settings:'lnum' 1;font-variant-numeric:lining-nums">3</text>
+
+    <!-- plank shadow on wall / on the 3 -->
+    <rect x="238" y="613" width="480" height="150" rx="18" fill="#3F2F1F" opacity=".2" filter="url(#b18)"/>
+    <rect x="232" y="599" width="478" height="148" rx="18" fill="#3F2F1F" opacity=".12" filter="url(#b8)"/>
+
+    <!-- plank -->
+    <g transform="translate(230 585)">
+      <rect x="0" y="0" width="480" height="150" rx="18" fill="url(#gPlank)"/>
+      <rect x="0.75" y="0.75" width="478.5" height="148.5" rx="17.25" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
+      <rect x="0.5" y="0.5" width="479" height="149" rx="17.5" fill="none" stroke="rgba(43,33,24,.1)" stroke-width="1"/>
+      <!-- engraving -->
+      <text x="26" y="28.2" font-family="'Bodoni Moda',serif" font-weight="500" font-size="9.5"
+            letter-spacing="2.3" fill="rgba(255,255,255,.9)">GAMBARDINI</text>
+      <text x="26" y="27.2" font-family="'Bodoni Moda',serif" font-weight="500" font-size="9.5"
+            letter-spacing="2.3" fill="#A69D8C">GAMBARDINI</text>
+      <!-- discs 1 & 2 -->
+      <g>
+        <ellipse cx="90" cy="80" rx="43" ry="41" fill="rgba(60,45,30,.14)" filter="url(#b4)"/>
+        <circle cx="90" cy="75" r="41" fill="url(#gDisc)" stroke="rgba(43,33,24,.1)" stroke-width="1"/>
+        <circle cx="90" cy="75" r="29" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1"/>
+        <circle cx="90" cy="75" r="27" fill="none" stroke="rgba(80,66,48,.2)" stroke-width="1.5"/>
+      </g>
+      <g>
+        <ellipse cx="240" cy="80" rx="43" ry="41" fill="rgba(60,45,30,.14)" filter="url(#b4)"/>
+        <circle cx="240" cy="75" r="41" fill="url(#gDisc)" stroke="rgba(43,33,24,.1)" stroke-width="1"/>
+        <circle cx="240" cy="75" r="29" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1"/>
+        <circle cx="240" cy="75" r="27" fill="none" stroke="rgba(80,66,48,.2)" stroke-width="1.5"/>
+      </g>
+    </g>
+
+    <!-- towel shadow -->
+    <rect x="572" y="716" width="122" height="238" rx="14" fill="#3F2F1F" opacity=".16" filter="url(#b8)"/>
+
+    <!-- towel on hook 3 -->
+    <g>
+      <path d="M594 694 C584 728 562 756 558 800 L558 926 Q558 942 574 942 L666 942 Q682 942 682 926 L682 800 C678 756 656 728 646 694 Z"
+            fill="url(#gTowel)"/>
+      <g clip-path="url(#towelClip)">
+        <rect x="550" y="690" width="140" height="256" fill="url(#gTowelShade)"/>
+        <rect x="550" y="884" width="140" height="16" fill="#CFA45C" opacity=".45"/>
+        <line x1="550" y1="877" x2="690" y2="877" stroke="#B08D57" stroke-width="1.5" opacity=".6"/>
+        <line x1="550" y1="907" x2="690" y2="907" stroke="#B08D57" stroke-width="1.5" opacity=".6"/>
+        <path d="M602 704 L588 744" stroke="rgba(92,68,50,.13)" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M620 706 L620 748" stroke="rgba(92,68,50,.13)" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M639 704 L651 744" stroke="rgba(92,68,50,.13)" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </g>
+    </g>
+
+    <!-- disc 3 over the towel -->
+    <g>
+      <ellipse cx="620" cy="666" rx="44" ry="42" fill="rgba(60,45,30,.17)" filter="url(#b4)"/>
+      <circle cx="620" cy="660" r="41" fill="url(#gDisc)" stroke="rgba(43,33,24,.1)" stroke-width="1"/>
+      <circle cx="620" cy="660" r="29" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1"/>
+      <circle cx="620" cy="660" r="27" fill="none" stroke="rgba(80,66,48,.2)" stroke-width="1.5"/>
+    </g>
+  </svg>
+
+  <!-- three things -->
+  <div class="caption">полотенце<b>·</b>халат<b>·</b>щётка</div>
+
+  <!-- benefits -->
+  <div class="chips">
+    <div class="chip chip-dark">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#F2EAD9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3.4 8.4 H13.2 V14 H9.6 L8.4 19.2 H5 L6.2 14 H3.4 Z"/>
+        <path d="M13.2 9.3 H15.6 V13.1 H13.2"/>
+        <path d="M15.6 11.2 H20.4"/>
+        <path d="M3.2 20.6 L20.8 3.4" stroke="#241B12" stroke-width="4.6"/>
+        <path d="M3.2 20.6 L20.8 3.4"/>
+      </svg>
+      <span>Без сверления</span>
+    </div>
+    <div class="chip chip-line">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#8F6B33" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8.7 8.4 C8.7 4.7 15.3 4.7 15.3 8.4"/>
+        <path d="M8.1 8.4 H15.9 L17.4 17.5 C17.6 18.9 16.7 20 15.3 20 H8.7 C7.3 20 6.4 18.9 6.6 17.5 Z"/>
+      </svg>
+      <span>До&nbsp;5&nbsp;кг</span>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div class="foot">
+    <div class="steel">Нержавеющая сталь AISI&nbsp;304 <span>· толщина 1&nbsp;мм</span></div>
+    <div class="colors">
+      <span class="colors-label">4 цвета</span>
+      <span class="sw"><span class="dot dot-1"></span><i>белый</i></span>
+      <span class="sw"><span class="dot dot-2"></span><i>чёрный</i></span>
+      <span class="sw"><span class="dot dot-3"></span><i>графит</i></span>
+      <span class="sw"><span class="dot dot-4"></span><i>шампань</i></span>
+    </div>
+  </div>
+
+  <div class="grain"></div>
+</div>
+</body>
+</html>

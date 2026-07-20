@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>GAMBARDINI ЛАЙТ — крючок самоклеящийся тройной</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F2EDE4; --bg-2:#EAE3D4; --bg-3:#E2D9C6;
+    --ink:#2B2118; --noce:#5C4432;
+    --brass:#B08D57; --brass-ink:#8F6B33; --muted:#7D6F5C;
+  }
+  html,body{margin:0;padding:0;overflow:hidden;background:#191612}
+  *{box-sizing:border-box}
+  body{
+    font-family:'Jost',sans-serif;
+    font-feature-settings:"kern" 1;
+    text-rendering:optimizeLegibility;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  #card{
+    position:relative;width:900px;height:1200px;overflow:hidden;
+    background:
+      radial-gradient(760px 600px at 57% 44%, rgba(176,141,87,.13), rgba(176,141,87,0) 72%),
+      linear-gradient(180deg,#F5F0E7 0%, #F2EDE4 46%, #EBE3D1 100%);
+    color:var(--ink);
+  }
+
+  /* ---- паспарту ---- */
+  .frame{position:absolute;inset:30px;border:1px solid rgba(143,107,51,.5);pointer-events:none;z-index:6}
+  .frame-in{position:absolute;inset:37px;border:1px solid rgba(143,107,51,.18);pointer-events:none;z-index:6}
+
+  /* ---- латунное пятно света (тёплый живой элемент) ---- */
+  .glow{
+    position:absolute;left:130px;top:270px;width:680px;height:540px;z-index:0;
+    background:radial-gradient(closest-side, rgba(176,141,87,.16), rgba(176,141,87,0));
+  }
+
+  /* ---- шапка ---- */
+  .brand{position:absolute;top:74px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:22px;z-index:3}
+  .brand .word{
+    font-family:'Bodoni Moda',serif;font-weight:500;font-size:29px;line-height:1;
+    letter-spacing:.34em;margin-right:-.34em;color:var(--ink);
+  }
+  .brand i{display:block;width:64px;height:1px}
+  .brand i.l{background:linear-gradient(90deg,rgba(176,141,87,0),rgba(176,141,87,.7))}
+  .brand i.r{background:linear-gradient(90deg,rgba(176,141,87,.7),rgba(176,141,87,0))}
+
+  .eyebrow{
+    position:absolute;top:146px;left:0;right:0;text-align:center;z-index:3;
+    font-weight:500;font-size:13px;line-height:1;letter-spacing:.3em;text-indent:.3em;
+    color:var(--brass-ink);
+  }
+
+  /* ---- заголовок: крупная дидона с контрастом размеров ---- */
+  .title{position:absolute;top:182px;left:0;right:0;text-align:center;z-index:3}
+  .title .t1{
+    display:block;font-family:'Bodoni Moda',serif;font-weight:500;
+    font-size:94px;line-height:.95;letter-spacing:.005em;color:var(--ink);
+  }
+  .title .t2{
+    display:block;margin-top:14px;font-family:'Bodoni Moda',serif;
+    font-style:italic;font-weight:400;font-size:41px;line-height:1;color:var(--noce);
+  }
+
+  /* ---- сцена: товар + выноски ---- */
+  .scene{position:absolute;inset:0;width:900px;height:1200px;z-index:2}
+  .scene text{font-feature-settings:"kern" 1}
+  .scene .cap{font-family:'Jost',sans-serif;font-weight:500;font-size:10.5px;letter-spacing:2.2px;fill:var(--brass-ink)}
+  .scene .cap-s{font-family:'Jost',sans-serif;font-weight:500;font-size:10px;letter-spacing:1.9px;fill:var(--brass-ink)}
+  .scene .val{font-family:'Bodoni Moda',serif;font-weight:500;font-size:30px;fill:var(--ink)}
+  .scene .note{font-family:'Jost',sans-serif;font-weight:400;font-size:13.5px;fill:var(--muted)}
+  .scene .eng{font-family:'Bodoni Moda',serif;font-weight:600;font-size:10px;letter-spacing:2.6px}
+  .scene .lead{stroke:#B08D57;stroke-opacity:.72;stroke-width:1;fill:none}
+  .scene .dim{stroke:#B08D57;stroke-opacity:.6;stroke-width:.9;fill:none}
+  .scene .pt{fill:#B08D57}
+
+  /* ---- главный бенефит ---- */
+  .benefit{position:absolute;left:72px;top:884px;z-index:3}
+  .benefit .big{
+    font-family:'Bodoni Moda',serif;font-weight:500;font-size:68px;line-height:1;
+    letter-spacing:.004em;color:var(--ink);
+  }
+  .benefit .row{display:flex;align-items:center;gap:13px;margin-top:24px}
+  .benefit .row + .row{margin-top:14px}
+  .benefit .row svg{flex:0 0 auto;display:block}
+  .benefit .row span{font-size:16.5px;line-height:1.2;color:var(--noce)}
+
+  /* ---- цвета ---- */
+  .colors{position:absolute;right:72px;top:892px;text-align:right;z-index:3}
+  .colors .cap{
+    display:block;font-weight:500;font-size:11px;line-height:1;letter-spacing:.26em;margin-right:-.26em;
+    color:var(--brass-ink);
+  }
+  .colors .row{display:flex;justify-content:flex-end;gap:22px;margin-top:23px}
+  .sw{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .sw b{
+    display:block;width:30px;height:30px;border-radius:50%;
+    border:1px solid rgba(43,33,24,.22);
+    box-shadow:inset 0 -6px 10px rgba(43,33,24,.14), inset 0 5px 8px rgba(255,255,255,.28), 0 1px 3px rgba(43,33,24,.18);
+  }
+  .sw span{font-size:12.5px;line-height:1;color:var(--muted)}
+
+  /* ---- подпись листа ---- */
+  .made{
+    position:absolute;left:0;right:0;bottom:78px;z-index:3;
+    display:flex;align-items:center;justify-content:center;gap:18px;
+  }
+  .made em{font-style:normal;font-weight:500;font-size:11.5px;line-height:1;letter-spacing:.3em;margin-right:-.3em;color:var(--muted)}
+  .made i{display:block;width:46px;height:1px;background:rgba(176,141,87,.45)}
+
+  /* ---- бумага ---- */
+  .vignette{position:absolute;inset:0;z-index:4;pointer-events:none;box-shadow:inset 0 0 140px rgba(92,68,50,.10)}
+  .grain{
+    position:absolute;inset:0;z-index:7;pointer-events:none;opacity:.07;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    background-size:240px 240px;
+  }
+</style>
+</head>
+<body>
+<div id="card">
+  <div class="glow"></div>
+
+  <header class="brand" aria-label="GAMBARDINI">
+    <i class="l"></i><span class="word">GAMBARDINI</span><i class="r"></i>
+  </header>
+
+  <div class="eyebrow">СЕРИЯ GAMBARDINI&nbsp;ЛАЙТ</div>
+
+  <h1 class="title">
+    <span class="t1">Крючок</span>
+    <span class="t2">самоклеящийся тройной</span>
+  </h1>
+
+  <svg class="scene" viewBox="0 0 900 1200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="pg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#808080"/>
+        <stop offset=".42" stop-color="#6C6C6C"/>
+        <stop offset="1" stop-color="#5F5F5F"/>
+      </linearGradient>
+      <linearGradient id="ps" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+        <stop offset=".16" stop-color="#FFFFFF" stop-opacity=".10"/>
+        <stop offset=".38" stop-color="#FFFFFF" stop-opacity="0"/>
+        <stop offset=".78" stop-color="#FFFFFF" stop-opacity=".06"/>
+        <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+      </linearGradient>
+      <radialGradient id="dg" cx=".36" cy=".30" r=".85">
+        <stop offset="0" stop-color="#8E8E8E"/>
+        <stop offset=".5" stop-color="#707070"/>
+        <stop offset="1" stop-color="#565656"/>
+      </radialGradient>
+      <linearGradient id="tw" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#5C4432" stop-opacity=".13"/>
+        <stop offset=".24" stop-color="#5C4432" stop-opacity="0"/>
+        <stop offset=".8" stop-color="#5C4432" stop-opacity="0"/>
+        <stop offset="1" stop-color="#5C4432" stop-opacity=".09"/>
+      </linearGradient>
+      <filter id="wallShadow" x="-30%" y="-30%" width="160%" height="200%">
+        <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#2B2118" flood-opacity=".20"/>
+        <feDropShadow dx="0" dy="34" stdDeviation="34" flood-color="#2B2118" flood-opacity=".11"/>
+      </filter>
+      <filter id="discShadow" x="-40%" y="-40%" width="180%" height="180%">
+        <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#000000" flood-opacity=".30"/>
+      </filter>
+      <filter id="towelShadow" x="-40%" y="-30%" width="180%" height="160%">
+        <feDropShadow dx="0" dy="9" stdDeviation="9" flood-color="#2B2118" flood-opacity=".16"/>
+      </filter>
+    </defs>
+
+    <!-- ======= планка ======= -->
+    <g filter="url(#wallShadow)">
+      <rect x="190" y="445" width="520" height="162" rx="19.5" fill="url(#pg)"/>
+      <rect x="190" y="445" width="520" height="162" rx="19.5" fill="url(#ps)"/>
+      <rect x="190.5" y="445.5" width="519" height="161" rx="19" stroke="#000000" stroke-opacity=".28"/>
+      <path d="M212 447.6 H688" stroke="#FFFFFF" stroke-opacity=".32" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M212 604.4 H688" stroke="#000000" stroke-opacity=".20" stroke-width="1.4" stroke-linecap="round"/>
+
+      <!-- гравировка на планке -->
+      <text class="eng" x="222" y="589" fill="#FFFFFF" fill-opacity=".28">GAMBARDINI</text>
+      <text class="eng" x="222" y="588" fill="#000000" fill-opacity=".42">GAMBARDINI</text>
+
+      <!-- ======= три крючка-пина ======= -->
+      <g filter="url(#discShadow)">
+        <circle cx="277" cy="526" r="44.7" fill="url(#dg)"/>
+        <circle cx="277" cy="526" r="44.7" stroke="#000000" stroke-opacity=".32"/>
+        <circle cx="277" cy="526" r="33" stroke="#000000" stroke-opacity=".25" stroke-width="1.4"/>
+        <circle cx="277" cy="526" r="31.4" stroke="#FFFFFF" stroke-opacity=".17"/>
+        <path d="M238.3 503.65 A44.7 44.7 0 0 1 315.7 503.65" stroke="#FFFFFF" stroke-opacity=".22" stroke-width="1.2"/>
+      </g>
+      <g filter="url(#discShadow)">
+        <circle cx="450" cy="526" r="44.7" fill="url(#dg)"/>
+        <circle cx="450" cy="526" r="44.7" stroke="#000000" stroke-opacity=".32"/>
+        <circle cx="450" cy="526" r="33" stroke="#000000" stroke-opacity=".25" stroke-width="1.4"/>
+        <circle cx="450" cy="526" r="31.4" stroke="#FFFFFF" stroke-opacity=".17"/>
+        <path d="M411.3 503.65 A44.7 44.7 0 0 1 488.7 503.65" stroke="#FFFFFF" stroke-opacity=".22" stroke-width="1.2"/>
+      </g>
+      <g filter="url(#discShadow)">
+        <circle cx="623" cy="526" r="44.7" fill="url(#dg)"/>
+        <circle cx="623" cy="526" r="44.7" stroke="#000000" stroke-opacity=".32"/>
+        <circle cx="623" cy="526" r="33" stroke="#000000" stroke-opacity=".25" stroke-width="1.4"/>
+        <circle cx="623" cy="526" r="31.4" stroke="#FFFFFF" stroke-opacity=".17"/>
+        <path d="M584.3 503.65 A44.7 44.7 0 0 1 661.7 503.65" stroke="#FFFFFF" stroke-opacity=".22" stroke-width="1.2"/>
+      </g>
+    </g>
+
+    <!-- ======= полотенце на правом крючке ======= -->
+    <g filter="url(#towelShadow)">
+      <path d="M591 540 C591 502 598 478 623 474 C648 478 655 502 655 540 L655 786 Q655 794 647 794 L599 794 Q591 794 591 786 Z"
+            fill="#FAF5EA" stroke="#5C4432" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M591 540 C591 502 598 478 623 474 C648 478 655 502 655 540 L655 786 Q655 794 647 794 L599 794 Q591 794 591 786 Z"
+            fill="url(#tw)"/>
+      <path d="M601 501 C610 494 636 494 645 501" stroke="#5C4432" stroke-opacity=".18" stroke-width="1.1"/>
+      <path d="M607 512 C604 575 605 690 607 770" stroke="#5C4432" stroke-opacity=".30" stroke-width="1.2"/>
+      <path d="M639 512 C642 575 641 690 639 770" stroke="#5C4432" stroke-opacity=".30" stroke-width="1.2"/>
+      <path d="M591.8 738 H654.2" stroke="#B08D57" stroke-opacity=".6" stroke-width="5"/>
+      <path d="M591.8 748 H654.2" stroke="#B08D57" stroke-opacity=".5" stroke-width="1.4"/>
+      <path d="M591.8 768 H654.2" stroke="#5C4432" stroke-opacity=".25"/>
+    </g>
+
+    <!-- ======= размерная линия: три крючка ======= -->
+    <g>
+      <path class="dim" d="M277 414 V441 M623 414 V441"/>
+      <path class="dim" d="M277 418 H398 M502 418 H623"/>
+      <path class="dim" d="M271.5 423.5 L282.5 412.5 M617.5 423.5 L628.5 412.5"/>
+      <text class="cap" x="450" y="423" text-anchor="middle">ТРИ КРЮЧКА</text>
+    </g>
+
+    <!-- ======= выноска: сталь ======= -->
+    <g>
+      <text class="cap" x="74" y="412">НЕРЖАВЕЮЩАЯ СТАЛЬ</text>
+      <text class="val" x="74" y="441">AISI&#160;304</text>
+      <text class="note" x="74" y="470">толщина 1&#160;мм</text>
+      <path class="lead" d="M74 448 H226 L237 467"/>
+      <circle class="pt" cx="239" cy="470" r="2.6"/>
+    </g>
+
+    <!-- ======= выноска: нагрузка ======= -->
+    <g>
+      <text class="cap" x="826" y="412" text-anchor="end">НАГРУЗКА</text>
+      <text class="val" x="826" y="441" text-anchor="end">до&#160;5&#160;кг</text>
+      <path class="lead" d="M826 448 H700 L634 476"/>
+      <circle class="pt" cx="631" cy="477.5" r="2.6"/>
+    </g>
+
+    <!-- ======= выноска: самоклеящаяся основа ======= -->
+    <g>
+      <path class="lead" d="M826 664 H668 L683 613"/>
+      <circle class="pt" cx="684" cy="610" r="2.6"/>
+      <text class="cap-s" x="826" y="686" text-anchor="end">САМОКЛЕЯЩАЯСЯ ОСНОВА</text>
+    </g>
+
+    <!-- ======= выноска: шляпка с фаской ======= -->
+    <g>
+      <text class="note" x="74" y="601">шляпка с&#160;фаской</text>
+      <path class="lead" d="M74 608 H178 L251 552"/>
+      <circle class="pt" cx="253" cy="550" r="2.6"/>
+    </g>
+  </svg>
+
+  <!-- ======= главный бенефит ======= -->
+  <section class="benefit">
+    <div class="big">Без сверления</div>
+    <div class="row">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5C4432" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10.1"/>
+        <path d="M12 5.6 V18.4"/>
+        <path d="M9.7 8.1 L14.3 9.9 M9.7 11.5 L14.3 13.3 M9.7 14.9 L14.3 16.7"/>
+        <path d="M5.2 18.8 L18.8 5.2"/>
+      </svg>
+      <span>никаких отверстий в&nbsp;стене</span>
+    </div>
+    <div class="row">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5C4432" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9.2 8.4 V7.1 a2.8 2.8 0 0 1 5.6 0 V8.4"/>
+        <path d="M7.6 8.4 h8.8 l1.7 8.3 a2.7 2.7 0 0 1 -2.65 3.3 H8.55 a2.7 2.7 0 0 1 -2.65 -3.3 Z"/>
+        <text x="12" y="16.4" text-anchor="middle" font-family="Jost, sans-serif" font-size="8.5" font-weight="500" fill="#5C4432" stroke="none">5</text>
+      </svg>
+      <span>выдерживает до&nbsp;5&nbsp;кг</span>
+    </div>
+  </section>
+
+  <!-- ======= цвета ======= -->
+  <aside class="colors">
+    <span class="cap">ЧЕТЫРЕ ЦВЕТА</span>
+    <div class="row">
+      <div class="sw"><b style="background:#FFFFFF"></b><span>белый</span></div>
+      <div class="sw"><b style="background:#1A1A1A"></b><span>чёрный</span></div>
+      <div class="sw"><b style="background:#6E6E6E"></b><span>графит</span></div>
+      <div class="sw"><b style="background:#D6B36A"></b><span>шампань</span></div>
+    </div>
+  </aside>
+
+  <footer class="made">
+    <i></i><em>СДЕЛАНО В&nbsp;РОССИИ</em><i></i>
+  </footer>
+
+  <div class="vignette"></div>
+  <div class="frame"></div>
+  <div class="frame-in"></div>
+  <div class="grain"></div>
+</div>
+</body>
+</html>

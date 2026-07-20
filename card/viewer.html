@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Просмотр карточки</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #101010; overflow: hidden; }
+  #stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  iframe {
+    width: 900px; height: 1200px; border: 0; background: #fff;
+    transform-origin: center center; flex: none;
+  }
+</style>
+</head>
+<body>
+<div id="stage"><iframe id="frame" scrolling="no"></iframe></div>
+<script>
+  const params = new URLSearchParams(location.search);
+  const file = params.get('f') || 'card-a.html';
+  const frame = document.getElementById('frame');
+  frame.src = file;
+  function fit() {
+    const zoom = parseFloat(params.get('z')) ||
+      Math.min(innerWidth / 900, innerHeight / 1200);
+    frame.style.transform = 'scale(' + zoom + ')';
+  }
+  addEventListener('resize', fit);
+  fit();
+</script>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>GAMBARDINI ЛАЙТ — Крючок самоклеящийся тройной · 900×1200</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { overflow: hidden; background: #17110B; }
+
+  :root{
+    --bg:      #F2EDE4;
+    --ink:     #2B2118;
+    --noce:    #5C4432;
+    --brass:   #B08D57;
+    --brass-2: #C9A465;
+    --brass-ink:#8F6B33;
+    --cream:   #F2EDE4;
+  }
+
+  #card{
+    position: relative;
+    width: 900px; height: 1200px;
+    overflow: hidden;
+    background:
+      radial-gradient(130% 96% at 50% 36%,
+        #372B1E 0%, #2B2118 42%, #211911 72%, #17110B 100%);
+    font-family: 'Manrope', 'Segoe UI', sans-serif;
+    color: var(--cream);
+    font-feature-settings: "kern";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ---------- light: spotlight cone + warm glow (behind everything) ---------- */
+  .light{ position:absolute; inset:0; width:100%; height:100%; }
+
+  /* ---------- hairline vitrine frame ---------- */
+  .frame{
+    position:absolute; inset:26px;
+    border:1px solid rgba(176,141,87,.16);
+    pointer-events:none;
+  }
+
+  /* ---------- brand wordmark ---------- */
+  .brand{
+    position:absolute; top:62px; left:64px; right:64px;
+    display:flex; align-items:center; gap:26px;
+  }
+  .brand .hl{ flex:1; height:1px; }
+  .brand .hl.l{ background:linear-gradient(90deg, transparent, rgba(176,141,87,.5)); }
+  .brand .hl.r{ background:linear-gradient(270deg, transparent, rgba(176,141,87,.5)); }
+  .brand .wm{
+    font-family:'Bodoni Moda', serif;
+    font-size:17px; font-weight:500;
+    letter-spacing:.35em; margin-right:-.35em;
+    color:rgba(242,237,228,.92);
+    white-space:nowrap;
+  }
+
+  /* ---------- title ---------- */
+  .title{
+    position:absolute; top:112px; left:64px; right:64px;
+    margin:0; text-align:center;
+    font-family:'Bodoni Moda', serif;
+    font-weight:500; font-size:60px; line-height:1.09;
+    letter-spacing:-.005em;
+    color:#F7F2E7;
+  }
+  .title em{
+    font-style:italic; font-weight:500; font-size:62px;
+    display:inline-block; padding:0 .09em .04em .03em;
+    background:linear-gradient(170deg, #E8C77F 8%, #C6A063 48%, #96713A 96%);
+    -webkit-background-clip:text; background-clip:text;
+    color:transparent;
+  }
+
+  /* ---------- series line ---------- */
+  .series{
+    position:absolute; top:268px; left:0; right:0;
+    display:flex; align-items:center; justify-content:center; gap:14px;
+    font-size:12.5px; font-weight:600; color:var(--brass-2);
+  }
+  .series b{ font-weight:600; letter-spacing:.14em; margin-right:-.14em; white-space:nowrap; }
+  .lz{ width:5px; height:5px; transform:rotate(45deg); background:rgba(176,141,87,.75); }
+
+  /* ---------- product scene ---------- */
+  .scene{ position:absolute; top:292px; left:70px; width:760px; height:440px; }
+  .scene svg{ display:block; overflow:visible; }
+
+  /* ---------- divider ---------- */
+  .rule{
+    position:absolute; top:762px; left:64px; right:64px; height:1px;
+    background:linear-gradient(90deg, transparent, rgba(176,141,87,.38) 18%, rgba(176,141,87,.38) 82%, transparent);
+  }
+
+  /* ---------- facts: 5 kg + specs ---------- */
+  .facts{
+    position:absolute; top:792px; left:64px; right:64px; height:206px;
+    display:flex; justify-content:space-between;
+  }
+  .load{ display:flex; flex-direction:column; justify-content:space-between; }
+  .eyebrow{
+    display:flex; align-items:center; gap:11px;
+    margin-left:8px;
+    font-size:13px; font-weight:600; letter-spacing:.14em;
+    color:rgba(242,237,228,.78);
+    white-space:nowrap;
+  }
+  .eyebrow svg{ flex:0 0 18px; }
+  .kgwrap{ filter:drop-shadow(0 22px 34px rgba(0,0,0,.45)); }
+  .kg{
+    font-family:'Bodoni Moda', serif; font-weight:500; line-height:.76;
+    background:linear-gradient(168deg, #EACB86 8%, #C6A063 40%, #B08D57 62%, #8F6B33 96%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    white-space:nowrap;
+  }
+  .kg .five{ font-size:214px; }
+  .kg .unit{ font-size:82px; }
+
+  .specs{
+    list-style:none; margin:0; width:336px;
+    padding:0 0 0 30px;
+    border-left:1px solid rgba(176,141,87,.28);
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .specs li{ display:flex; align-items:center; gap:16px; padding:13px 0; }
+  .specs li + li{ border-top:1px solid rgba(242,237,228,.10); }
+  .specs li svg{ flex:0 0 26px; }
+  .specs b{
+    display:block; font-size:16px; font-weight:600;
+    letter-spacing:.01em; color:var(--cream);
+  }
+  .specs span{
+    display:block; margin-top:3px;
+    font-size:12.5px; font-weight:500;
+    color:rgba(242,237,228,.55);
+  }
+
+  /* ---------- colour tray (jeweler palette on velvet) ---------- */
+  .tray{
+    position:absolute; top:1022px; left:64px; right:64px; height:110px;
+    border-radius:18px;
+    background:linear-gradient(180deg, #231A11, #1D150D);
+    border:1px solid rgba(176,141,87,.22);
+    box-shadow: inset 0 1px 0 rgba(242,237,228,.05), inset 0 12px 26px rgba(0,0,0,.35);
+    display:flex; align-items:center; gap:30px;
+    padding:0 34px;
+    box-sizing:border-box;
+  }
+  .tray .lbl{
+    font-size:12.5px; font-weight:600; letter-spacing:.14em;
+    color:var(--brass-2); white-space:nowrap;
+  }
+  .tray .div{
+    width:1px; height:46px;
+    background:linear-gradient(180deg, transparent, rgba(176,141,87,.4), transparent);
+  }
+  .sw-row{ flex:1; display:flex; justify-content:space-between; }
+  .sw{ display:flex; flex-direction:column; align-items:center; gap:8px; }
+  .sw .ring{
+    width:52px; height:52px; border-radius:50%;
+    border:1px solid rgba(176,141,87,.4);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 16px rgba(0,0,0,.35);
+  }
+  .sw .dot{ width:38px; height:38px; border-radius:50%; }
+  .dot.w{ background:radial-gradient(circle at 32% 28%, #FFFFFF, #E9E3D6 74%); }
+  .dot.k{ background:radial-gradient(circle at 32% 28%, #3B3B3B, #141414 76%); }
+  .dot.g{ background:radial-gradient(circle at 32% 28%, #8B8B8B, #5B5B5B 76%); }
+  .dot.c{ background:radial-gradient(circle at 32% 28%, #E9CD8F, #BE9A50 76%); }
+  .sw i{
+    font-style:normal; font-size:11.5px; font-weight:500;
+    letter-spacing:.02em; color:rgba(242,237,228,.62);
+  }
+
+  /* ---------- film grain ---------- */
+  .grain{
+    position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='280' height='280'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.9 0 0 0 0'/></filter><rect width='280' height='280' filter='url(%23n)'/></svg>");
+    background-size:280px;
+    opacity:.07; mix-blend-mode:overlay;
+  }
+</style>
+</head>
+<body>
+<div id="card">
+
+  <!-- warm spotlight: cone + glow -->
+  <svg class="light" viewBox="0 0 900 1200" aria-hidden="true">
+    <defs>
+      <linearGradient id="cone" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0"   stop-color="#ECD196" stop-opacity=".17"/>
+        <stop offset=".55" stop-color="#ECD196" stop-opacity=".06"/>
+        <stop offset="1"   stop-color="#ECD196" stop-opacity="0"/>
+      </linearGradient>
+      <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#D6B36A" stop-opacity=".22"/>
+        <stop offset="1" stop-color="#D6B36A" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="lb" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="34"/></filter>
+      <filter id="lb2" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="52"/></filter>
+    </defs>
+    <polygon points="366,-60 534,-60 792,640 108,640" fill="url(#cone)" filter="url(#lb)"/>
+    <ellipse cx="450" cy="470" rx="340" ry="170" fill="url(#glow)" filter="url(#lb2)"/>
+  </svg>
+
+  <div class="frame"></div>
+
+  <!-- wordmark -->
+  <header class="brand">
+    <span class="hl l"></span>
+    <span class="wm">GAMBARDINI</span>
+    <span class="hl r"></span>
+  </header>
+
+  <!-- title -->
+  <h1 class="title">Крючок самоклеящийся<br><em>тройной</em></h1>
+
+  <div class="series">
+    <i class="lz"></i>
+    <b>СЕРИЯ GAMBARDINI&nbsp;ЛАЙТ</b>
+    <i class="lz"></i>
+  </div>
+
+  <!-- product: wall bar, three pins, towel on the right pin -->
+  <div class="scene">
+    <svg width="760" height="440" viewBox="0 0 760 440" aria-hidden="true">
+      <defs>
+        <linearGradient id="plateGrad" x1="0" y1="78" x2="0" y2="256" gradientUnits="userSpaceOnUse">
+          <stop offset="0"   stop-color="#FCFAF6"/>
+          <stop offset=".55" stop-color="#F2EEE5"/>
+          <stop offset="1"   stop-color="#E5DFD1"/>
+        </linearGradient>
+        <radialGradient id="sheen" gradientUnits="userSpaceOnUse" cx="380" cy="70" r="300">
+          <stop offset="0"  stop-color="#FFFFFF" stop-opacity=".38"/>
+          <stop offset=".7" stop-color="#FFFFFF" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="plateBottom" x1="0" y1="200" x2="0" y2="256" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#2B2118" stop-opacity="0"/>
+          <stop offset="1" stop-color="#2B2118" stop-opacity=".14"/>
+        </linearGradient>
+        <linearGradient id="topline" x1="0" y1="78" x2="0" y2="142" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#FFFFFF" stop-opacity=".8"/>
+          <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+        </linearGradient>
+        <radialGradient id="discGrad" cx="35%" cy="30%" r="80%">
+          <stop offset="0"   stop-color="#FFFFFF"/>
+          <stop offset=".55" stop-color="#F2EDE3"/>
+          <stop offset="1"   stop-color="#D9D2C2"/>
+        </radialGradient>
+        <linearGradient id="towelGrad" x1="0" y1="127" x2="0" y2="382" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#F5EEDF"/>
+          <stop offset="1" stop-color="#E5DAC4"/>
+        </linearGradient>
+        <linearGradient id="shadeL" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#2B2118" stop-opacity=".16"/>
+          <stop offset="1" stop-color="#2B2118" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="shadeR" x1="1" y1="0" x2="0" y2="0">
+          <stop offset="0" stop-color="#2B2118" stop-opacity=".14"/>
+          <stop offset="1" stop-color="#2B2118" stop-opacity="0"/>
+        </linearGradient>
+
+        <filter id="b6"  x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5"/></filter>
+        <filter id="b10" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="9"/></filter>
+        <filter id="b14" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="12"/></filter>
+        <filter id="b26" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="22"/></filter>
+        <filter id="b44" x="-90%" y="-90%" width="280%" height="280%"><feGaussianBlur stdDeviation="38"/></filter>
+
+        <clipPath id="plateClip"><rect x="95" y="78" width="570" height="178" rx="21.4"/></clipPath>
+
+        <path id="towelP" d="M465 142 C465 132 470 127 481 127 L563 127 C574 127 579 132 579 142
+                             L581 350 C581 367 573 375 558 377.5 C532 381 505 381.5 486 378
+                             C474 375.5 466 367.5 466 355 Z"/>
+        <clipPath id="towelClip"><use href="#towelP"/></clipPath>
+
+        <g id="pinProto">
+          <circle cx="3" cy="7" r="47" fill="#241A10" opacity=".26" filter="url(#b6)"/>
+          <circle r="49" fill="url(#discGrad)" stroke="rgba(43,33,24,.10)" stroke-width="1"/>
+          <circle r="41.2" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="1"/>
+          <circle r="39.6" fill="none" stroke="rgba(43,33,24,.15)" stroke-width="1.2"/>
+        </g>
+      </defs>
+
+      <!-- long soft vitrine shadow, three layers -->
+      <g fill="#0D0803">
+        <rect x="95" y="78" width="570" height="178" rx="21.4" transform="translate(46,64)" filter="url(#b44)" opacity=".28"/>
+        <rect x="95" y="78" width="570" height="178" rx="21.4" transform="translate(24,34)" filter="url(#b26)" opacity=".38"/>
+        <rect x="95" y="78" width="570" height="178" rx="21.4" transform="translate(0,12)"  filter="url(#b10)" opacity=".5"/>
+      </g>
+
+      <!-- wall bar 480×150 (×1.1875), r 18 -->
+      <rect x="95" y="78" width="570" height="178" rx="21.4" fill="url(#plateGrad)" stroke="rgba(43,33,24,.08)" stroke-width="1"/>
+      <g clip-path="url(#plateClip)">
+        <rect x="95" y="78" width="570" height="178" fill="url(#sheen)"/>
+        <rect x="95" y="78" width="570" height="178" fill="url(#plateBottom)"/>
+      </g>
+      <rect x="96" y="79" width="568" height="176" rx="20.4" fill="none" stroke="url(#topline)" stroke-width="1.1"/>
+
+      <!-- engraving -->
+      <text x="141" y="171.8" text-anchor="middle" font-family="'Bodoni Moda', serif" font-size="9"
+            letter-spacing="1.6" fill="#FFFFFF" opacity=".5">GAMBARDINI</text>
+      <text x="141" y="171" text-anchor="middle" font-family="'Bodoni Moda', serif" font-size="9"
+            letter-spacing="1.6" fill="#6E5B44" opacity=".72">GAMBARDINI</text>
+
+      <!-- towel on the right pin (drawn behind its disc) -->
+      <use href="#towelP" transform="translate(14,18)" fill="#0D0803" opacity=".38" filter="url(#b14)"/>
+      <use href="#towelP" fill="url(#towelGrad)"/>
+      <g clip-path="url(#towelClip)">
+        <rect x="463" y="127" width="18" height="256" fill="url(#shadeL)"/>
+        <rect x="563" y="127" width="18" height="256" fill="url(#shadeR)"/>
+        <path d="M508 195 C504 250 505 315 508 370" stroke="rgba(43,33,24,.08)" stroke-width="1.6" fill="none"/>
+        <path d="M545 195 C549 250 548 315 544 368" stroke="rgba(43,33,24,.08)" stroke-width="1.6" fill="none"/>
+        <path d="M472 342 C505 361 545 360 575 340" stroke="#B08D57" stroke-width="2.2" opacity=".8" fill="none"/>
+        <path d="M472 352 C505 371 545 370 575 350" stroke="#B08D57" stroke-width="1" opacity=".5" fill="none"/>
+        <circle cx="525" cy="172" r="51" fill="#20160C" opacity=".32" filter="url(#b10)"/>
+      </g>
+
+      <!-- three pins, disc = 55% of bar height, concentric chamfer ring -->
+      <use href="#pinProto" transform="translate(237.5,167)"/>
+      <use href="#pinProto" transform="translate(380,167)"/>
+      <use href="#pinProto" transform="translate(522.5,167)"/>
+    </svg>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- load + specs -->
+  <section class="facts">
+    <div class="load">
+      <div class="eyebrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A465" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6.2 19.6 L7.9 9.4 H16.1 L17.8 19.6 Z"/>
+          <path d="M9.7 9.4 V7.6 C9.7 5.9 10.7 4.9 12 4.9 C13.3 4.9 14.3 5.9 14.3 7.6 V9.4"/>
+        </svg>
+        <span>НАГРУЗКА ДО</span>
+      </div>
+      <div class="kgwrap"><div class="kg"><span class="five">5</span><span class="unit">&nbsp;кг</span></div></div>
+    </div>
+
+    <ul class="specs">
+      <li>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A465" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3.4 14.6 L9 7.4 H20.6 L15 14.6 Z"/>
+          <path d="M3.4 14.6 V17 H15 V14.6"/>
+          <path d="M15 17 L20.6 9.8 V7.4"/>
+        </svg>
+        <div><b>Нержавеющая сталь AISI&nbsp;304</b><span>толщина 1&nbsp;мм</span></div>
+      </li>
+      <li>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A465" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5.4 8.6 h7 a1 1 0 0 1 1 1 v4 a1 1 0 0 1 -1 1 h-7 a1 1 0 0 1 -1 -1 v-4 a1 1 0 0 1 1 -1 Z"/>
+          <path d="M13.4 10.1 h2.6 v3.8 h-2.6"/>
+          <path d="M16 12 h4"/>
+          <path d="M7.6 14.6 l-.9 4.2 h3.2"/>
+          <path d="M3.2 20.8 L20.8 3.2"/>
+        </svg>
+        <div><b>Без сверления</b><span>самоклеящееся крепление</span></div>
+      </li>
+      <li>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A465" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20.6 C12 20.6 5.8 14.7 5.8 10.1 C5.8 6.3 8.5 3.6 12 3.6 C15.5 3.6 18.2 6.3 18.2 10.1 C18.2 14.7 12 20.6 12 20.6 Z"/>
+          <circle cx="12" cy="10" r="2.3"/>
+        </svg>
+        <div><b>Сделано в России</b></div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- jeweler colour tray -->
+  <section class="tray">
+    <span class="lbl">4&nbsp;ЦВЕТА</span>
+    <span class="div"></span>
+    <div class="sw-row">
+      <div class="sw"><span class="ring"><span class="dot w"></span></span><i>белый</i></div>
+      <div class="sw"><span class="ring"><span class="dot k"></span></span><i>чёрный</i></div>
+      <div class="sw"><span class="ring"><span class="dot g"></span></span><i>графит</i></div>
+      <div class="sw"><span class="ring"><span class="dot c"></span></span><i>шампань</i></div>
+    </div>
+  </section>
+
+  <div class="grain"></div>
+</div>
+</body>
+</html>
