@@ -3,325 +3,348 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>gambardini — премиальные аксессуары для дома · Москва</title>
-  <meta name="description" content="Gambardini — премиальные аксессуары для дома из литой латуни, мрамора и ореха. Итальянский стиль, московская мастерская.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='32' y='48' font-family='Georgia,serif' font-weight='bold' font-size='48' fill='%235C4432' text-anchor='middle'%3Eg%3C/text%3E%3C/svg%3E">
+  <title>Gambardini — аксессуары для дома из литой латуни · Москва</title>
+  <meta name="description" content="Каталог-резоне дома Gambardini: крючки, держатели, полки и скрытые аксессуары из литой латуни CW614N, каррарского мрамора и американского ореха. Собственное производство, Москва, с 2014 года.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='32' y='47' font-family='Georgia,serif' font-weight='600' font-size='46' fill='%23212327' text-anchor='middle'%3Eg%3C/text%3E%3C/svg%3E">
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      var t;
+      try { t = localStorage.getItem('gb-theme'); } catch (e) { t = null; }
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      if (location.search.indexOf('theme=dark') > -1) t = 'dark';
+      if (location.search.indexOf('theme=light') > -1) t = 'light';
+      d.setAttribute('data-theme', t);
+      var m; try { m = localStorage.getItem('gb-mode'); } catch (e) { m = null; }
+      if (m === 'real' || location.search.indexOf('mode=real') > -1) d.classList.add('mode-real');
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Literata:opsz,wght@7..72,400..700&family=PT+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1">
 </head>
 <body>
 
-  <!-- ═══════════ PRELOADER ═══════════ -->
-  <div id="preloader">
-    <p class="pre-logo">gambardini</p>
-    <span class="pre-line"></span>
-    <span class="pre-count">0</span>
-  </div>
+  <a class="skip-link" href="#main">К содержанию</a>
 
-  <!-- ═══════════ CURSOR ═══════════ -->
-  <div class="cursor-dot" aria-hidden="true"></div>
-  <div class="cursor-ring" aria-hidden="true"><span class="cursor-label"></span></div>
-
-  <!-- ═══════════ NAV ═══════════ -->
-  <header id="nav">
-    <a href="#hero" class="logo" aria-label="gambardini — на главную">gambardini</a>
-    <nav class="nav-links">
-      <a href="#manifesto">Манифест</a>
-      <a href="#collezione">Коллекция</a>
-      <a href="#atelier">Ателье</a>
-      <a href="#materiali">Материалы</a>
-      <a href="#contatti">Контакты</a>
-    </nav>
-    <a href="#contatti" class="nav-cta" data-magnetic>Шоурум</a>
-  </header>
-
-  <main>
-
-    <!-- ═══════════ HERO ═══════════ -->
-    <section id="hero">
-      <canvas id="hero-canvas" aria-hidden="true"></canvas>
-      <div class="hero-inner">
-        <p class="hero-label" data-hero><span class="dash"></span>премиальные аксессуары для дома<span class="dash"></span></p>
-        <h1 class="hero-title" aria-label="gambardini">
-          <span class="ht-l">g</span><span class="ht-l">a</span><span class="ht-l">m</span><span class="ht-l">b</span><span class="ht-l">a</span><span class="ht-l">r</span><span class="ht-l">d</span><span class="ht-l">i</span><span class="ht-l">n</span><span class="ht-l">i</span>
-        </h1>
-        <p class="hero-sub" data-hero>Латунь, мрамор и орех, превращённые в&nbsp;жесты.<br>
-        <em>Итальянский стиль. Московская мастерская.</em></p>
-        <div class="hero-cta" data-hero>
-          <a href="#collezione" class="btn btn--dark" data-magnetic>Смотреть коллекцию</a>
-          <a href="#atelier" class="btn btn--ghost" data-magnetic>Ателье 3D</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="index.html" aria-label="Gambardini — на главную">gambardini</a>
+      <nav class="site-nav" aria-label="Основная навигация">
+        <a href="catalog.html">Каталог</a>
+        <a href="production.html">Производство</a>
+        <a href="about.html">О нас</a>
+        <a href="service.html">Покупателям</a>
+        <a href="contacts.html">Контакты</a>
+        <button class="theme-toggle-m" type="button"></button>
+      </nav>
+      <div class="header-controls">
+        <div class="mode-toggle" role="group" aria-label="Представление изделий">
+          <button type="button" data-mode="draw" aria-pressed="true">Чертёж</button>
+          <button type="button" data-mode="real" aria-pressed="false">Вещь</button>
         </div>
-      </div>
-      <div class="hero-scroll" aria-hidden="true"><span></span>листайте</div>
-    </section>
-
-    <!-- ═══════════ MARQUEE ═══════════ -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>Латунь ✦ Мрамор ✦ Орех ✦ Ручная работа ✦ Москва ✦ С 2014 года ✦&nbsp;</span><span>Латунь ✦ Мрамор ✦ Орех ✦ Ручная работа ✦ Москва ✦ С 2014 года ✦&nbsp;</span>
+        <button class="theme-toggle" type="button"></button>
+        <a class="order-toggle" href="catalog.html#order">Заказ</a>
+        <button class="nav-burger" type="button" aria-expanded="false" aria-label="Меню">
+          <svg viewBox="0 0 20 14" width="20" height="14" aria-hidden="true" fill="none"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.6"/></svg>
+        </button>
       </div>
     </div>
+  </header>
 
-    <!-- ═══════════ MANIFESTO ═══════════ -->
-    <section id="manifesto">
-      <p class="section-label" data-reveal><i>I.</i> Манифест</p>
-      <p class="manifesto-text">Мы верим, что красота живёт в деталях. Латунный крючок, на который вы вешаете халат. Полка, где стоит ваш парфюм. Двенадцать лет мы превращаем повседневные жесты в маленькие ритуалы — вручную, в нашей московской мастерской, из латуни, мрамора и ореха.</p>
-      <p class="manifesto-sign" data-reveal>— основатели мастерской gambardini</p>
-    </section>
+  <main id="main">
 
-    <!-- ═══════════ COLLEZIONE ═══════════ -->
-    <section id="collezione">
-      <div class="section-head">
-        <p class="section-label" data-reveal><i>II.</i> Коллекция</p>
-        <h2 data-reveal>Коллекция<br><em>восемь главных предметов</em></h2>
-        <p class="section-note" data-reveal>Восемь предметов, без которых дом остаётся квартирой. Каждый отливается, шлифуется и полируется вручную — семь этапов, три пары рук, одно клеймо.</p>
-      </div>
-
-      <div class="grid">
-
-        <article class="card" data-reveal>
-          <span class="card-num">01</span>
-          <div class="card-art">
-            <svg viewBox="0 0 120 120" fill="none">
-              <path d="M60 18 v16" pathLength="1"/>
-              <ellipse cx="60" cy="42" rx="26" ry="8" pathLength="1"/>
-              <path d="M34 42 L44 88" pathLength="1"/>
-              <path d="M86 42 L76 88" pathLength="1"/>
-              <ellipse cx="60" cy="88" rx="16" ry="5" pathLength="1"/>
-            </svg>
+    <!-- ── ТИТУЛЬНЫЙ ЛИСТ ─────────────────────────────────────── -->
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="t-label" data-reveal>Каталог-резоне · Москва · с 2014 года</p>
+          <h1 class="t-display hero-title" data-reveal data-delay="60">Аксессуары для&nbsp;дома. Литая латунь, мрамор, орех.</h1>
+          <p class="hero-sub" data-reveal data-delay="120">Крючки, держатели, полки и&nbsp;скрытые аксессуары собственного производства. Пятнадцать предметов, рассчитанных на&nbsp;десятилетия, — каждый существует сначала как&nbsp;чертёж и&nbsp;только потом как&nbsp;вещь.</p>
+          <div class="hero-links" data-reveal data-delay="180">
+            <a class="btn btn--primary" href="catalog.html">Смотреть каталог</a>
+            <a class="btn btn--ghost" href="production.html">Производство</a>
           </div>
-          <h3 class="card-name">Держатель для&nbsp;фена</h3>
-          <p class="card-type">литая латунь</p>
-          <div class="card-foot"><span class="card-price">12&nbsp;900&nbsp;₽</span><span class="card-arrow">→</span></div>
-        </article>
-
-        <article class="card" data-reveal>
-          <span class="card-num">02</span>
-          <div class="card-art">
-            <svg viewBox="0 0 120 120" fill="none">
-              <circle cx="60" cy="28" r="8" pathLength="1"/>
-              <path d="M60 36 v30 a16 16 0 0 0 32 0 v-8" pathLength="1"/>
-              <circle cx="92" cy="55" r="2.5" pathLength="1"/>
-            </svg>
-          </div>
-          <h3 class="card-name">Крючок для&nbsp;халата</h3>
-          <p class="card-type">литая латунь</p>
-          <div class="card-foot"><span class="card-price">4&nbsp;900&nbsp;₽</span><span class="card-arrow">→</span></div>
-        </article>
-
-        <article class="card" data-reveal>
-          <span class="card-num">03</span>
-          <div class="card-art">
-            <svg viewBox="0 0 120 120" fill="none">
-              <path d="M20 46 h80" pathLength="1"/>
-              <path d="M20 60 h80 M20 65 h80" pathLength="1"/>
-              <path d="M34 65 l8 18 M86 65 l-8 18" pathLength="1"/>
-            </svg>
-          </div>
-          <h3 class="card-name">Полка</h3>
-          <p class="card-type">латунь · мрамор</p>
-          <div class="card-foot"><span class="card-price">24&nbsp;900&nbsp;₽</span><span class="card-arrow">→</span></div>
-        </article>
-
-        <article class="card" data-reveal>
-          <span class="card-num">04</span>
-          <div class="card-art">
-            <svg viewBox="0 0 120 120" fill="none">
-              <path d="M30 28 v24 h14" pathLength="1"/>
-              <circle cx="64" cy="52" r="17" pathLength="1"/>
-              <circle cx="64" cy="52" r="4" pathLength="1"/>
-              <path d="M81 52 v32" pathLength="1"/>
-            </svg>
-          </div>
-          <h3 class="card-name">Держатель туалетной бумаги</h3>
-          <p class="card-type">литая латунь</p>
-          <div class="card-foot"><span class="card-price">9&nbsp;900&nbsp;₽</span><span class="card-arrow">→</span></div>
-        </article>
-
-        <article class="card" data-reveal>
-          <span class="card-num">05</span>
-          <div class="card-art">
-            <svg viewBox="0 0 120 120" fill="none">
-              <circle cx="22" cy="44" r="5" pathLength="1"/>
-              <circle cx="98" cy="44" r="5" pathLength="1"/>
-              <path d="M22 44 h76" pathLength="1"/>
-              <path d="M40 44 v38 h26 v-38" pathLength="1"/>
-              <path d="M53 44 v38" pathLength="1"/>
-            </svg>
-          </div>
-          <h3 class="card-name">Держатель для&nbsp;полотенец</h3>
-          <p class="card-type">литая латунь</p>
-          <div class="card-foot"><span class="card-price">16&nbsp;900&nbsp;₽</span><span class="card-arrow">→</span></div>
-        </article>
-
-        <article class="card" data-reveal>
-          <span class="card-num">06</span>
-          <div class="card-art">
-            <svg viewBox="0 0 120 120" fill="none">
-              <path d="M60 22 v66" pathLength="1"/>
-              <ellipse cx="60" cy="92" rx="20" ry="6" pathLength="1"/>
-              <rect x="46" y="36" width="28" height="38" rx="13" pathLength="1"/>
-              <ellipse cx="60" cy="36" rx="14" ry="5" pathLength="1"/>
-            </svg>
-          </div>
-          <h3 class="card-name">Держатель бумажных полотенец</h3>
-          <p class="card-type">латунь · орех</p>
-          <div class="card-foot"><span class="card-price">8&nbsp;900&nbsp;₽</span><span class="card-arrow">→</span></div>
-        </article>
-
-        <article class="card" data-reveal>
-          <span class="card-num">07</span>
-          <div class="card-art">
-            <svg viewBox="0 0 120 120" fill="none">
-              <path d="M30 84 h60" pathLength="1"/>
-              <path d="M38 84 a22 22 0 0 1 44 0" pathLength="1"/>
-              <path d="M52 46 v38 M60 42 v42 M68 46 v38" pathLength="1"/>
-            </svg>
-          </div>
-          <h3 class="card-name">Салфетница</h3>
-          <p class="card-type">литая латунь</p>
-          <div class="card-foot"><span class="card-price">6&nbsp;900&nbsp;₽</span><span class="card-arrow">→</span></div>
-        </article>
-
-        <article class="card" data-reveal>
-          <span class="card-num">08</span>
-          <div class="card-art">
-            <svg viewBox="0 0 120 120" fill="none">
-              <circle cx="60" cy="32" r="7" pathLength="1"/>
-              <path d="M60 39 v6" pathLength="1"/>
-              <circle cx="60" cy="70" r="25" pathLength="1"/>
-              <path d="M48 92 q12 8 24 0" pathLength="1"/>
-            </svg>
-          </div>
-          <h3 class="card-name">Кольцо для&nbsp;полотенец</h3>
-          <p class="card-type">литая латунь</p>
-          <div class="card-foot"><span class="card-price">7&nbsp;900&nbsp;₽</span><span class="card-arrow">→</span></div>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- ═══════════ ATELIER 3D ═══════════ -->
-    <section id="atelier">
-      <div class="atelier-left">
-        <p class="section-label" data-reveal><i>III.</i> Ателье</p>
-        <h2 data-reveal>Поверните.<br><em>Рассмотрите. Влюбитесь.</em></h2>
-        <p class="section-note" data-reveal>Каждый предмет — в трёх отделках. Выберите модель, потяните её курсором и посмотрите, как свет ложится на металл.</p>
-
-        <div class="model-list" data-reveal role="tablist" aria-label="Модели">
-          <button class="model-btn is-active" data-model="lungo"><i>01</i>Держатель для полотенец<small>16&nbsp;900&nbsp;₽</small></button>
-          <button class="model-btn" data-model="uncino"><i>02</i>Крючок<small>4&nbsp;900&nbsp;₽</small></button>
-          <button class="model-btn" data-model="piano"><i>03</i>Полка<small>24&nbsp;900&nbsp;₽</small></button>
-          <button class="model-btn" data-model="rotolo"><i>04</i>Держатель бумаги<small>9&nbsp;900&nbsp;₽</small></button>
-          <button class="model-btn" data-model="aria"><i>05</i>Держатель фена<small>12&nbsp;900&nbsp;₽</small></button>
-          <button class="model-btn" data-model="piega"><i>06</i>Салфетница<small>6&nbsp;900&nbsp;₽</small></button>
+          <p class="hero-facts" data-reveal data-delay="240"><b>CW614N</b> · гальваника 12&nbsp;мкм · клеймо и&nbsp;номер отливки · гарантия <b>10&nbsp;лет</b></p>
         </div>
-
-        <div class="finish-row" data-reveal>
-          <span class="finish-title">Отделка</span>
-          <button class="finish-btn is-active" data-finish="ottone" aria-label="Полированная латунь"><span class="swatch swatch--ottone"></span>Латунь</button>
-          <button class="finish-btn" data-finish="nero" aria-label="Матовый чёрный"><span class="swatch swatch--nero"></span>Чёрный</button>
-          <button class="finish-btn" data-finish="nichel" aria-label="Никель"><span class="swatch swatch--nichel"></span>Никель</button>
-        </div>
-      </div>
-
-      <div class="atelier-stage" data-reveal>
-        <canvas id="atelier-canvas" data-cursor="потяните"></canvas>
-        <div class="stage-caption">
-          <span class="stage-name">Держатель для полотенец</span>
-          <span class="stage-price">16&nbsp;900&nbsp;₽</span>
-        </div>
-        <span class="stage-hint">⟲ потяните, чтобы вращать</span>
-      </div>
-    </section>
-
-    <!-- ═══════════ MATERIALI ═══════════ -->
-    <section id="materiali">
-      <div class="section-head">
-        <p class="section-label" data-reveal><i>IV.</i> Материалы</p>
-        <h2 data-reveal>Три материала.<br><em>Ни одного компромисса.</em></h2>
-      </div>
-      <div class="mat-grid">
-        <div class="mat" data-reveal>
-          <span class="mat-swatch mat-swatch--ottone"></span>
-          <h3>Латунь <em>литьё и полировка</em></h3>
-          <p>Литая латунь CW614N. Семь этапов шлифовки и полировки, гальваническое покрытие толщиной 12 микрон. С годами — только благороднее.</p>
-        </div>
-        <div class="mat" data-reveal>
-          <span class="mat-swatch mat-swatch--marmo"></span>
-          <h3>Мрамор <em>Каррара</em></h3>
-          <p>Тот самый камень, из которого высечен «Давид». Каждую плиту мы отбираем за рисунок прожилок — он неповторим, как отпечаток пальца.</p>
-        </div>
-        <div class="mat" data-reveal>
-          <span class="mat-swatch mat-swatch--noce"></span>
-          <h3>Орех <em>американский</em></h3>
-          <p>Массив ореха, выдержанный три года. Масляная отделка без лака — дерево, которое приятно трогать, а не только разглядывать.</p>
+        <div class="hero-stage" data-reveal data-delay="140">
+          <div class="sheet sheet--framed hero-sheet">
+            <div class="sheet-head">
+              <span class="t-mono hero-caps">
+                <span class="sheet-caption" id="hero-cap-a">черт. GB&nbsp;01 · крючок для халата</span>
+                <span class="sheet-caption" id="hero-cap-b" aria-hidden="true">GB&nbsp;01 · 240&nbsp;г · 4&nbsp;900&nbsp;₽</span>
+              </span>
+              <span class="t-mono sheet-folio">М 1:1</span>
+            </div>
+            <div class="pv" data-product="gb-01" id="hero-pv"></div>
+            <div class="sheet-stamp" aria-hidden="true">
+              <span class="st-name">gambardini</span>
+              <span>КБ · Москва</span>
+              <span>лист 01 / 15</span>
+              <span>ред. 2026</span>
+            </div>
+          </div>
+          <p class="hero-hint t-mono" aria-hidden="true">листайте — чертёж становится вещью</p>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════ NUMERI ═══════════ -->
-    <section class="numeri">
-      <div class="stat" data-reveal><span class="stat-n" data-count="12">0</span><span class="stat-l">лет мастерской</span></div>
-      <div class="stat" data-reveal><span class="stat-n" data-count="7">0</span><span class="stat-l">этапов полировки</span></div>
-      <div class="stat" data-reveal><span class="stat-n" data-count="24">0</span><span class="stat-l">мастера в команде</span></div>
-      <div class="stat" data-reveal><span class="stat-n" data-count="9000" data-plus="+">0</span><span class="stat-l">домов с нашим клеймом</span></div>
-    </section>
-
-    <!-- ═══════════ CITAZIONE ═══════════ -->
-    <section class="citazione">
-      <span class="cit-mark" aria-hidden="true">”</span>
-      <blockquote data-reveal>
-        <p>«Красота — в повседневных жестах»</p>
-        <cite>— основатель мастерской gambardini</cite>
-      </blockquote>
-    </section>
-
-    <!-- ═══════════ CONTATTI ═══════════ -->
-    <section id="contatti">
-      <div class="con-left">
-        <p class="section-label" data-reveal><i>V.</i> Контакты</p>
-        <h2 data-reveal>Приезжайте<br><em>в шоурум</em></h2>
-        <p class="section-note" data-reveal>Латунь нужно трогать. Приходите — нальём эспрессо и покажем коллекцию при правильном свете.</p>
-        <a class="btn btn--dark" href="mailto:hello@gambardini.ru" data-magnetic data-reveal>Написать нам</a>
+    <!-- ── ВИТРИНА: ВЕЧЕРНИЙ СВЕТ ─────────────────────────────── -->
+    <section class="section vitrine" id="vitrine">
+      <div class="container">
+        <div class="section-head">
+          <p class="t-label" data-reveal>Витрина · вечерний свет</p>
+          <h2 class="t-display" data-reveal data-delay="60">Чертёж — днём. Вещь&nbsp;— вечером.</h2>
+        </div>
+        <div class="vitrine-grid">
+          <div class="vitrine-item" data-reveal>
+            <div class="pv pv--real-only" data-product="gb-04" data-thumb></div>
+            <p class="vitrine-meta"><a class="vn" href="catalog.html#gb-04">Кольцо для полотенец</a><span class="vp">GB&nbsp;04 · 7&nbsp;900&nbsp;₽</span></p>
+          </div>
+          <div class="vitrine-item" data-reveal data-delay="80">
+            <div class="pv pv--real-only" data-product="gb-09" data-thumb></div>
+            <p class="vitrine-meta"><a class="vn" href="catalog.html#gb-09">Салфетница</a><span class="vp">GB&nbsp;09 · 6&nbsp;900&nbsp;₽</span></p>
+          </div>
+          <div class="vitrine-item" data-reveal data-delay="160">
+            <div class="pv pv--real-only" data-product="gb-10" data-thumb></div>
+            <p class="vitrine-meta"><a class="vn" href="catalog.html#gb-10">Держатель бумажных полотенец</a><span class="vp">GB&nbsp;10 · 8&nbsp;900&nbsp;₽</span></p>
+          </div>
+        </div>
+        <p class="vitrine-note" data-reveal>Так коллекция выглядит в&nbsp;шоуруме после заката: латунь собирает весь оставшийся свет. Полированные поверхности — на&nbsp;фото не&nbsp;передать, <a href="contacts.html">приходите смотреть вживую</a>.</p>
       </div>
-      <div class="con-right" data-reveal>
-        <dl>
-          <dt>Шоурум</dt><dd>Москва, Большая Никитская, 17</dd>
-          <dt>Часы</dt><dd>Пн – Сб · 10:00 – 20:00</dd>
-          <dt>Почта</dt><dd><a href="mailto:hello@gambardini.ru">hello@gambardini.ru</a></dd>
-          <dt>Телефон</dt><dd><a href="tel:+74951203874">+7 495 120-38-74</a></dd>
-        </dl>
+    </section>
+
+    <!-- ── ТРИ МАТЕРИАЛА ──────────────────────────────────────── -->
+    <section class="section" id="materials">
+      <div class="container">
+        <div class="section-head">
+          <p class="t-label" data-reveal>Материалы</p>
+          <h2 class="t-display" data-reveal data-delay="60">Три материала. Ни&nbsp;одного случайного.</h2>
+          <p class="section-note" data-reveal data-delay="120">Всё, что мы делаем, состоит из&nbsp;латуни, камня и&nbsp;дерева. Составы и&nbsp;режимы обработки — в&nbsp;паспорте каждого изделия.</p>
+        </div>
+
+        <article class="chapter">
+          <div class="chapter-copy" data-reveal>
+            <p class="chapter-numeral" aria-hidden="true">I</p>
+            <h3>Латунь CW614N</h3>
+            <p>Литьё в&nbsp;кокиль, механическая обработка, семь операций шлифовки и&nbsp;полировки. Финиш — гальваническое покрытие толщиной 12&nbsp;мкм или живая нелакированная поверхность, которая темнеет достойно.</p>
+            <div class="chapter-facts">
+              <p class="fact"><b>сплав</b><span>CW614N, литьё в&nbsp;кокиль</span></p>
+              <p class="fact"><b>операций</b><span>7 — шлифовка и&nbsp;полировка вручную</span></p>
+              <p class="fact"><b>покрытие</b><span>гальваника 12&nbsp;мкм</span></p>
+            </div>
+          </div>
+          <div class="chapter-media" data-reveal data-delay="80">
+            <div class="sheet">
+              <svg viewBox="0 0 560 240" role="img" aria-label="Образец полированной латуни">
+                <rect class="sample-fill" x="0" y="0" width="560" height="196" fill="url(#gbdef-brass-l)"/>
+                <g fill="none" stroke="#FFFFFF" opacity=".14">
+                  <path d="M0 34 H560 M0 52 H560 M0 88 H560 M0 122 H560 M0 150 H560" stroke-width="1"/>
+                  <path d="M0 42 H560" stroke-width="6"/>
+                </g>
+                <rect x="0" y="0" width="560" height="196" fill="none" stroke="#8F7340" stroke-width="1" opacity=".5"/>
+                <text class="td td-s" x="0" y="226">обр. 01 · латунь CW614N · полировка, операция 07 из 07</text>
+              </svg>
+              <div class="ops-scale" aria-hidden="true">
+                <div class="ops-track" id="ops-track">
+                  <i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i>
+                </div>
+                <p class="ops-name"><span class="ops-n num" id="ops-n">07 / 07</span><span id="ops-label">зеркальная доводка</span></p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="chapter">
+          <div class="chapter-copy" data-reveal>
+            <p class="chapter-numeral" aria-hidden="true">II</p>
+            <h3>Мрамор Каррара</h3>
+            <p>Плиты отбираются по&nbsp;рисунку прожилок — двух одинаковых не&nbsp;бывает, поэтому в&nbsp;паспорте полки указан номер конкретной плиты. Кромка полируется до&nbsp;мягкого блеска, поверхность остаётся шелковистой.</p>
+            <div class="chapter-facts">
+              <p class="fact"><b>камень</b><span>Каррара, Италия</span></p>
+              <p class="fact"><b>толщина</b><span>плита 20&nbsp;мм</span></p>
+              <p class="fact"><b>отбор</b><span>по&nbsp;рисунку прожилок, поштучно</span></p>
+            </div>
+          </div>
+          <div class="chapter-media" data-reveal data-delay="80">
+            <div class="sheet">
+              <svg viewBox="0 0 560 240" role="img" aria-label="Образец каррарского мрамора">
+                <rect class="sample-fill" x="0" y="0" width="560" height="196" fill="url(#gbdef-marble)"/>
+                <g fill="none" stroke="#AEACA2" opacity=".9">
+                  <path d="M20 46 q90 22 170 10 t180 16 q80 6 170 -8" stroke-width="1.6"/>
+                  <path d="M120 120 q110 -18 210 -4 t210 6" stroke-width="1.1"/>
+                  <path d="M0 168 q140 14 260 2 M300 84 q60 -20 120 -12" stroke-width=".8"/>
+                </g>
+                <rect x="0" y="0" width="560" height="196" fill="none" stroke="#C5C3BA" stroke-width="1"/>
+                <text class="td td-s" x="0" y="226">обр. 02 · мрамор Каррара · плита 20 мм, полированная кромка</text>
+              </svg>
+            </div>
+          </div>
+        </article>
+
+        <article class="chapter">
+          <div class="chapter-copy" data-reveal>
+            <p class="chapter-numeral" aria-hidden="true">III</p>
+            <h3>Орех американский</h3>
+            <p>Массив выдерживается три года до&nbsp;стабильной влажности и&nbsp;только потом идёт в&nbsp;работу. Отделка — масло без&nbsp;лака: дерево остаётся тёплым на&nbsp;ощупь и&nbsp;стареет вместе с&nbsp;домом.</p>
+            <div class="chapter-facts">
+              <p class="fact"><b>порода</b><span>орех американский, массив</span></p>
+              <p class="fact"><b>выдержка</b><span>36 месяцев</span></p>
+              <p class="fact"><b>отделка</b><span>масло, без&nbsp;лака</span></p>
+            </div>
+          </div>
+          <div class="chapter-media" data-reveal data-delay="80">
+            <div class="sheet">
+              <svg viewBox="0 0 560 240" role="img" aria-label="Образец американского ореха">
+                <rect class="sample-fill" x="0" y="0" width="560" height="196" fill="url(#gbdef-walnut)"/>
+                <path class="grain" d="M0 34 q140 10 280 2 t280 6 M0 78 q120 -12 260 -4 t300 8 M0 124 q160 12 300 4 t260 -6 M0 166 q130 8 270 2" opacity=".55"/>
+                <path class="grain" d="M40 54 q30 4 60 1 M300 100 q40 6 80 2" opacity=".8" stroke-width="2"/>
+                <rect x="0" y="0" width="560" height="196" fill="none" stroke="#3E2C1A" stroke-width="1" opacity=".6"/>
+                <text class="td td-s" x="0" y="226">обр. 03 · орех американский · масло, выдержка 36 мес.</text>
+              </svg>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ── СКРЫТЫЙ МОНТАЖ ─────────────────────────────────────── -->
+    <section class="section section--tint concealed" id="concealed">
+      <div class="container concealed-stage">
+        <div class="concealed-copy">
+          <p class="t-label" data-reveal>Скрытая серия · глава V каталога</p>
+          <h2 class="t-display" data-reveal data-delay="60">Крепёж не&nbsp;виден. Виден результат.</h2>
+          <p data-reveal data-delay="120">Гильзы и&nbsp;закладные уходят в&nbsp;стену до&nbsp;чистовой отделки. Снаружи остаётся только металл — ни&nbsp;винтов, ни&nbsp;розеток, ни&nbsp;заглушек. Так устроена вся пятая глава каталога.</p>
+          <div class="concealed-legend" data-reveal data-delay="160">
+            <p class="lg"><i></i><span>видимая часть — литая латунь</span></p>
+            <p class="lg lg--hidden"><i></i><span>скрытая часть — гильза в&nbsp;стене</span></p>
+          </div>
+          <p data-reveal data-delay="200" style="margin-top:28px"><a class="btn btn--ghost" href="catalog.html#gb-13">Скрытая серия в&nbsp;каталоге</a></p>
+        </div>
+        <div class="chapter-media" data-reveal data-delay="100">
+          <div class="sheet">
+            <div class="sheet-head">
+              <span class="t-mono">
+                <span class="sheet-caption" id="cs-cap-a">разрез стены · GB&nbsp;13 · М&nbsp;1:1</span>
+                <span class="sheet-caption" id="cs-cap-b" aria-hidden="true">готовая стена · крепежа не&nbsp;видно</span>
+              </span>
+            </div>
+            <svg viewBox="0 0 640 440" role="img" aria-label="Разрез стены со скрытым крючком GB 13: гильза в стене, снаружи только цилиндр" id="cs-svg">
+              <g id="cs-section">
+                <rect class="hatch" x="272" y="40" width="128" height="360"/>
+                <rect class="ln-h" x="286" y="178" width="114" height="84"/>
+                <path class="ln-h" d="M298 178 v-12 m24 12 v-12 m24 12 v-12 m24 12 v-12 m24 12 v-12"/>
+                <g class="dim">
+                  <line class="ln-x" x1="286" y1="178" x2="286" y2="110"/>
+                  <line class="ln-x" x1="400" y1="178" x2="400" y2="110"/>
+                  <line class="ln-d" x1="286" y1="110" x2="400" y2="110"/>
+                  <path class="ar" d="M286 110 l7 -2.6 v5.2 z"/><path class="ar" d="M400 110 l-7 -2.6 v5.2 z"/>
+                  <text class="td" x="343" y="102" text-anchor="middle">38</text>
+                </g>
+              </g>
+              <g id="cs-plain" style="opacity:0">
+                <rect class="plaster" x="272" y="40" width="128" height="360"/>
+              </g>
+              <line class="ln-c" x1="400" y1="40" x2="400" y2="400"/>
+              <g id="cs-hook-draw">
+                <path class="ln-c" d="M400 160 H521 Q535 160 535 174 V266 Q535 280 521 280 H400"/>
+              </g>
+              <g id="cs-hook-real" style="opacity:0">
+                <path class="met" data-g="l" d="M400 160 H521 Q535 160 535 174 V266 Q535 280 521 280 H400 Z"/>
+                <ellipse class="spec" cx="470" cy="170" rx="40" ry="4"/>
+              </g>
+              <line class="ln-a" x1="250" y1="220" x2="570" y2="220"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ПОЛОСА ИНДЕКСА ─────────────────────────────────────── -->
+    <section class="section strip" id="index-strip">
+      <div class="container">
+        <div class="strip-head">
+          <h2 class="t-display" data-reveal>Пятнадцать позиций</h2>
+          <a class="strip-link" href="catalog.html" data-reveal data-delay="80">Открыть каталог →</a>
+        </div>
+        <div class="strip-rail" id="strip-rail" data-reveal data-delay="120"></div>
+      </div>
+    </section>
+
+    <!-- ── ФИНАЛ ──────────────────────────────────────────────── -->
+    <section class="section finale" id="finale">
+      <div class="container">
+        <div class="finale-grid">
+          <div class="finale-stat" data-reveal><span class="stat-n num" data-count="12">12</span><span class="stat-l">лет производству в&nbsp;Москве</span></div>
+          <div class="finale-stat" data-reveal data-delay="60"><span class="stat-n num" data-count="24">24</span><span class="stat-l">мастера в&nbsp;цехе и&nbsp;бюро</span></div>
+          <div class="finale-stat" data-reveal data-delay="120"><span class="stat-n num" data-count="9000" data-suffix="+">9000+</span><span class="stat-l">домов с&nbsp;нашим клеймом</span></div>
+          <div class="finale-stat" data-reveal data-delay="180"><span class="stat-n num" data-count="10">10</span><span class="stat-l">лет гарантии на&nbsp;каждую вещь</span></div>
+        </div>
+        <div class="showroom">
+          <div>
+            <p class="t-label" data-reveal>Шоурум</p>
+            <h2 class="t-display" data-reveal data-delay="60">Латунь надо держать в&nbsp;руках</h2>
+            <p class="addr" data-reveal data-delay="120">Вся коллекция — в&nbsp;шоуруме на&nbsp;Большой Никитской. Приходите посмотреть, как металл ложится в&nbsp;ладонь.</p>
+            <p data-reveal data-delay="160" style="margin-top:26px"><a class="btn btn--primary" href="contacts.html">Как добраться</a></p>
+          </div>
+          <dl class="showroom-data" data-reveal data-delay="140">
+            <div><dt class="sr-only">Адрес</dt><dd>Москва, Большая Никитская,&nbsp;17</dd></div>
+            <div><dt class="sr-only">Часы работы</dt><dd><span>пн–сб · 10:00–20:00</span></dd></div>
+            <div><dt class="sr-only">Телефон</dt><dd><a href="tel:+74951203874">+7&nbsp;495&nbsp;120-38-74</a></dd></div>
+            <div><dt class="sr-only">Почта</dt><dd><a href="mailto:hello@gambardini.ru">hello@gambardini.ru</a></dd></div>
+          </dl>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ═══════════ FOOTER ═══════════ -->
-  <footer>
-    <span class="foot-word" aria-hidden="true">gambardini</span>
-    <div class="foot-row">
-      <span>© 2026 Мастерская Gambardini · Москва</span>
-      <span class="foot-links"><a href="#">Telegram</a> · <a href="#">Instagram</a> · <a href="#">Pinterest</a></span>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="wordmark">gambardini</span>
+          <p>Аксессуары для дома из&nbsp;литой латуни, мрамора и&nbsp;ореха. Собственное производство, Москва.</p>
+        </div>
+        <nav class="footer-col" aria-label="Разделы сайта">
+          <p class="t-label">Разделы</p>
+          <ul>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="production.html">Производство</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="service.html">Покупателям</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+          </ul>
+        </nav>
+        <div class="footer-col">
+          <p class="t-label">Шоурум</p>
+          <ul>
+            <li>Москва, Большая Никитская,&nbsp;17</li>
+            <li>пн–сб · 10:00–20:00</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="t-label">Связь</p>
+          <ul>
+            <li><a href="mailto:hello@gambardini.ru">hello@gambardini.ru</a></li>
+            <li><a href="tel:+74951203874">+7&nbsp;495&nbsp;120-38-74</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-base">
+        <span>© 2026 Мастерская Gambardini · Москва</span>
+        <span>каталог-резоне · редакция 2026</span>
+      </div>
     </div>
   </footer>
-
-  <div class="noise" aria-hidden="true"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-    }
-  }
-  </script>
-  <script type="module" src="js/scene.js?v=3"></script>
-  <script src="js/main.js?v=3" defer></script>
+  <script src="js/products.js?v=1"></script>
+  <script src="js/main.js?v=1"></script>
+  <script src="js/home.js?v=1"></script>
 </body>
 </html>

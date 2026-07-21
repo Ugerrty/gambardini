@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог — Gambardini · 15 позиций в пяти главах</title>
+  <meta name="description" content="Каталог Gambardini: крючки, держатели, полки, настольная и скрытая серии. Чертежи с размерами, масса, материалы и цены в рублях. Печатная спецификация для дизайнеров и прорабов.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='32' y='47' font-family='Georgia,serif' font-weight='600' font-size='46' fill='%23212327' text-anchor='middle'%3Eg%3C/text%3E%3C/svg%3E">
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      var t;
+      try { t = localStorage.getItem('gb-theme'); } catch (e) { t = null; }
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      if (location.search.indexOf('theme=dark') > -1) t = 'dark';
+      if (location.search.indexOf('theme=light') > -1) t = 'light';
+      d.setAttribute('data-theme', t);
+      var m; try { m = localStorage.getItem('gb-mode'); } catch (e) { m = null; }
+      if (m === 'real' || location.search.indexOf('mode=real') > -1) d.classList.add('mode-real');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Literata:opsz,wght@7..72,400..700&family=PT+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body class="page-catalog">
+
+  <a class="skip-link" href="#main">К содержанию</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="index.html" aria-label="Gambardini — на главную">gambardini</a>
+      <nav class="site-nav" aria-label="Основная навигация">
+        <a href="catalog.html" aria-current="page">Каталог</a>
+        <a href="production.html">Производство</a>
+        <a href="about.html">О нас</a>
+        <a href="service.html">Покупателям</a>
+        <a href="contacts.html">Контакты</a>
+        <button class="theme-toggle-m" type="button"></button>
+      </nav>
+      <div class="header-controls">
+        <div class="mode-toggle" role="group" aria-label="Представление изделий">
+          <button type="button" data-mode="draw" aria-pressed="true">Чертёж</button>
+          <button type="button" data-mode="real" aria-pressed="false">Вещь</button>
+        </div>
+        <button class="theme-toggle" type="button"></button>
+        <button class="order-toggle" type="button">Заказ</button>
+        <button class="nav-burger" type="button" aria-expanded="false" aria-label="Меню">
+          <svg viewBox="0 0 20 14" width="20" height="14" aria-hidden="true" fill="none"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.6"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container page-head">
+      <p class="t-label" data-reveal>Каталог-резоне · 15 позиций · редакция 2026</p>
+      <h1 class="t-display" data-reveal data-delay="60">Каталог</h1>
+      <p class="page-note" data-reveal data-delay="120">Пятнадцать предметов в&nbsp;пяти главах. Выберите строку индекса — лист покажет чертёж с&nbsp;размерами; листайте стрелками&nbsp;←&nbsp;→ или кнопками на&nbsp;листе. Масса указана рядом с&nbsp;ценой: литая латунь измеряется граммами.</p>
+      <div class="cat-tools" data-reveal data-delay="160">
+        <button class="spec-btn" type="button" id="spec-toggle" aria-pressed="false">Спецификация</button>
+        <span class="t-mono" style="color:var(--dim)">табличный вид для печати и&nbsp;сметы</span>
+      </div>
+    </div>
+
+    <!-- ── ИНДЕКС + ЛИСТ ─────────────────────────────────────── -->
+    <div class="container catalog" id="catalog">
+      <nav class="cat-index" id="cat-index" aria-label="Индекс изделий"></nav>
+
+      <div class="cat-sheet-wrap">
+        <article class="sheet sheet--framed cat-sheet">
+          <p class="sr-only" role="status" id="sheet-status"></p>
+          <span class="sheet-watermark" id="sheet-wm" aria-hidden="true">GB 01</span>
+          <div id="sheet-body">
+            <div class="sheet-head">
+              <h2 class="sheet-title" id="sheet-title">—</h2>
+              <span class="t-mono sheet-code" id="sheet-code">—</span>
+            </div>
+            <div class="sheet-stage pv" id="sheet-stage"></div>
+            <div class="sheet-ghost" id="sheet-ghost" aria-hidden="true"></div>
+            <p class="sheet-note" id="sheet-note"></p>
+            <dl class="sheet-pass" id="sheet-pass"></dl>
+            <div class="finish-row" id="finish-row" role="group" aria-label="Отделка металла">
+              <span class="t-label">Отделка</span>
+              <button class="finish-btn" type="button" data-finish="brass" aria-pressed="true"><span class="swatch swatch--brass" aria-hidden="true"></span>Латунь</button>
+              <button class="finish-btn" type="button" data-finish="nickel" aria-pressed="false"><span class="swatch swatch--nickel" aria-hidden="true"></span>Никель</button>
+              <button class="finish-btn" type="button" data-finish="black" aria-pressed="false"><span class="swatch swatch--black" aria-hidden="true"></span>Чёрный</button>
+            </div>
+          </div>
+          <div class="sheet-actions">
+            <div class="sheet-nav">
+              <button type="button" id="sheet-prev" aria-label="Предыдущий лист">←</button>
+              <span class="folio num" id="sheet-folio">лист 01 / 15</span>
+              <button type="button" id="sheet-next" aria-label="Следующий лист">→</button>
+            </div>
+            <button class="add-btn" type="button" id="add-btn">В заказ</button>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- ── СПЕЦИФИКАЦИЯ (полная таблица, работает и без JS) ──── -->
+    <div class="container spec-table-wrap" id="spec">
+      <table class="spec-table">
+        <caption>Спецификация изделий Gambardini · редакция 2026 · цены включают НДС · hello@gambardini.ru · +7&nbsp;495&nbsp;120-38-74</caption>
+        <thead>
+          <tr>
+            <th scope="col">Поз.</th>
+            <th scope="col">Артикул</th>
+            <th scope="col">Наименование</th>
+            <th scope="col">Габариты, мм</th>
+            <th scope="col">Материал</th>
+            <th scope="col">Масса</th>
+            <th scope="col" class="c-price">Цена</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="c-code">01</td><td class="c-code">GB&nbsp;01</td><td>Крючок для халата</td><td class="c-dims">Ø&nbsp;52 × 60</td><td>латунь CW614N</td><td class="c-mass">240&nbsp;г</td><td class="c-price">4&nbsp;900&nbsp;₽</td></tr>
+          <tr><td class="c-code">02</td><td class="c-code">GB&nbsp;02</td><td>Крючок двойной</td><td class="c-dims">Ø&nbsp;52 × 74</td><td>латунь CW614N</td><td class="c-mass">310&nbsp;г</td><td class="c-price">6&nbsp;400&nbsp;₽</td></tr>
+          <tr><td class="c-code">03</td><td class="c-code">GB&nbsp;03</td><td>Держатель для полотенец</td><td class="c-dims">600 × 75 × 25</td><td>латунь CW614N</td><td class="c-mass">1,14&nbsp;кг</td><td class="c-price">16&nbsp;900&nbsp;₽</td></tr>
+          <tr><td class="c-code">04</td><td class="c-code">GB&nbsp;04</td><td>Кольцо для полотенец</td><td class="c-dims">Ø&nbsp;210 × 85</td><td>латунь CW614N</td><td class="c-mass">520&nbsp;г</td><td class="c-price">7&nbsp;900&nbsp;₽</td></tr>
+          <tr><td class="c-code">05</td><td class="c-code">GB&nbsp;05</td><td>Держатель туалетной бумаги</td><td class="c-dims">145 × 95 × 70</td><td>латунь CW614N</td><td class="c-mass">420&nbsp;г</td><td class="c-price">9&nbsp;900&nbsp;₽</td></tr>
+          <tr><td class="c-code">06</td><td class="c-code">GB&nbsp;06</td><td>Держатель для фена</td><td class="c-dims">110 × 140 × 110</td><td>латунь CW614N</td><td class="c-mass">680&nbsp;г</td><td class="c-price">12&nbsp;900&nbsp;₽</td></tr>
+          <tr><td class="c-code">07</td><td class="c-code">GB&nbsp;07</td><td>Полка</td><td class="c-dims">600 × 120 × 70</td><td>латунь · мрамор Каррара</td><td class="c-mass">4,2&nbsp;кг</td><td class="c-price">24&nbsp;900&nbsp;₽</td></tr>
+          <tr><td class="c-code">08</td><td class="c-code">GB&nbsp;08</td><td>Полка малая</td><td class="c-dims">300 × 120 × 70</td><td>латунь · мрамор Каррара</td><td class="c-mass">2,3&nbsp;кг</td><td class="c-price">17&nbsp;900&nbsp;₽</td></tr>
+          <tr><td class="c-code">09</td><td class="c-code">GB&nbsp;09</td><td>Салфетница</td><td class="c-dims">190 × 95 × 165</td><td>латунь CW614N</td><td class="c-mass">740&nbsp;г</td><td class="c-price">6&nbsp;900&nbsp;₽</td></tr>
+          <tr><td class="c-code">10</td><td class="c-code">GB&nbsp;10</td><td>Держатель бумажных полотенец</td><td class="c-dims">Ø&nbsp;180 × 310</td><td>латунь · орех американский</td><td class="c-mass">1,26&nbsp;кг</td><td class="c-price">8&nbsp;900&nbsp;₽</td></tr>
+          <tr><td class="c-code">11</td><td class="c-code">GB&nbsp;11</td><td>Мыльница</td><td class="c-dims">130 × 90 × 30</td><td>латунь · мрамор Каррара</td><td class="c-mass">480&nbsp;г</td><td class="c-price">7&nbsp;400&nbsp;₽</td></tr>
+          <tr><td class="c-code">12</td><td class="c-code">GB&nbsp;12</td><td>Стакан</td><td class="c-dims">Ø&nbsp;75 × 105</td><td>латунь · мрамор Каррара</td><td class="c-mass">390&nbsp;г</td><td class="c-price">6&nbsp;900&nbsp;₽</td></tr>
+          <tr><td class="c-code">13</td><td class="c-code">GB&nbsp;13</td><td>Крючок скрытого монтажа</td><td class="c-dims">Ø&nbsp;40 × 45</td><td>латунь CW614N</td><td class="c-mass">210&nbsp;г</td><td class="c-price">5&nbsp;900&nbsp;₽</td></tr>
+          <tr><td class="c-code">14</td><td class="c-code">GB&nbsp;14</td><td>Крючок откидной</td><td class="c-dims">60 × 60 × 8</td><td>латунь CW614N</td><td class="c-mass">340&nbsp;г</td><td class="c-price">8&nbsp;400&nbsp;₽</td></tr>
+          <tr><td class="c-code">15</td><td class="c-code">GB&nbsp;15</td><td>Держатель полотенец скрытого монтажа</td><td class="c-dims">450 × 18 × 90</td><td>латунь CW614N</td><td class="c-mass">980&nbsp;г</td><td class="c-price">19&nbsp;900&nbsp;₽</td></tr>
+        </tbody>
+      </table>
+      <div class="spec-foot">
+        <p class="t-mono">Скрытая серия (GB&nbsp;13–15) монтируется до&nbsp;чистовой отделки стен — см.&nbsp;раздел <a href="service.html">«Покупателям»</a>.</p>
+        <button class="spec-btn" type="button" id="spec-print">Распечатать</button>
+      </div>
+    </div>
+
+    <!-- ── ВЕДОМОСТЬ ЗАКАЗА ──────────────────────────────────── -->
+    <div class="order-layer" id="order-layer" role="dialog" aria-modal="true" aria-labelledby="order-title" hidden>
+      <div class="order-panel">
+        <div class="order-head">
+          <div>
+            <h2 id="order-title">Спецификация заказа</h2>
+            <p class="order-sub">Выбранные позиции. Отправьте ведомость нам на&nbsp;почту — подтвердим наличие и&nbsp;сроки в&nbsp;течение рабочего дня.</p>
+          </div>
+          <button class="x" type="button" id="order-close" aria-label="Закрыть ведомость">×</button>
+        </div>
+        <div class="order-rows" id="order-rows"></div>
+        <p class="order-total" id="order-total"></p>
+        <div class="order-actions">
+          <a class="btn btn--primary" id="order-mail" href="mailto:hello@gambardini.ru">Отправить заявку</a>
+          <button class="btn btn--ghost" type="button" id="order-print">Распечатать</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="wordmark">gambardini</span>
+          <p>Аксессуары для дома из&nbsp;литой латуни, мрамора и&nbsp;ореха. Собственное производство, Москва.</p>
+        </div>
+        <nav class="footer-col" aria-label="Разделы сайта">
+          <p class="t-label">Разделы</p>
+          <ul>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="production.html">Производство</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="service.html">Покупателям</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+          </ul>
+        </nav>
+        <div class="footer-col">
+          <p class="t-label">Шоурум</p>
+          <ul>
+            <li>Москва, Большая Никитская,&nbsp;17</li>
+            <li>пн–сб · 10:00–20:00</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="t-label">Связь</p>
+          <ul>
+            <li><a href="mailto:hello@gambardini.ru">hello@gambardini.ru</a></li>
+            <li><a href="tel:+74951203874">+7&nbsp;495&nbsp;120-38-74</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-base">
+        <span>© 2026 Мастерская Gambardini · Москва</span>
+        <span>каталог-резоне · редакция 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="js/products.js?v=1"></script>
+  <script src="js/main.js?v=1"></script>
+  <script src="js/catalog.js?v=1"></script>
+</body>
+</html>

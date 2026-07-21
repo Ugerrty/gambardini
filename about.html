@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>О нас — Gambardini · дом аксессуаров, Москва</title>
+  <meta name="description" content="Дом Gambardini основан в Москве в 2014 году. Собственное производство, 24 мастера, каталог-резоне из пятнадцати позиций и принцип «вещи на десятилетия».">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='32' y='47' font-family='Georgia,serif' font-weight='600' font-size='46' fill='%23212327' text-anchor='middle'%3Eg%3C/text%3E%3C/svg%3E">
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      var t;
+      try { t = localStorage.getItem('gb-theme'); } catch (e) { t = null; }
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      if (location.search.indexOf('theme=dark') > -1) t = 'dark';
+      if (location.search.indexOf('theme=light') > -1) t = 'light';
+      d.setAttribute('data-theme', t);
+      var m; try { m = localStorage.getItem('gb-mode'); } catch (e) { m = null; }
+      if (m === 'real' || location.search.indexOf('mode=real') > -1) d.classList.add('mode-real');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Literata:opsz,wght@7..72,400..700&family=PT+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">К содержанию</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="index.html" aria-label="Gambardini — на главную">gambardini</a>
+      <nav class="site-nav" aria-label="Основная навигация">
+        <a href="catalog.html">Каталог</a>
+        <a href="production.html">Производство</a>
+        <a href="about.html" aria-current="page">О нас</a>
+        <a href="service.html">Покупателям</a>
+        <a href="contacts.html">Контакты</a>
+        <button class="theme-toggle-m" type="button"></button>
+      </nav>
+      <div class="header-controls">
+        <div class="mode-toggle" role="group" aria-label="Представление изделий">
+          <button type="button" data-mode="draw" aria-pressed="true">Чертёж</button>
+          <button type="button" data-mode="real" aria-pressed="false">Вещь</button>
+        </div>
+        <button class="theme-toggle" type="button"></button>
+        <a class="order-toggle" href="catalog.html#order">Заказ</a>
+        <button class="nav-burger" type="button" aria-expanded="false" aria-label="Меню">
+          <svg viewBox="0 0 20 14" width="20" height="14" aria-hidden="true" fill="none"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.6"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container page-head">
+      <p class="t-label" data-reveal>Дом Gambardini · Москва · с 2014 года</p>
+      <h1 class="t-display" data-reveal data-delay="60">О нас</h1>
+    </div>
+
+    <section class="section" style="padding-top: clamp(24px, 4vh, 48px)">
+      <div class="container">
+        <p class="about-lead" data-reveal>Мы делаем аксессуары, которые ставят один раз — и&nbsp;на&nbsp;десятилетия.</p>
+
+        <div class="about-cols">
+          <div class="col" data-reveal>
+            <h2 class="t-display" style="font-size: var(--fs-h3); margin-bottom: 16px">История</h2>
+            <p>Gambardini начался в&nbsp;2014 году с&nbsp;мастерской на&nbsp;четырёх человек и&nbsp;одного убеждения: крючок — это тоже архитектура. Первую сотню отливок мы шлифовали на&nbsp;подоконнике, седьмую тысячу — уже в&nbsp;собственном цехе с&nbsp;литейным и&nbsp;гальваническим участками.</p>
+            <p>Сегодня в&nbsp;доме 24&nbsp;мастера: литейщики, токари, полировщики, конструкторы. Шоурум на&nbsp;Большой Никитской — единственная витрина; всё остальное — производство.</p>
+          </div>
+          <div class="col" data-reveal data-delay="80">
+            <h2 class="t-display" style="font-size: var(--fs-h3); margin-bottom: 16px">Подход</h2>
+            <p>У&nbsp;нас нет сезонных коллекций. Есть каталог-резоне из&nbsp;пятнадцати позиций, который пополняется медленно: новая вещь появляется, когда мы уверены, что она переживёт ремонт, моду и&nbsp;нас самих.</p>
+            <p>Каждое изделие существует сначала как&nbsp;чертёж с&nbsp;допусками, потом как&nbsp;отливка с&nbsp;номером — и&nbsp;только в&nbsp;конце как&nbsp;вещь в&nbsp;вашем доме. Поэтому на&nbsp;сайте у&nbsp;каждой позиции два состояния: «чертёж» и&nbsp;«вещь».</p>
+          </div>
+        </div>
+
+        <div class="principles">
+          <div class="principle" data-reveal>
+            <span class="pr-n num">01</span>
+            <div>
+              <h3>Сначала чертёж</h3>
+              <p>Ничто не&nbsp;идёт в&nbsp;литьё без паспорта изделия: габариты, допуски, нагрузка, тип крепежа. Что записано — то и&nbsp;отлито.</p>
+            </div>
+          </div>
+          <div class="principle" data-reveal data-delay="40">
+            <span class="pr-n num">02</span>
+            <div>
+              <h3>Масса — валюта</h3>
+              <p>Литая латунь честно весит. Мы пишем граммы рядом с&nbsp;ценой в&nbsp;каждой строке каталога — вес объясняет стоимость лучше слов.</p>
+            </div>
+          </div>
+          <div class="principle" data-reveal data-delay="80">
+            <span class="pr-n num">03</span>
+            <div>
+              <h3>Крепёж не&nbsp;виден</h3>
+              <p>Розетки закрывают винты, гильзы уходят в&nbsp;стену. Видимым остаётся только металл — это стандарт всех глав каталога, а&nbsp;не&nbsp;особенность одной серии.</p>
+            </div>
+          </div>
+          <div class="principle" data-reveal data-delay="120">
+            <span class="pr-n num">04</span>
+            <div>
+              <h3>Медленный каталог</h3>
+              <p>Позиции добавляются годами и&nbsp;не&nbsp;снимаются с&nbsp;производства: купленный в&nbsp;2015-м крючок можно дополнить парным сегодня — отливка совпадёт.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section finale" style="margin-top:0">
+      <div class="container">
+        <div class="finale-grid">
+          <div class="finale-stat" data-reveal><span class="stat-n num">2014</span><span class="stat-l">год основания дома</span></div>
+          <div class="finale-stat" data-reveal data-delay="60"><span class="stat-n num" data-count="24">24</span><span class="stat-l">мастера в&nbsp;штате</span></div>
+          <div class="finale-stat" data-reveal data-delay="120"><span class="stat-n num" data-count="9000" data-suffix="+">9000+</span><span class="stat-l">домов с&nbsp;клеймом «g»</span></div>
+          <div class="finale-stat" data-reveal data-delay="180"><span class="stat-n num" data-count="15">15</span><span class="stat-l">позиций в&nbsp;каталоге-резоне</span></div>
+        </div>
+        <div class="showroom">
+          <div>
+            <h2 class="t-display" data-reveal>Познакомиться проще всего в&nbsp;шоуруме</h2>
+            <p data-reveal data-delay="80" style="margin-top:26px"><a class="btn btn--primary" href="contacts.html">Контакты и&nbsp;схема проезда</a></p>
+          </div>
+          <dl class="showroom-data" data-reveal data-delay="140">
+            <div><dt class="sr-only">Адрес</dt><dd>Москва, Большая Никитская,&nbsp;17</dd></div>
+            <div><dt class="sr-only">Часы работы</dt><dd><span>пн–сб · 10:00–20:00</span></dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="wordmark">gambardini</span>
+          <p>Аксессуары для дома из&nbsp;литой латуни, мрамора и&nbsp;ореха. Собственное производство, Москва.</p>
+        </div>
+        <nav class="footer-col" aria-label="Разделы сайта">
+          <p class="t-label">Разделы</p>
+          <ul>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="production.html">Производство</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="service.html">Покупателям</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+          </ul>
+        </nav>
+        <div class="footer-col">
+          <p class="t-label">Шоурум</p>
+          <ul>
+            <li>Москва, Большая Никитская,&nbsp;17</li>
+            <li>пн–сб · 10:00–20:00</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="t-label">Связь</p>
+          <ul>
+            <li><a href="mailto:hello@gambardini.ru">hello@gambardini.ru</a></li>
+            <li><a href="tel:+74951203874">+7&nbsp;495&nbsp;120-38-74</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-base">
+        <span>© 2026 Мастерская Gambardini · Москва</span>
+        <span>каталог-резоне · редакция 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="js/products.js?v=1"></script>
+  <script src="js/main.js?v=1"></script>
+</body>
+</html>
