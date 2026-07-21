@@ -9,15 +9,31 @@
   let current = 0;
   let lastFocus = null;
 
-  /* ── Карточки ─────────────────────────────────────────────── */
+  /* ── Карточки: интерьерное фото — главное, рендер на ховере ── */
+  function cardMedia(p) {
+    if (p.lifeB) {
+      return `<span class="p-media p-media--photo">
+        <span class="duo m-life">
+          <img class="v-b" src="${p.lifeB}" alt="${p.name} в интерьере, чёрный" loading="lazy">
+          <img class="v-w" src="${p.lifeW}" alt="${p.name} в интерьере, белый" loading="lazy">
+        </span>
+        <span class="duo duo--contain m-render">
+          <img class="v-b" src="${p.imgB}" alt="" loading="lazy">
+          <img class="v-w" src="${p.imgW}" alt="" loading="lazy">
+        </span>
+      </span>`;
+    }
+    return `<span class="p-media"><span class="duo duo--contain">
+      <img class="v-b" src="${p.imgB}" alt="${p.name}, чёрный" loading="lazy">
+      <img class="v-w" src="${p.imgW}" alt="${p.name}, белый" loading="lazy">
+    </span></span>`;
+  }
+
   const cards = document.getElementById('cards');
   cards.insertAdjacentHTML('beforeend', P.map((p, i) => `
     <button class="p-card" type="button" data-id="${p.id}" data-reveal data-delay="${(i % 3) * 70}">
       <span class="p-code">${p.code}</span>
-      <span class="p-media"><span class="duo duo--contain">
-        <img class="v-b" src="${p.imgB}" alt="${p.name}, чёрный" loading="lazy">
-        <img class="v-w" src="${p.imgW}" alt="${p.name}, белый" loading="lazy">
-      </span></span>
+      ${cardMedia(p)}
       <span class="p-info">
         <span class="p-name">${p.name}<small>${p.sub}</small></span>
         <span class="p-price">${GB.fmtPrice(p.price)}</span>
@@ -59,9 +75,27 @@
     document.getElementById('pm-sub').textContent = p.sub;
     document.getElementById('pm-price').textContent = GB.fmtPrice(p.price);
     document.getElementById('pm-desc').textContent = p.desc;
-    document.getElementById('pm-duo').innerHTML = `
-      <img class="v-b" src="${p.imgB}" alt="${p.name}, чёрный">
-      <img class="v-w" src="${p.imgW}" alt="${p.name}, белый">`;
+    const media = document.getElementById('pm-media');
+    const duo = document.getElementById('pm-duo');
+    if (p.lifeB) {
+      media.classList.add('pm-media--stack');
+      duo.className = 'pm-stack';
+      duo.innerHTML = `
+        <span class="pm-shot duo">
+          <img class="v-b" src="${p.lifeB}" alt="${p.name} в интерьере, чёрный">
+          <img class="v-w" src="${p.lifeW}" alt="${p.name} в интерьере, белый">
+        </span>
+        <span class="pm-render duo">
+          <img class="v-b" src="${p.imgB}" alt="${p.name}, чёрный">
+          <img class="v-w" src="${p.imgW}" alt="${p.name}, белый">
+        </span>`;
+    } else {
+      media.classList.remove('pm-media--stack');
+      duo.className = 'duo duo--contain';
+      duo.innerHTML = `
+        <img class="v-b" src="${p.imgB}" alt="${p.name}, чёрный">
+        <img class="v-w" src="${p.imgW}" alt="${p.name}, белый">`;
+    }
     document.getElementById('pm-specs').innerHTML = [
       specRow('Артикул', p.code),
       specRow('Размеры', p.dims),
