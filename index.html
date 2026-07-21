@@ -3,27 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gambardini — аксессуары для дома из литой латуни · Москва</title>
-  <meta name="description" content="Каталог-резоне дома Gambardini: крючки, держатели, полки и скрытые аксессуары из литой латуни CW614N, каррарского мрамора и американского ореха. Собственное производство, Москва, с 2014 года.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='32' y='47' font-family='Georgia,serif' font-weight='600' font-size='46' fill='%23212327' text-anchor='middle'%3Eg%3C/text%3E%3C/svg%3E">
+  <title>GAMBARDINI — стальные аксессуары для дома · чёрный и белый</title>
+  <meta name="description" content="GAMBARDINI — аксессуары для ванной и дома из стали: полки, держатели, крючки. Каждый предмет в двух цветах — чёрном и белом. Производство в Москве.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='8' y='8' width='48' height='48' rx='12' fill='%23191919'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='700' font-size='28' fill='%23fff' text-anchor='middle'%3EG%3C/text%3E%3C/svg%3E">
   <script>
     (function () {
       var d = document.documentElement;
       d.classList.add('js');
-      var t;
-      try { t = localStorage.getItem('gb-theme'); } catch (e) { t = null; }
-      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      if (location.search.indexOf('theme=dark') > -1) t = 'dark';
-      if (location.search.indexOf('theme=light') > -1) t = 'light';
-      d.setAttribute('data-theme', t);
-      var m; try { m = localStorage.getItem('gb-mode'); } catch (e) { m = null; }
-      if (m === 'real' || location.search.indexOf('mode=real') > -1) d.classList.add('mode-real');
+      var f;
+      try { f = localStorage.getItem('gb-fin'); } catch (e) { f = null; }
+      if (location.search.indexOf('fin=w') > -1) f = 'w';
+      if (location.search.indexOf('fin=b') > -1) f = 'b';
+      if (f === 'w') d.classList.add('fin-w');
     })();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Literata:opsz,wght@7..72,400..700&family=PT+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=1">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
 
@@ -31,22 +28,17 @@
 
   <header class="site-header">
     <div class="header-inner">
-      <a class="wordmark" href="index.html" aria-label="Gambardini — на главную">gambardini</a>
+      <a class="wordmark" href="index.html" aria-label="Gambardini — на главную">Gambardini</a>
       <nav class="site-nav" aria-label="Основная навигация">
         <a href="catalog.html">Каталог</a>
-        <a href="production.html">Производство</a>
-        <a href="about.html">О нас</a>
-        <a href="service.html">Покупателям</a>
+        <a href="about.html">О бренде</a>
         <a href="contacts.html">Контакты</a>
-        <button class="theme-toggle-m" type="button"></button>
       </nav>
       <div class="header-controls">
-        <div class="mode-toggle" role="group" aria-label="Представление изделий">
-          <button type="button" data-mode="draw" aria-pressed="true">Чертёж</button>
-          <button type="button" data-mode="real" aria-pressed="false">Вещь</button>
+        <div class="fin-toggle" role="group" aria-label="Цвет изделий">
+          <button type="button" data-fin="b" aria-pressed="true"><span class="dot dot--b" aria-hidden="true"></span><span class="lbl">Чёрный</span></button>
+          <button type="button" data-fin="w" aria-pressed="false"><span class="dot dot--w" aria-hidden="true"></span><span class="lbl">Белый</span></button>
         </div>
-        <button class="theme-toggle" type="button"></button>
-        <a class="order-toggle" href="catalog.html#order">Заказ</a>
         <button class="nav-burger" type="button" aria-expanded="false" aria-label="Меню">
           <svg viewBox="0 0 20 14" width="20" height="14" aria-hidden="true" fill="none"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.6"/></svg>
         </button>
@@ -56,245 +48,158 @@
 
   <main id="main">
 
-    <!-- ── ТИТУЛЬНЫЙ ЛИСТ ─────────────────────────────────────── -->
-    <section class="hero" id="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="t-label" data-reveal>Каталог-резоне · Москва · с 2014 года</p>
-          <h1 class="t-display hero-title" data-reveal data-delay="60">Аксессуары для&nbsp;дома. Литая латунь, мрамор, орех.</h1>
-          <p class="hero-sub" data-reveal data-delay="120">Крючки, держатели, полки и&nbsp;скрытые аксессуары собственного производства. Пятнадцать предметов, рассчитанных на&nbsp;десятилетия, — каждый существует сначала как&nbsp;чертёж и&nbsp;только потом как&nbsp;вещь.</p>
-          <div class="hero-links" data-reveal data-delay="180">
-            <a class="btn btn--primary" href="catalog.html">Смотреть каталог</a>
-            <a class="btn btn--ghost" href="production.html">Производство</a>
-          </div>
-          <p class="hero-facts" data-reveal data-delay="240"><b>CW614N</b> · гальваника 12&nbsp;мкм · клеймо и&nbsp;номер отливки · гарантия <b>10&nbsp;лет</b></p>
-        </div>
-        <div class="hero-stage" data-reveal data-delay="140">
-          <div class="sheet sheet--framed hero-sheet">
-            <div class="sheet-head">
-              <span class="t-mono hero-caps">
-                <span class="sheet-caption" id="hero-cap-a">черт. GB&nbsp;01 · крючок для халата</span>
-                <span class="sheet-caption" id="hero-cap-b" aria-hidden="true">GB&nbsp;01 · 240&nbsp;г · 4&nbsp;900&nbsp;₽</span>
-              </span>
-              <span class="t-mono sheet-folio">М 1:1</span>
-            </div>
-            <div class="pv" data-product="gb-01" id="hero-pv"></div>
-            <div class="sheet-stamp" aria-hidden="true">
-              <span class="st-name">gambardini</span>
-              <span>КБ · Москва</span>
-              <span>лист 01 / 15</span>
-              <span>ред. 2026</span>
-            </div>
-          </div>
-          <p class="hero-hint t-mono" aria-hidden="true">листайте — чертёж становится вещью</p>
+    <!-- ── ГЕРОЙ ──────────────────────────────────────────────── -->
+    <section class="hero">
+      <div class="hero-media" aria-hidden="true">
+        <span class="duo">
+          <img class="v-b" src="img/life-g01-b.jpg" alt="">
+          <img class="v-w" src="img/life-g01-w.jpg" alt="">
+        </span>
+      </div>
+      <p class="hero-wordmark" aria-hidden="true">Gambardini</p>
+      <div class="container hero-content">
+        <p class="t-label hero-kicker" data-reveal>Аксессуары для дома · сталь · Москва</p>
+        <h1 class="t-head" data-reveal data-delay="80">Форма, которой достаточно</h1>
+        <p class="hero-sub" data-reveal data-delay="160">Полки, держатели и&nbsp;крючки из&nbsp;гнутой стали. Каждый предмет — в&nbsp;двух цветах: чёрном и&nbsp;белом. Без лишних деталей, наклеек и&nbsp;видимого крепежа.</p>
+        <div class="hero-cta" data-reveal data-delay="240">
+          <a class="btn btn--light" href="catalog.html">Смотреть каталог</a>
+          <a class="btn btn--glass" href="about.html">О бренде</a>
         </div>
       </div>
     </section>
 
-    <!-- ── ВИТРИНА: ВЕЧЕРНИЙ СВЕТ ─────────────────────────────── -->
-    <section class="section vitrine" id="vitrine">
+    <!-- ── ОДИН ПРЕДМЕТ — ДВА ХАРАКТЕРА ──────────────────────── -->
+    <section class="section split">
+      <div class="container">
+        <div class="section-head section-head--center">
+          <p class="t-label" data-reveal>Сигнатура бренда</p>
+          <h2 class="t-head" data-reveal data-delay="60">Один предмет. Два&nbsp;характера.</h2>
+          <p class="note" data-reveal data-delay="120">Каждая вещь выпускается в&nbsp;чёрном и&nbsp;белом. Чёрный собирает интерьер, белый растворяется в&nbsp;нём. Переключайте — и&nbsp;смотрите, как меняется комната.</p>
+        </div>
+        <div class="split-stage" data-reveal data-delay="160">
+          <span class="duo">
+            <img class="v-b" src="img/life-g043-b.jpg" alt="Чёрная вешалка на три крючка на бежевой плитке" loading="lazy">
+            <img class="v-w" src="img/life-g043-w.jpg" alt="Белая вешалка на три крючка на бежевой плитке" loading="lazy">
+          </span>
+          <div class="split-ui" role="group" aria-label="Цвет изделий">
+            <button type="button" data-fin="b" aria-pressed="true">Чёрный</button>
+            <button type="button" data-fin="w" aria-pressed="false">Белый</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── КАТАЛОГ-ПРЕВЬЮ ────────────────────────────────────── -->
+    <section class="section" style="padding-top: 0">
       <div class="container">
         <div class="section-head">
-          <p class="t-label" data-reveal>Витрина · вечерний свет</p>
-          <h2 class="t-display" data-reveal data-delay="60">Чертёж — днём. Вещь&nbsp;— вечером.</h2>
+          <p class="t-label" data-reveal>Каталог</p>
+          <h2 class="t-head" data-reveal data-delay="60">Семь предметов, которые наводят порядок</h2>
         </div>
-        <div class="vitrine-grid">
-          <div class="vitrine-item" data-reveal>
-            <div class="pv pv--real-only" data-product="gb-04" data-thumb></div>
-            <p class="vitrine-meta"><a class="vn" href="catalog.html#gb-04">Кольцо для полотенец</a><span class="vp">GB&nbsp;04 · 7&nbsp;900&nbsp;₽</span></p>
-          </div>
-          <div class="vitrine-item" data-reveal data-delay="80">
-            <div class="pv pv--real-only" data-product="gb-09" data-thumb></div>
-            <p class="vitrine-meta"><a class="vn" href="catalog.html#gb-09">Салфетница</a><span class="vp">GB&nbsp;09 · 6&nbsp;900&nbsp;₽</span></p>
-          </div>
-          <div class="vitrine-item" data-reveal data-delay="160">
-            <div class="pv pv--real-only" data-product="gb-10" data-thumb></div>
-            <p class="vitrine-meta"><a class="vn" href="catalog.html#gb-10">Держатель бумажных полотенец</a><span class="vp">GB&nbsp;10 · 8&nbsp;900&nbsp;₽</span></p>
-          </div>
+        <div class="cards">
+          <a class="p-card" href="catalog.html#g02" data-reveal>
+            <span class="p-code">G02</span>
+            <span class="p-media"><span class="duo duo--contain">
+              <img class="v-b" src="img/g02-b.png" alt="Держатель туалетной бумаги с полкой, чёрный" loading="lazy">
+              <img class="v-w" src="img/g02-w.png" alt="Держатель туалетной бумаги с полкой, белый" loading="lazy">
+            </span></span>
+            <span class="p-info">
+              <span class="p-name">Держатель туалетной бумаги<small>с полкой и нишей для салфеток</small></span>
+              <span class="p-price">2 290 ₽</span>
+            </span>
+          </a>
+          <a class="p-card" href="catalog.html#g01" data-reveal data-delay="70">
+            <span class="p-code">G01-32</span>
+            <span class="p-media"><span class="duo duo--contain">
+              <img class="v-b" src="img/g01-b.png" alt="Полка настенная 32 см, чёрная" loading="lazy">
+              <img class="v-w" src="img/g01-w.png" alt="Полка настенная 32 см, белая" loading="lazy">
+            </span></span>
+            <span class="p-info">
+              <span class="p-name">Полка настенная 32 см<small>с бортом и крючком</small></span>
+              <span class="p-price">1 990 ₽</span>
+            </span>
+          </a>
+          <a class="p-card" href="catalog.html#g043" data-reveal data-delay="140">
+            <span class="p-code">G04-3</span>
+            <span class="p-media"><span class="duo duo--contain">
+              <img class="v-b" src="img/g043-b.png" alt="Вешалка на три крючка, чёрная" loading="lazy">
+              <img class="v-w" src="img/g043-w.png" alt="Вешалка на три крючка, белая" loading="lazy">
+            </span></span>
+            <span class="p-info">
+              <span class="p-name">Вешалка на три крючка<small>планка с круглыми крючками</small></span>
+              <span class="p-price">1 690 ₽</span>
+            </span>
+          </a>
         </div>
-        <p class="vitrine-note" data-reveal>Так коллекция выглядит в&nbsp;шоуруме после заката: латунь собирает весь оставшийся свет. Полированные поверхности — на&nbsp;фото не&nbsp;передать, <a href="contacts.html">приходите смотреть вживую</a>.</p>
+        <p style="margin-top: clamp(28px, 4vh, 44px)" data-reveal>
+          <a class="btn btn--ghost" href="catalog.html">Весь каталог — 7 позиций</a>
+        </p>
       </div>
     </section>
 
-    <!-- ── ТРИ МАТЕРИАЛА ──────────────────────────────────────── -->
-    <section class="section" id="materials">
+    <!-- ── ПРИНЦИПЫ ──────────────────────────────────────────── -->
+    <section class="section" style="padding-top: 0">
       <div class="container">
-        <div class="section-head">
-          <p class="t-label" data-reveal>Материалы</p>
-          <h2 class="t-display" data-reveal data-delay="60">Три материала. Ни&nbsp;одного случайного.</h2>
-          <p class="section-note" data-reveal data-delay="120">Всё, что мы делаем, состоит из&nbsp;латуни, камня и&nbsp;дерева. Составы и&nbsp;режимы обработки — в&nbsp;паспорте каждого изделия.</p>
-        </div>
-
-        <article class="chapter">
-          <div class="chapter-copy" data-reveal>
-            <p class="chapter-numeral" aria-hidden="true">I</p>
-            <h3>Латунь CW614N</h3>
-            <p>Литьё в&nbsp;кокиль, механическая обработка, семь операций шлифовки и&nbsp;полировки. Финиш — гальваническое покрытие толщиной 12&nbsp;мкм или живая нелакированная поверхность, которая темнеет достойно.</p>
-            <div class="chapter-facts">
-              <p class="fact"><b>сплав</b><span>CW614N, литьё в&nbsp;кокиль</span></p>
-              <p class="fact"><b>операций</b><span>7 — шлифовка и&nbsp;полировка вручную</span></p>
-              <p class="fact"><b>покрытие</b><span>гальваника 12&nbsp;мкм</span></p>
-            </div>
+        <div class="tiles">
+          <div class="tile" data-reveal>
+            <span class="t-label">Материал</span>
+            <p class="big">Сталь 1,5&nbsp;мм</p>
+            <p>Лазерная резка и&nbsp;гибка, полимерное покрытие. Не&nbsp;боится воды и&nbsp;пара, не&nbsp;желтеет и&nbsp;не&nbsp;выгорает.</p>
           </div>
-          <div class="chapter-media" data-reveal data-delay="80">
-            <div class="sheet">
-              <svg viewBox="0 0 560 240" role="img" aria-label="Образец полированной латуни">
-                <rect class="sample-fill" x="0" y="0" width="560" height="196" fill="url(#gbdef-brass-l)"/>
-                <g fill="none" stroke="#FFFFFF" opacity=".14">
-                  <path d="M0 34 H560 M0 52 H560 M0 88 H560 M0 122 H560 M0 150 H560" stroke-width="1"/>
-                  <path d="M0 42 H560" stroke-width="6"/>
-                </g>
-                <rect x="0" y="0" width="560" height="196" fill="none" stroke="#8F7340" stroke-width="1" opacity=".5"/>
-                <text class="td td-s" x="0" y="226">обр. 01 · латунь CW614N · полировка, операция 07 из 07</text>
-              </svg>
-              <div class="ops-scale" aria-hidden="true">
-                <div class="ops-track" id="ops-track">
-                  <i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i><i class="is-on"></i>
-                </div>
-                <p class="ops-name"><span class="ops-n num" id="ops-n">07 / 07</span><span id="ops-label">зеркальная доводка</span></p>
-              </div>
-            </div>
+          <div class="tile" data-reveal data-delay="70">
+            <span class="t-label">Монтаж</span>
+            <p class="big">Без пыли</p>
+            <p>Скрытый крепёж «замочная скважина» или клеевая площадка — в&nbsp;зависимости от&nbsp;модели. Ни&nbsp;один винт не&nbsp;виден снаружи.</p>
           </div>
-        </article>
-
-        <article class="chapter">
-          <div class="chapter-copy" data-reveal>
-            <p class="chapter-numeral" aria-hidden="true">II</p>
-            <h3>Мрамор Каррара</h3>
-            <p>Плиты отбираются по&nbsp;рисунку прожилок — двух одинаковых не&nbsp;бывает, поэтому в&nbsp;паспорте полки указан номер конкретной плиты. Кромка полируется до&nbsp;мягкого блеска, поверхность остаётся шелковистой.</p>
-            <div class="chapter-facts">
-              <p class="fact"><b>камень</b><span>Каррара, Италия</span></p>
-              <p class="fact"><b>толщина</b><span>плита 20&nbsp;мм</span></p>
-              <p class="fact"><b>отбор</b><span>по&nbsp;рисунку прожилок, поштучно</span></p>
-            </div>
-          </div>
-          <div class="chapter-media" data-reveal data-delay="80">
-            <div class="sheet">
-              <svg viewBox="0 0 560 240" role="img" aria-label="Образец каррарского мрамора">
-                <rect class="sample-fill" x="0" y="0" width="560" height="196" fill="url(#gbdef-marble)"/>
-                <g fill="none" stroke="#AEACA2" opacity=".9">
-                  <path d="M20 46 q90 22 170 10 t180 16 q80 6 170 -8" stroke-width="1.6"/>
-                  <path d="M120 120 q110 -18 210 -4 t210 6" stroke-width="1.1"/>
-                  <path d="M0 168 q140 14 260 2 M300 84 q60 -20 120 -12" stroke-width=".8"/>
-                </g>
-                <rect x="0" y="0" width="560" height="196" fill="none" stroke="#C5C3BA" stroke-width="1"/>
-                <text class="td td-s" x="0" y="226">обр. 02 · мрамор Каррара · плита 20 мм, полированная кромка</text>
-              </svg>
-            </div>
-          </div>
-        </article>
-
-        <article class="chapter">
-          <div class="chapter-copy" data-reveal>
-            <p class="chapter-numeral" aria-hidden="true">III</p>
-            <h3>Орех американский</h3>
-            <p>Массив выдерживается три года до&nbsp;стабильной влажности и&nbsp;только потом идёт в&nbsp;работу. Отделка — масло без&nbsp;лака: дерево остаётся тёплым на&nbsp;ощупь и&nbsp;стареет вместе с&nbsp;домом.</p>
-            <div class="chapter-facts">
-              <p class="fact"><b>порода</b><span>орех американский, массив</span></p>
-              <p class="fact"><b>выдержка</b><span>36 месяцев</span></p>
-              <p class="fact"><b>отделка</b><span>масло, без&nbsp;лака</span></p>
-            </div>
-          </div>
-          <div class="chapter-media" data-reveal data-delay="80">
-            <div class="sheet">
-              <svg viewBox="0 0 560 240" role="img" aria-label="Образец американского ореха">
-                <rect class="sample-fill" x="0" y="0" width="560" height="196" fill="url(#gbdef-walnut)"/>
-                <path class="grain" d="M0 34 q140 10 280 2 t280 6 M0 78 q120 -12 260 -4 t300 8 M0 124 q160 12 300 4 t260 -6 M0 166 q130 8 270 2" opacity=".55"/>
-                <path class="grain" d="M40 54 q30 4 60 1 M300 100 q40 6 80 2" opacity=".8" stroke-width="2"/>
-                <rect x="0" y="0" width="560" height="196" fill="none" stroke="#3E2C1A" stroke-width="1" opacity=".6"/>
-                <text class="td td-s" x="0" y="226">обр. 03 · орех американский · масло, выдержка 36 мес.</text>
-              </svg>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ── СКРЫТЫЙ МОНТАЖ ─────────────────────────────────────── -->
-    <section class="section section--tint concealed" id="concealed">
-      <div class="container concealed-stage">
-        <div class="concealed-copy">
-          <p class="t-label" data-reveal>Скрытая серия · глава V каталога</p>
-          <h2 class="t-display" data-reveal data-delay="60">Крепёж не&nbsp;виден. Виден результат.</h2>
-          <p data-reveal data-delay="120">Гильзы и&nbsp;закладные уходят в&nbsp;стену до&nbsp;чистовой отделки. Снаружи остаётся только металл — ни&nbsp;винтов, ни&nbsp;розеток, ни&nbsp;заглушек. Так устроена вся пятая глава каталога.</p>
-          <div class="concealed-legend" data-reveal data-delay="160">
-            <p class="lg"><i></i><span>видимая часть — литая латунь</span></p>
-            <p class="lg lg--hidden"><i></i><span>скрытая часть — гильза в&nbsp;стене</span></p>
-          </div>
-          <p data-reveal data-delay="200" style="margin-top:28px"><a class="btn btn--ghost" href="catalog.html#gb-13">Скрытая серия в&nbsp;каталоге</a></p>
-        </div>
-        <div class="chapter-media" data-reveal data-delay="100">
-          <div class="sheet">
-            <div class="sheet-head">
-              <span class="t-mono">
-                <span class="sheet-caption" id="cs-cap-a">разрез стены · GB&nbsp;13 · М&nbsp;1:1</span>
-                <span class="sheet-caption" id="cs-cap-b" aria-hidden="true">готовая стена · крепежа не&nbsp;видно</span>
-              </span>
-            </div>
-            <svg viewBox="0 0 640 440" role="img" aria-label="Разрез стены со скрытым крючком GB 13: гильза в стене, снаружи только цилиндр" id="cs-svg">
-              <g id="cs-section">
-                <rect class="hatch" x="272" y="40" width="128" height="360"/>
-                <rect class="ln-h" x="286" y="178" width="114" height="84"/>
-                <path class="ln-h" d="M298 178 v-12 m24 12 v-12 m24 12 v-12 m24 12 v-12 m24 12 v-12"/>
-                <g class="dim">
-                  <line class="ln-x" x1="286" y1="178" x2="286" y2="110"/>
-                  <line class="ln-x" x1="400" y1="178" x2="400" y2="110"/>
-                  <line class="ln-d" x1="286" y1="110" x2="400" y2="110"/>
-                  <path class="ar" d="M286 110 l7 -2.6 v5.2 z"/><path class="ar" d="M400 110 l-7 -2.6 v5.2 z"/>
-                  <text class="td" x="343" y="102" text-anchor="middle">38</text>
-                </g>
-              </g>
-              <g id="cs-plain" style="opacity:0">
-                <rect class="plaster" x="272" y="40" width="128" height="360"/>
-              </g>
-              <line class="ln-c" x1="400" y1="40" x2="400" y2="400"/>
-              <g id="cs-hook-draw">
-                <path class="ln-c" d="M400 160 H521 Q535 160 535 174 V266 Q535 280 521 280 H400"/>
-              </g>
-              <g id="cs-hook-real" style="opacity:0">
-                <path class="met" data-g="l" d="M400 160 H521 Q535 160 535 174 V266 Q535 280 521 280 H400 Z"/>
-                <ellipse class="spec" cx="470" cy="170" rx="40" ry="4"/>
-              </g>
-              <line class="ln-a" x1="250" y1="220" x2="570" y2="220"/>
-            </svg>
+          <div class="tile" data-reveal data-delay="140">
+            <span class="t-label">Цвет</span>
+            <p class="big">Чёрный / белый</p>
+            <p>Вся коллекция в&nbsp;двух цветах — предметы из&nbsp;разных серий гарантированно соберутся в&nbsp;один комплект.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ── ПОЛОСА ИНДЕКСА ─────────────────────────────────────── -->
-    <section class="section strip" id="index-strip">
+    <!-- ── ГАЛЕРЕЯ ───────────────────────────────────────────── -->
+    <section class="section" style="padding-top: 0">
       <div class="container">
-        <div class="strip-head">
-          <h2 class="t-display" data-reveal>Пятнадцать позиций</h2>
-          <a class="strip-link" href="catalog.html" data-reveal data-delay="80">Открыть каталог →</a>
+        <div class="gallery">
+          <span class="shot" data-reveal><span class="duo">
+            <img class="v-b" src="img/life-g02-b.jpg" alt="Чёрный держатель бумаги с полкой в интерьере" loading="lazy">
+            <img class="v-w" src="img/life-g02-w.jpg" alt="Белый держатель бумаги с полкой в интерьере" loading="lazy">
+          </span></span>
+          <span class="shot" data-reveal data-delay="70"><span class="duo">
+            <img class="v-b" src="img/life-g0506-b.jpg" alt="Чёрный крючок-клипса с полотенцем" loading="lazy">
+            <img class="v-w" src="img/life-g0506-w.jpg" alt="Белый крючок-клипса с полотенцем" loading="lazy">
+          </span></span>
+          <span class="shot" data-reveal data-delay="140"><span class="duo">
+            <img class="v-b" src="img/life-g043-b.jpg" alt="Чёрная вешалка с полотенцем" loading="lazy">
+            <img class="v-w" src="img/life-g043-w.jpg" alt="Белая вешалка с полотенцем" loading="lazy">
+          </span></span>
+          <span class="shot" data-reveal data-delay="210"><span class="duo">
+            <img class="v-b" src="img/life-g01-b.jpg" alt="Чёрная полка с косметикой" loading="lazy">
+            <img class="v-w" src="img/life-g01-w.jpg" alt="Белая полка с косметикой" loading="lazy">
+          </span></span>
         </div>
-        <div class="strip-rail" id="strip-rail" data-reveal data-delay="120"></div>
       </div>
     </section>
 
-    <!-- ── ФИНАЛ ──────────────────────────────────────────────── -->
-    <section class="section finale" id="finale">
+    <!-- ── ТЁМНЫЙ CTA ────────────────────────────────────────── -->
+    <section class="section" style="padding-top: 0">
       <div class="container">
-        <div class="finale-grid">
-          <div class="finale-stat" data-reveal><span class="stat-n num" data-count="12">12</span><span class="stat-l">лет производству в&nbsp;Москве</span></div>
-          <div class="finale-stat" data-reveal data-delay="60"><span class="stat-n num" data-count="24">24</span><span class="stat-l">мастера в&nbsp;цехе и&nbsp;бюро</span></div>
-          <div class="finale-stat" data-reveal data-delay="120"><span class="stat-n num" data-count="9000" data-suffix="+">9000+</span><span class="stat-l">домов с&nbsp;нашим клеймом</span></div>
-          <div class="finale-stat" data-reveal data-delay="180"><span class="stat-n num" data-count="10">10</span><span class="stat-l">лет гарантии на&nbsp;каждую вещь</span></div>
-        </div>
-        <div class="showroom">
+        <div class="dark-cta" data-reveal>
           <div>
-            <p class="t-label" data-reveal>Шоурум</p>
-            <h2 class="t-display" data-reveal data-delay="60">Латунь надо держать в&nbsp;руках</h2>
-            <p class="addr" data-reveal data-delay="120">Вся коллекция — в&nbsp;шоуруме на&nbsp;Большой Никитской. Приходите посмотреть, как металл ложится в&nbsp;ладонь.</p>
-            <p data-reveal data-delay="160" style="margin-top:26px"><a class="btn btn--primary" href="contacts.html">Как добраться</a></p>
+            <span class="t-label">Комплекты</span>
+            <h2 class="t-head">Соберите ванную в&nbsp;одном стиле</h2>
+            <p>Полка, держатели и&nbsp;крючки сделаны в&nbsp;одной геометрии и&nbsp;одном цвете — комплект выглядит как&nbsp;единая система, а&nbsp;не&nbsp;набор случайных вещей.</p>
+            <a class="btn btn--light" href="catalog.html">Собрать комплект</a>
           </div>
-          <dl class="showroom-data" data-reveal data-delay="140">
-            <div><dt class="sr-only">Адрес</dt><dd>Москва, Большая Никитская,&nbsp;17</dd></div>
-            <div><dt class="sr-only">Часы работы</dt><dd><span>пн–сб · 10:00–20:00</span></dd></div>
-            <div><dt class="sr-only">Телефон</dt><dd><a href="tel:+74951203874">+7&nbsp;495&nbsp;120-38-74</a></dd></div>
-            <div><dt class="sr-only">Почта</dt><dd><a href="mailto:hello@gambardini.ru">hello@gambardini.ru</a></dd></div>
-          </dl>
+          <div class="cta-media" aria-hidden="true">
+            <span class="duo">
+              <img class="v-b" src="img/life-g0506-b.jpg" alt="" loading="lazy">
+              <img class="v-w" src="img/life-g0506-w.jpg" alt="" loading="lazy">
+            </span>
+          </div>
         </div>
       </div>
     </section>
@@ -305,46 +210,35 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <span class="wordmark">gambardini</span>
-          <p>Аксессуары для дома из&nbsp;литой латуни, мрамора и&nbsp;ореха. Собственное производство, Москва.</p>
+          <span class="wordmark">Gambardini</span>
+          <p>Стальные аксессуары для ванной и&nbsp;дома. Чёрный и&nbsp;белый. Производство — Москва.</p>
         </div>
         <nav class="footer-col" aria-label="Разделы сайта">
-          <p class="t-label">Разделы</p>
+          <span class="t-label">Разделы</span>
           <ul>
             <li><a href="catalog.html">Каталог</a></li>
-            <li><a href="production.html">Производство</a></li>
-            <li><a href="about.html">О нас</a></li>
-            <li><a href="service.html">Покупателям</a></li>
+            <li><a href="about.html">О бренде</a></li>
             <li><a href="contacts.html">Контакты</a></li>
           </ul>
         </nav>
         <div class="footer-col">
-          <p class="t-label">Шоурум</p>
-          <ul>
-            <li>Москва, Большая Никитская,&nbsp;17</li>
-            <li>пн–сб · 10:00–20:00</li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <p class="t-label">Связь</p>
+          <span class="t-label">Связь</span>
           <ul>
             <li><a href="mailto:hello@gambardini.ru">hello@gambardini.ru</a></li>
             <li><a href="tel:+74951203874">+7&nbsp;495&nbsp;120-38-74</a></li>
+            <li>Москва</li>
           </ul>
         </div>
       </div>
       <div class="footer-base">
-        <span>© 2026 Мастерская Gambardini · Москва</span>
-        <span>каталог-резоне · редакция 2026</span>
+        <span>© 2026 GAMBARDINI</span>
+        <span>сталь · чёрный · белый</span>
       </div>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="js/products.js?v=1"></script>
-  <script src="js/main.js?v=1"></script>
-  <script src="js/home.js?v=1"></script>
+  <script src="js/products.js?v=3"></script>
+  <script src="js/main.js?v=3"></script>
 </body>
 </html>

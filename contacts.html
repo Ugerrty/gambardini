@@ -3,27 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Контакты — Gambardini · шоурум на Большой Никитской, 17</title>
-  <meta name="description" content="Шоурум Gambardini: Москва, Большая Никитская, 17. Пн–сб с 10:00 до 20:00. Телефон +7 495 120-38-74, почта hello@gambardini.ru. Схема проезда.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='32' y='47' font-family='Georgia,serif' font-weight='600' font-size='46' fill='%23212327' text-anchor='middle'%3Eg%3C/text%3E%3C/svg%3E">
+  <title>Контакты — GAMBARDINI · заказ, доставка, вопросы</title>
+  <meta name="description" content="Связаться с GAMBARDINI: hello@gambardini.ru, +7 495 120-38-74. Доставка по Москве и России, оплата по счёту или картой, возврат 14 дней.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='8' y='8' width='48' height='48' rx='12' fill='%23191919'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='700' font-size='28' fill='%23fff' text-anchor='middle'%3EG%3C/text%3E%3C/svg%3E">
   <script>
     (function () {
       var d = document.documentElement;
       d.classList.add('js');
-      var t;
-      try { t = localStorage.getItem('gb-theme'); } catch (e) { t = null; }
-      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      if (location.search.indexOf('theme=dark') > -1) t = 'dark';
-      if (location.search.indexOf('theme=light') > -1) t = 'light';
-      d.setAttribute('data-theme', t);
-      var m; try { m = localStorage.getItem('gb-mode'); } catch (e) { m = null; }
-      if (m === 'real' || location.search.indexOf('mode=real') > -1) d.classList.add('mode-real');
+      var f;
+      try { f = localStorage.getItem('gb-fin'); } catch (e) { f = null; }
+      if (location.search.indexOf('fin=w') > -1) f = 'w';
+      if (location.search.indexOf('fin=b') > -1) f = 'b';
+      if (f === 'w') d.classList.add('fin-w');
     })();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Literata:opsz,wght@7..72,400..700&family=PT+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=1">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
 
@@ -31,22 +28,17 @@
 
   <header class="site-header">
     <div class="header-inner">
-      <a class="wordmark" href="index.html" aria-label="Gambardini — на главную">gambardini</a>
+      <a class="wordmark" href="index.html" aria-label="Gambardini — на главную">Gambardini</a>
       <nav class="site-nav" aria-label="Основная навигация">
         <a href="catalog.html">Каталог</a>
-        <a href="production.html">Производство</a>
-        <a href="about.html">О нас</a>
-        <a href="service.html">Покупателям</a>
+        <a href="about.html">О бренде</a>
         <a href="contacts.html" aria-current="page">Контакты</a>
-        <button class="theme-toggle-m" type="button"></button>
       </nav>
       <div class="header-controls">
-        <div class="mode-toggle" role="group" aria-label="Представление изделий">
-          <button type="button" data-mode="draw" aria-pressed="true">Чертёж</button>
-          <button type="button" data-mode="real" aria-pressed="false">Вещь</button>
+        <div class="fin-toggle" role="group" aria-label="Цвет изделий">
+          <button type="button" data-fin="b" aria-pressed="true"><span class="dot dot--b" aria-hidden="true"></span><span class="lbl">Чёрный</span></button>
+          <button type="button" data-fin="w" aria-pressed="false"><span class="dot dot--w" aria-hidden="true"></span><span class="lbl">Белый</span></button>
         </div>
-        <button class="theme-toggle" type="button"></button>
-        <a class="order-toggle" href="catalog.html#order">Заказ</a>
         <button class="nav-burger" type="button" aria-expanded="false" aria-label="Меню">
           <svg viewBox="0 0 20 14" width="20" height="14" aria-hidden="true" fill="none"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.6"/></svg>
         </button>
@@ -56,77 +48,48 @@
 
   <main id="main">
     <div class="container page-head">
-      <p class="t-label" data-reveal>Контакты · шоурум и бюро</p>
-      <h1 class="t-display" data-reveal data-delay="60">Большая Никитская,&nbsp;17</h1>
-      <p class="page-note" data-reveal data-delay="120">Единственный шоурум дома — вся коллекция при&nbsp;правильном свете и&nbsp;мастер-консультант, который знает каждую отливку по&nbsp;номеру.</p>
+      <p class="t-label" data-reveal>Контакты</p>
+      <h1 class="t-head" data-reveal data-delay="60">На связи</h1>
+      <p class="note" data-reveal data-delay="120">Пишите по&nbsp;любому вопросу — заказ, наличие, монтаж, сотрудничество. Отвечаем в&nbsp;течение рабочего дня.</p>
     </div>
 
-    <section class="section" style="padding-top: clamp(24px, 4vh, 48px)">
-      <div class="container contacts-grid">
-        <dl class="contacts-list" data-reveal>
-          <div class="contact-row">
-            <dt>Адрес</dt>
-            <dd>Москва, Большая Никитская,&nbsp;17<small>10&nbsp;минут пешком от&nbsp;м.&nbsp;Охотный Ряд и&nbsp;м.&nbsp;Арбатская</small></dd>
-          </div>
-          <div class="contact-row">
-            <dt>Часы</dt>
-            <dd>пн–сб · 10:00–20:00<small>воскресенье — выходной</small></dd>
-          </div>
-          <div class="contact-row">
-            <dt>Телефон</dt>
-            <dd><a href="tel:+74951203874">+7&nbsp;495&nbsp;120-38-74</a><small>звонки принимаем в&nbsp;часы работы шоурума</small></dd>
-          </div>
-          <div class="contact-row">
+    <section class="section" style="padding-top: clamp(20px, 3vh, 36px)">
+      <div class="container contact-grid">
+        <dl class="contact-list" data-reveal>
+          <div class="row">
             <dt>Почта</dt>
-            <dd><a href="mailto:hello@gambardini.ru">hello@gambardini.ru</a><small>заявки, монтажные чертежи, вопросы по&nbsp;уходу</small></dd>
+            <dd><a href="mailto:hello@gambardini.ru">hello@gambardini.ru</a><small>заказы, вопросы, фото для подбора</small></dd>
           </div>
-          <div class="contact-row">
+          <div class="row">
+            <dt>Телефон</dt>
+            <dd><a href="tel:+74951203874">+7&nbsp;495&nbsp;120-38-74</a><small>будни, 10:00–19:00 по&nbsp;Москве</small></dd>
+          </div>
+          <div class="row">
+            <dt>Город</dt>
+            <dd>Москва<small>собственное производство</small></dd>
+          </div>
+          <div class="row">
             <dt>Дизайнерам</dt>
-            <dd>Спецификации, DWG и&nbsp;образцы отделок<small>напишите с&nbsp;пометкой «для проекта» — соберём комплект</small></dd>
+            <dd>Комплектация объектов<small>напишите на&nbsp;почту с&nbsp;пометкой «для проекта» — соберём спецификацию и&nbsp;образцы цвета</small></dd>
           </div>
         </dl>
 
-        <div class="sheet map-sheet" data-reveal data-delay="100">
-          <p class="t-label">Схема проезда · без соблюдения масштаба</p>
-          <svg viewBox="0 0 640 480" role="img" aria-label="Схема: шоурум на Большой Никитской, 17, между Брюсовым и Газетным переулками, десять минут пешком от метро Охотный Ряд">
-            <!-- улица -->
-            <line class="ln-c" x1="320" y1="40" x2="320" y2="440" style="stroke-width:3"/>
-            <text class="td td-s" transform="rotate(-90 296 240)" x="296" y="240" text-anchor="middle">Большая Никитская</text>
-            <!-- поперечные -->
-            <line class="ln-t ln-d" x1="140" y1="90" x2="520" y2="90"/>
-            <text class="td td-s" x="140" y="78">Никитские Ворота</text>
-            <line class="ln-t ln-d" x1="170" y1="180" x2="500" y2="180"/>
-            <text class="td td-s" x="336" y="170">Вознесенский пер.</text>
-            <line class="ln-t ln-d" x1="170" y1="260" x2="500" y2="260"/>
-            <text class="td td-s" x="336" y="250">Брюсов пер.</text>
-            <line class="ln-t ln-d" x1="170" y1="350" x2="500" y2="350"/>
-            <text class="td td-s" x="336" y="340">Газетный пер.</text>
-            <line class="ln-c" x1="120" y1="420" x2="560" y2="420" style="stroke-width:2"/>
-            <text class="td td-s" x="120" y="410">Моховая</text>
-            <!-- консерватория -->
-            <rect class="ln-h" x="252" y="196" width="30" height="30"/>
-            <text class="td td-s" x="238" y="216" text-anchor="end">Консерватория</text>
-            <!-- дом 17 -->
-            <circle cx="320" cy="300" r="11" fill="none" stroke="url(#gbdef-brass-l)" stroke-width="4"/>
-            <circle cx="320" cy="300" r="2.6" fill="url(#gbdef-brass-l)"/>
-            <text class="td" x="344" y="305">№ 17 · шоурум</text>
-            <!-- метро -->
-            <text class="td td-s" x="520" y="452">м. Охотный Ряд →</text>
-            <text class="td td-s" x="120" y="452" text-anchor="start">← м. Арбатская</text>
-            <!-- север и масштаб -->
-            <g class="dim">
-              <line class="ln-d" x1="584" y1="96" x2="584" y2="56"/>
-              <path class="ar" d="M584 56 l-3.4 9 h6.8 z"/>
-              <text class="td td-s" x="584" y="114" text-anchor="middle">С</text>
-            </g>
-            <g class="rl">
-              <rect class="rl-a" x="500" y="150" width="50" height="5"/>
-              <rect class="rl-f" x="500" y="150" width="100" height="5"/>
-              <text class="td td-s" x="500" y="170">0</text>
-              <text class="td td-s" x="600" y="170" text-anchor="end">≈ 200 м</text>
-            </g>
-          </svg>
-          <p class="map-note">Вход с&nbsp;улицы, первый этаж. Городская парковка — в&nbsp;Брюсовом и&nbsp;Газетном переулках; удобнее всего пешком от&nbsp;Моховой.</p>
+        <div data-reveal data-delay="100">
+          <div class="tile" style="margin-bottom: 18px">
+            <span class="t-label">Доставка</span>
+            <h3>По Москве и всей России</h3>
+            <p>По&nbsp;Москве — курьером, 1–2 рабочих дня. По&nbsp;России — транспортными службами, 2–7 дней. Стоимость подтверждаем письмом до&nbsp;оплаты. Каждый предмет едет в&nbsp;жёсткой коробке с&nbsp;крепежом и&nbsp;инструкцией.</p>
+          </div>
+          <div class="tile" style="margin-bottom: 18px">
+            <span class="t-label">Оплата</span>
+            <h3>Карта или счёт</h3>
+            <p>Частным покупателям — ссылка на&nbsp;оплату картой. Юридическим лицам и&nbsp;дизайнерам — счёт и&nbsp;закрывающие документы.</p>
+          </div>
+          <div class="tile">
+            <span class="t-label">Возврат</span>
+            <h3>14 дней</h3>
+            <p>Не&nbsp;подошёл цвет или размер — вернём или обменяем в&nbsp;течение 14&nbsp;дней, если предмет не&nbsp;был установлен.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -136,43 +99,35 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <span class="wordmark">gambardini</span>
-          <p>Аксессуары для дома из&nbsp;литой латуни, мрамора и&nbsp;ореха. Собственное производство, Москва.</p>
+          <span class="wordmark">Gambardini</span>
+          <p>Стальные аксессуары для ванной и&nbsp;дома. Чёрный и&nbsp;белый. Производство — Москва.</p>
         </div>
         <nav class="footer-col" aria-label="Разделы сайта">
-          <p class="t-label">Разделы</p>
+          <span class="t-label">Разделы</span>
           <ul>
             <li><a href="catalog.html">Каталог</a></li>
-            <li><a href="production.html">Производство</a></li>
-            <li><a href="about.html">О нас</a></li>
-            <li><a href="service.html">Покупателям</a></li>
+            <li><a href="about.html">О бренде</a></li>
             <li><a href="contacts.html">Контакты</a></li>
           </ul>
         </nav>
         <div class="footer-col">
-          <p class="t-label">Шоурум</p>
-          <ul>
-            <li>Москва, Большая Никитская,&nbsp;17</li>
-            <li>пн–сб · 10:00–20:00</li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <p class="t-label">Связь</p>
+          <span class="t-label">Связь</span>
           <ul>
             <li><a href="mailto:hello@gambardini.ru">hello@gambardini.ru</a></li>
             <li><a href="tel:+74951203874">+7&nbsp;495&nbsp;120-38-74</a></li>
+            <li>Москва</li>
           </ul>
         </div>
       </div>
       <div class="footer-base">
-        <span>© 2026 Мастерская Gambardini · Москва</span>
-        <span>каталог-резоне · редакция 2026</span>
+        <span>© 2026 GAMBARDINI</span>
+        <span>сталь · чёрный · белый</span>
       </div>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="js/products.js?v=1"></script>
-  <script src="js/main.js?v=1"></script>
+  <script src="js/products.js?v=3"></script>
+  <script src="js/main.js?v=3"></script>
 </body>
 </html>
