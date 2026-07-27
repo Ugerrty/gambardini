@@ -241,20 +241,29 @@ html.fin-w .duo .v-b { opacity: 0; }
 }
 .hero-cta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 
+/* Логотип-заставка. Базовый кегль намеренно скромный: скрипт
+   увеличит его ровно до ширины листа, измерив реальный шрифт. */
 .hero-wordmark {
   position: absolute;
   top: calc(var(--header-h) + clamp(10px, 4vh, 48px));
-  left: 0; right: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 2;
+  width: min(1180px, calc(100% - 2 * var(--gutter)));
   text-align: center;
+  pointer-events: none;
+  line-height: 1.06;
+}
+.hero-wordmark span {
+  display: inline-block;
   font-family: var(--font-head);
   font-weight: 600;
-  font-size: clamp(2rem, 8.4vw, 7.2rem);
+  font-size: clamp(1.7rem, 6.4vw, 6rem);
   letter-spacing: .3em;
   text-indent: .3em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: rgba(255, 255, 255, .92);
-  pointer-events: none;
 }
 
 /* Кнопки */
@@ -700,15 +709,131 @@ body.pm-open { overflow: hidden; }
   }
   .fin-toggle button span.lbl { display: none; }
   .fin-toggle button { padding: 8px 10px; }
-  .hero-wordmark { letter-spacing: .22em; text-indent: .22em; }
-  .split-stage { aspect-ratio: 4 / 5; }
+  /* min-height вместе с aspect-ratio навязывал ширину больше экрана */
+  .split-stage { aspect-ratio: 4 / 5; min-height: 0; }
+}
+
+/* ═══ ГЕРОЙ НА ТЕЛЕФОНАХ ══════════════════════════════════════── */
+@media (max-width: 700px) {
+  .hero {
+    min-height: 100svh;
+    min-height: 100dvh;
+  }
+  /* на телефоне логотип не во всю ширину: с полями смотрится дороже
+     и не рискует упереться в края при подмене шрифта */
+  .hero-wordmark {
+    top: calc(var(--header-h) + 16px);
+    width: min(76%, 300px);
+  }
+  .hero-wordmark span {
+    letter-spacing: .24em;
+    text-indent: .24em;
+    color: rgba(255, 255, 255, .96);
+  }
+
+  /* фото смещаем вправо: предмет уходит из-под текстового блока */
+  .hero-media img { object-position: 62% 42%; }
+
+  /* фото прижато градиентом там, где лежит текст: середина остаётся
+     светлой ради предмета, низ — гарантированно тёмный */
+  .hero-media::after {
+    background:
+      linear-gradient(180deg,
+        rgba(18, 17, 15, .54) 0%,
+        rgba(18, 17, 15, .18) 24%,
+        rgba(18, 17, 15, .14) 40%,
+        rgba(18, 17, 15, .50) 56%,
+        rgba(18, 17, 15, .80) 74%,
+        rgba(18, 17, 15, .92) 100%);
+  }
+
+  .hero-content {
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+  .hero-kicker {
+    font-size: .625rem;
+    letter-spacing: .2em;
+    margin-bottom: 12px;
+    color: rgba(255, 255, 255, .86);
+    text-shadow: 0 1px 12px rgba(16, 15, 13, .55);
+  }
+  .hero h1 {
+    font-size: clamp(2.05rem, 9.6vw, 2.7rem);
+    line-height: 1.05;
+    margin-bottom: 14px;
+    max-width: 11ch;
+    text-shadow: 0 2px 22px rgba(16, 15, 13, .4);
+  }
+  .hero-sub {
+    font-size: .9375rem;
+    line-height: 1.5;
+    margin-bottom: 22px;
+    max-width: 34ch;
+    color: rgba(255, 255, 255, .92);
+    text-shadow: 0 1px 14px rgba(16, 15, 13, .5);
+  }
+  .hero-cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .hero-cta .btn {
+    width: 100%;
+    padding-block: 17px;
+  }
+  /* вторая кнопка поверх фото: плотнее, чтобы читалась на любом кадре */
+  .hero-cta .btn--glass {
+    background: rgba(24, 22, 20, .42);
+    border-color: rgba(255, 255, 255, .55);
+  }
+
+  /* лейблы разделов не должны ломаться на две строки */
+  .page-head .t-label,
+  .section-head .t-label { font-size: .625rem; letter-spacing: .17em; }
+
+  /* шапка поверх героя — светлая: чёрный логотип на фото не читается */
+  body.hero-page .site-header:not(.is-solid) { color: #fff; }
+  body.hero-page .site-header:not(.is-solid) .fin-toggle {
+    border-color: rgba(255, 255, 255, .5);
+    background: rgba(24, 22, 20, .3);
+  }
+  body.hero-page .site-header:not(.is-solid) .fin-toggle button { color: rgba(255, 255, 255, .8); }
+  body.hero-page .site-header:not(.is-solid) .fin-toggle button[aria-pressed="true"] {
+    background: #fff;
+    color: #191919;
+  }
+  body.hero-page .site-header:not(.is-solid) .fin-toggle .dot { border-color: rgba(255, 255, 255, .55); }
+  body.hero-page .site-header:not(.is-solid) .fin-toggle button[aria-pressed="true"] .dot {
+    border-color: rgba(25, 25, 25, .35);
+  }
+}
+
+/* низкие экраны (iPhone SE и подобные) — плотнее по вертикали */
+@media (max-width: 700px) and (max-height: 700px) {
+  .hero-wordmark { top: calc(var(--header-h) + 8px); }
+  .hero h1 { font-size: 1.95rem; margin-bottom: 10px; }
+  .hero-sub { font-size: .875rem; margin-bottom: 16px; }
+  .hero-kicker { margin-bottom: 8px; }
+  .hero-cta .btn { padding-block: 14px; }
 }
 
 @media (max-width: 560px) {
   .gallery { grid-template-columns: 1fr 1fr; }
   .cards { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
-  .pm-media .duo { width: 92%; }
+  .pm-media > .duo { width: 92%; }
+}
+
+/* узкие телефоны: шапка не должна переполняться */
+@media (max-width: 365px) {
+  .header-inner { padding-inline: 14px; gap: 8px; }
+  .wordmark { font-size: .8125rem; letter-spacing: .22em; }
+  .fin-toggle { padding: 4px; gap: 4px; }
+  .fin-toggle button { padding: 7px 9px; }
+  .nav-burger { width: 34px; margin-left: 0; }
+  .hero-wordmark { width: min(84%, 260px); }
+  /* кикер должен остаться одной строкой */
+  .hero-kicker { font-size: .5625rem; letter-spacing: .14em; }
 }
 
 /* ═══ ДВИЖЕНИЕ ════════════════════════════════════════════════── */

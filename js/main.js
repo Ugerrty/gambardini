@@ -64,6 +64,29 @@
   syncFin();
   window.gbSetFin = setFin;
 
+  /* ── Логотип-заставка: подгоняем кегль под ширину листа ────── */
+  function fitWordmark() {
+    const box = document.querySelector('.hero-wordmark');
+    const el = box && box.querySelector('span');
+    if (!el) return;
+    const target = box.clientWidth;
+    if (!target) return;
+    /* меряем при опорном кегле — работает с любым шрифтом,
+       включая случай, когда Montserrat ещё не загрузился */
+    el.style.fontSize = '100px';
+    const measured = el.getBoundingClientRect().width;
+    if (!measured) { el.style.fontSize = ''; return; }
+    /* 0.97 — запас на разницу метрик, пока подгружается Montserrat */
+    const size = Math.min(100 * (target / measured) * 0.97, 116);
+    el.style.fontSize = size.toFixed(2) + 'px';
+  }
+  fitWordmark();
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => requestAnimationFrame(fitWordmark));
+  }
+  window.addEventListener('load', fitWordmark);
+  window.addEventListener('resize', fitWordmark, { passive: true });
+
   /* ── Появления ────────────────────────────────────────────── */
   const revealed = document.querySelectorAll('[data-reveal]');
   if ('IntersectionObserver' in window && revealed.length) {
