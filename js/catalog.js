@@ -148,6 +148,36 @@
   });
 
   document.getElementById('pm-close').addEventListener('click', closeModal);
+
+  /* свайп вниз по «шапке» шторки закрывает карточку */
+  (function swipeToClose() {
+    const sheet = layer.querySelector('.pm');
+    const grip = document.getElementById('pm-media');
+    if (!grip || !sheet) return;
+    let startY = 0, dy = 0, active = false;
+
+    grip.addEventListener('touchstart', (e) => {
+      if (!layer.classList.contains('is-open')) return;
+      active = true;
+      dy = 0;
+      startY = e.touches[0].clientY;
+      sheet.style.transition = 'none';
+    }, { passive: true });
+
+    grip.addEventListener('touchmove', (e) => {
+      if (!active) return;
+      dy = Math.max(0, e.touches[0].clientY - startY);
+      sheet.style.transform = 'translateY(' + dy + 'px)';
+    }, { passive: true });
+
+    grip.addEventListener('touchend', () => {
+      if (!active) return;
+      active = false;
+      sheet.style.transition = 'transform .32s cubic-bezier(.22,1,.36,1)';
+      sheet.style.transform = '';
+      if (dy > 90) closeModal();
+    });
+  })();
   document.getElementById('pm-next').addEventListener('click', () => {
     openModal(current + 1);
     document.getElementById('pm-close').focus();
