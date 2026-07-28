@@ -118,27 +118,62 @@
   }
   document.addEventListener('gb:fin', syncOrderLink);
 
+  const sheet = layer.querySelector('.pm');
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let closeTimer = null;
+
   function openModal(i, keepHash) {
+    const wasOpen = !layer.hidden;
     current = (i + P.length) % P.length;
     renderModal(current);
-    lastFocus = document.activeElement;
+    /* запоминаем только внешний фокус: при листании внутри карточки
+       activeElement — это её же кнопки, и возвращать фокус туда нельзя */
+    if (!wasOpen && !layer.contains(document.activeElement)) {
+      lastFocus = document.activeElement;
+    }
+
+    clearTimeout(closeTimer);
+    sheet.classList.remove('is-dragging');
+    sheet.style.transform = '';
     layer.hidden = false;
-    layer.classList.add('is-open');
+    layer.removeAttribute('aria-hidden');
     document.body.classList.add('pm-open');
     if (window.gbLenis) gbLenis.stop();
+    /* синхронный reflow фиксирует исходное состояние перехода.
+       rAF здесь ненадёжен: в фоновой вкладке он не выполняется,
+       и шторка осталась бы невидимой */
+    void layer.offsetWidth;
+    layer.classList.add('is-open');
+
     if (!keepHash) {
       try { history.replaceState(null, '', '#' + P[current].id); } catch (e) { /* — */ }
     }
-    document.getElementById('pm-close').focus();
+    /* при листании озвучиваем новый товар — фокус на заголовок,
+       при первом открытии оставляем его на кнопке закрытия */
+    const target = wasOpen ? document.getElementById('pm-name') : document.getElementById('pm-close');
+    if (target) target.focus({ preventScroll: true });
   }
 
   function closeModal() {
+    if (layer.hidden) return;
     layer.classList.remove('is-open');
-    layer.hidden = true;
+    sheet.classList.remove('is-dragging');
+    sheet.style.transform = '';         /* шторка уезжает вниз по CSS */
     document.body.classList.remove('pm-open');
     if (window.gbLenis) gbLenis.start();
     try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* — */ }
-    if (lastFocus) lastFocus.focus();
+
+    /* возвращаем фокус наружу; если исходный элемент исчез — на карточку товара */
+    const back = (lastFocus && document.contains(lastFocus) && !layer.contains(lastFocus))
+      ? lastFocus
+      : cards.querySelector('.p-card[data-id="' + P[current].id + '"]');
+    if (back) back.focus({ preventScroll: true });
+
+    /* из дерева доступности убираем сразу: пока жив aria-modal,
+       скринридер не видит страницу под диалогом */
+    layer.setAttribute('aria-hidden', 'true');
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(() => { layer.hidden = true; }, REDUCED ? 0 : 480);
   }
 
   cards.addEventListener('click', (e) => {
@@ -149,39 +184,70 @@
 
   document.getElementById('pm-close').addEventListener('click', closeModal);
 
-  /* свайп вниз по «шапке» шторки закрывает карточку */
+  /* Свайп вниз по фото закрывает шторку.
+     Тянем за пальцем 1:1, вверх — с сопротивлением; решение принимаем
+     по пройденному пути ИЛИ по скорости броска. */
   (function swipeToClose() {
-    const sheet = layer.querySelector('.pm');
     const grip = document.getElementById('pm-media');
     if (!grip || !sheet) return;
     let startY = 0, dy = 0, active = false;
+    /* две последние точки жеста: по ним считаем скорость броска */
+    let lastY = 0, lastT = 0, prevY = 0, prevT = 0;
 
-    grip.addEventListener('touchstart', (e) => {
+    const reset = () => {
+      active = false;
+      sheet.classList.remove('is-dragging');
+      sheet.style.transform = '';
+    };
+
+    const onStart = (e) => {
       if (!layer.classList.contains('is-open')) return;
+      if (!matchMedia('(max-width: 700px)').matches) return;
+      /* второй палец не должен переустанавливать точку отсчёта */
+      if (active || e.touches.length > 1) return;
       active = true;
       dy = 0;
       startY = e.touches[0].clientY;
-      sheet.style.transition = 'none';
-    }, { passive: true });
+      lastY = prevY = startY;
+      lastT = prevT = performance.now();
+      sheet.classList.add('is-dragging');
+    };
 
-    grip.addEventListener('touchmove', (e) => {
+    const onMove = (e) => {
       if (!active) return;
-      dy = Math.max(0, e.touches[0].clientY - startY);
-      sheet.style.transform = 'translateY(' + dy + 'px)';
-    }, { passive: true });
+      if (e.touches.length > 1) { reset(); return; }   /* пошёл зум — отдаём жест */
+      const y = e.touches[0].clientY;
+      const raw = y - startY;
+      /* вверх шторка почти не идёт — мягкое сопротивление */
+      dy = raw >= 0 ? raw : raw * 0.18;
+      sheet.style.transform = 'translateY(' + dy.toFixed(1) + 'px)';
+      /* сдвигаем «окно» не чаще ~40 мс — так prev остаётся точкой
+         за момент до броска, а не самим броском */
+      const now = performance.now();
+      if (now - lastT > 40) { prevY = lastY; prevT = lastT; }
+      lastY = y;
+      lastT = now;
+    };
 
-    grip.addEventListener('touchend', () => {
+    const onEnd = (e) => {
       if (!active) return;
-      active = false;
-      sheet.style.transition = 'transform .32s cubic-bezier(.22,1,.36,1)';
-      sheet.style.transform = '';
-      if (dy > 90) closeModal();
-    });
+      if (e.touches && e.touches.length) return;      /* ещё есть пальцы на экране */
+      const travelled = dy;
+      /* скорость по последнему отрезку, а не средняя за жест: иначе
+         бросок после паузы не распознаётся. performance.now() вместо
+         e.timeStamp — последний бывает нулевым у синтетических событий */
+      const velocity = (lastY - prevY) / Math.max(1, lastT - prevT);
+      reset();
+      if (travelled > 110 || (velocity > 0.55 && travelled > 40)) closeModal();
+    };
+
+    grip.addEventListener('touchstart', onStart, { passive: true });
+    grip.addEventListener('touchmove', onMove, { passive: true });
+    grip.addEventListener('touchend', onEnd);
+    /* отменённый системой жест (шторка ОС, звонок) не должен закрывать карточку */
+    grip.addEventListener('touchcancel', () => { if (active) reset(); });
   })();
-  document.getElementById('pm-next').addEventListener('click', () => {
-    openModal(current + 1);
-    document.getElementById('pm-close').focus();
-  });
+  document.getElementById('pm-next').addEventListener('click', () => openModal(current + 1));
   layer.addEventListener('click', (e) => { if (e.target === layer) closeModal(); });
 
   document.addEventListener('keydown', (e) => {
@@ -193,6 +259,13 @@
       const f = layer.querySelectorAll('button, a[href]');
       if (!f.length) return;
       const first = f[0], last = f[f.length - 1];
+      /* клик по тексту или фото сбрасывает фокус на body —
+         тогда Tab уводил из диалога на скрытую страницу */
+      if (!layer.contains(document.activeElement)) {
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus();
+        return;
+      }
       if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     }

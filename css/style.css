@@ -39,6 +39,9 @@
   --r: 18px;
   --r-lg: 26px;
 
+  /* длительность ухода карточки товара — на неё завязаны CSS и JS */
+  --pm-out: 480ms;
+
   --container: 1360px;
   --gutter: clamp(20px, 4.5vw, 68px);
   --header-h: 76px;
@@ -49,7 +52,13 @@
 }
 
 /* ── База ─────────────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* никакой синей подсветки при тапе на мобильных */
+  -webkit-tap-highlight-color: transparent;
+}
 
 html { scroll-behavior: smooth; }
 html.lenis { scroll-behavior: auto; }
@@ -128,7 +137,8 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 /* Появления */
 html.js [data-reveal] { opacity: 0; transform: translateY(18px); }
 html.js [data-reveal].is-in {
-  opacity: 1; transform: none;
+  opacity: 1;
+  transform: var(--card-rest, none);
   transition: opacity .6s var(--ease-out), transform .6s var(--ease-out);
   transition-delay: var(--reveal-delay, 0ms);
 }
@@ -394,12 +404,31 @@ html.fin-w .duo .v-b { opacity: 0; }
   background: var(--stone);
   box-shadow: var(--shadow-card);
   cursor: pointer;
+  /* transform идёт через переменную: правило появления [data-reveal].is-in
+     специфичнее и иначе затирало бы hover/active */
+  transform: var(--card-rest, none);
   transition: transform .45s var(--ease-out), box-shadow .45s var(--ease-out);
   text-align: left;
   display: flex;
   flex-direction: column;
 }
-.p-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-soft); }
+/* подавляем выделение только там, где палец задевает картинку;
+   на главной .p-card — ссылка, и её контекстное меню трогать нельзя */
+.p-card .p-media {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.p-card img { -webkit-user-drag: none; user-select: none; pointer-events: none; }
+
+@media (hover: hover) {
+  .p-card:hover { --card-rest: translateY(-6px); box-shadow: var(--shadow-soft); }
+}
+/* отклик на палец вместо системной подсветки */
+@media (hover: none) {
+  .p-card { transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out); }
+  .p-card:active { --card-rest: scale(.978); box-shadow: var(--shadow-card); }
+}
 .p-card .p-media {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -431,9 +460,13 @@ html.fin-w .duo .v-b { opacity: 0; }
   transition: opacity .5s var(--ease-out);
 }
 .p-media--photo .m-render img { object-fit: contain; }
-.p-card:hover .p-media--photo .m-life,
+/* подмена фото на рендер — только там, где есть настоящий указатель:
+   на тач-устройствах :hover залипает после тапа */
+@media (hover: hover) {
+  .p-card:hover .p-media--photo .m-life { opacity: 0; }
+  .p-card:hover .p-media--photo .m-render { opacity: 1; }
+}
 .p-card:focus-visible .p-media--photo .m-life { opacity: 0; }
-.p-card:hover .p-media--photo .m-render,
 .p-card:focus-visible .p-media--photo .m-render { opacity: 1; }
 
 /* модалка: интерьерный кадр + предмет, оба видны сразу */
@@ -470,7 +503,9 @@ html.fin-w .duo .v-b { opacity: 0; }
   aspect-ratio: 3 / 4;
   transition: transform .5s var(--ease-out);
 }
-.p-card:hover .p-media:not(.p-media--photo) .duo { transform: scale(1.045); }
+@media (hover: hover) {
+  .p-card:hover .p-media:not(.p-media--photo) .duo { transform: scale(1.045); }
+}
 .p-card .p-media img { object-fit: contain; position: absolute; inset: 0; }
 .p-card .p-info {
   display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
@@ -573,12 +608,30 @@ html.fin-w .duo .v-b { opacity: 0; }
 /* ═══ МОДАЛКА ТОВАРА ══════════════════════════════════════════── */
 .pm-layer {
   position: fixed; inset: 0; z-index: 60;
-  display: none;
+  display: flex;
   align-items: center; justify-content: center;
   padding: clamp(12px, 3vh, 40px) var(--gutter);
-  background: rgba(22, 21, 19, .55);
+  /* затемнение — отдельным слоем: иначе прозрачность родителя гасила бы
+     шторку раньше, чем она доедет вниз */
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0s linear var(--pm-out, .48s);
 }
-.pm-layer.is-open { display: flex; }
+.pm-layer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(22, 21, 19, .55);
+  opacity: 0;
+  transition: opacity .34s ease;
+}
+.pm-layer[hidden] { display: none; }
+.pm-layer.is-open {
+  visibility: visible;
+  pointer-events: auto;
+  transition: visibility 0s;
+}
+.pm-layer.is-open::before { opacity: 1; }
 body.pm-open, body.nav-open { overflow: hidden; }
 
 /* при открытой шторке шапка не должна оставаться «геройски» светлой */
@@ -594,7 +647,12 @@ body.nav-open .site-header { background: transparent; box-shadow: none; }
   box-shadow: var(--shadow-soft);
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  transform: translateY(20px) scale(.985);
+  opacity: 0;
+  transition: transform .46s var(--ease-out), opacity .3s ease;
+  will-change: transform;
 }
+.pm-layer.is-open .pm { transform: none; opacity: 1; }
 .pm-media {
   position: relative;
   background: var(--stone-deep);
@@ -853,7 +911,18 @@ body.nav-open .site-header { background: transparent; box-shadow: none; }
     /* скроллится только текстовая часть — фото остаётся на месте */
     overflow: hidden;
   }
-  /* «ручка» шторки */
+  /* на телефоне шторка выезжает снизу */
+  .pm {
+    transform: translateY(100%);
+    transition: transform .48s var(--ease-out), opacity .001s;
+    opacity: 1;
+  }
+  .pm-layer.is-open .pm { transform: translateY(0); }
+  /* пока палец ведёт шторку — никакой инерции перехода */
+  .pm.is-dragging { transition: none; }
+
+  /* «ручка» шторки. pointer-events:none обязателен: иначе касание
+     ровно по ручке уходит в .pm, а слушатели жеста висят на .pm-media */
   .pm::before {
     content: "";
     position: absolute;
@@ -863,6 +932,7 @@ body.nav-open .site-header { background: transparent; box-shadow: none; }
     border-radius: 999px;
     background: rgba(25, 25, 25, .18);
     z-index: 4;
+    pointer-events: none;
   }
   .pm-media {
     min-height: 0;
@@ -872,7 +942,9 @@ body.nav-open .site-header { background: transparent; box-shadow: none; }
   .pm-media > .duo { width: 76%; aspect-ratio: auto; height: 100%; }
   /* артикул на шторке дублирует характеристики и лезет под фото */
   .pm-media .p-code { display: none; }
-  .pm-media { touch-action: none; }
+  /* pinch-zoom оставляем: фото товара должно масштабироваться,
+     одно-пальцевый жест ведём сами */
+  .pm-media { touch-action: pinch-zoom; }
 
   /* интерьер и предмет — рядом, а не друг под другом.
      Высоту задаём явно: картинки внутри абсолютные, своей высоты нет */
