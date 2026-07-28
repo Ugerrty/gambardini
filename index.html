@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=13">
+  <link rel="stylesheet" href="css/style.css?v=17">
 </head>
 <body class="hero-page">
 
@@ -29,18 +29,22 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="wordmark" href="index.html" aria-label="Gambardini — на главную">Gambardini</a>
-      <nav class="site-nav" aria-label="Основная навигация">
+      <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
         <a href="catalog.html">Каталог</a>
         <a href="about.html">О бренде</a>
         <a href="contacts.html">Контакты</a>
+        <span class="nav-foot" aria-hidden="true">
+          <a href="mailto:hello@gambardini.ru">hello@gambardini.ru</a>
+          <a href="tel:+74951203874">+7&nbsp;495&nbsp;120-38-74</a>
+        </span>
       </nav>
       <div class="header-controls">
         <div class="fin-toggle" role="group" aria-label="Цвет изделий">
           <button type="button" data-fin="b" aria-pressed="true"><span class="dot dot--b" aria-hidden="true"></span><span class="lbl">Чёрный</span></button>
           <button type="button" data-fin="w" aria-pressed="false"><span class="dot dot--w" aria-hidden="true"></span><span class="lbl">Белый</span></button>
         </div>
-        <button class="nav-burger" type="button" aria-expanded="false" aria-label="Меню">
-          <svg viewBox="0 0 20 14" width="20" height="14" aria-hidden="true" fill="none"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.6"/></svg>
+        <button class="nav-burger" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Меню">
+          <span class="burger-box" aria-hidden="true"><i></i><i></i><i></i></span>
         </button>
       </div>
     </div>
@@ -256,7 +260,7 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="js/products.js?v=13"></script>
-  <script src="js/main.js?v=13"></script>
+  <script src="js/products.js?v=17"></script>
+  <script src="js/main.js?v=17"></script>
 </body>
 </html>

@@ -27,20 +27,43 @@
     if (header) header.classList.toggle('is-solid', (window.scrollY || 0) > 10);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
+  if (lenis) lenis.on('scroll', onScroll);
   onScroll();
 
+  /* ── Мобильное меню ───────────────────────────────────────── */
   const burger = document.querySelector('.nav-burger');
   const nav = document.querySelector('.site-nav');
   if (burger && nav) {
-    burger.addEventListener('click', () => {
-      const open = nav.classList.toggle('is-open');
+    const setNav = (open) => {
+      nav.classList.toggle('is-open', open);
       burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Меню');
+      document.body.classList.toggle('nav-open', open);
+      if (window.gbLenis) open ? gbLenis.stop() : gbLenis.start();
+    };
+
+    burger.addEventListener('click', () => {
+      setNav(!nav.classList.contains('is-open'));
     });
+
     nav.addEventListener('click', (e) => {
-      if (e.target.closest('a')) {
-        nav.classList.remove('is-open');
-        burger.setAttribute('aria-expanded', 'false');
+      if (e.target.closest('a')) setNav(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!nav.classList.contains('is-open')) return;
+      if (e.key === 'Escape') { setNav(false); burger.focus(); return; }
+      if (e.key === 'Tab') {
+        const items = [burger, ...nav.querySelectorAll('a')];
+        const first = items[0], last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
+    });
+
+    /* при переходе на десктоп шторку закрываем, чтобы не залипла */
+    matchMedia('(min-width: 861px)').addEventListener('change', (m) => {
+      if (m.matches) setNav(false);
     });
   }
 

@@ -140,11 +140,31 @@ html.qa .hero { min-height: 720px; }
   position: fixed; inset: 0 0 auto 0; z-index: 40;
   height: var(--header-h);
   display: flex; align-items: center;
-  transition: background var(--t-med), box-shadow var(--t-med);
+  transition: background var(--t-med), box-shadow var(--t-med), color var(--t-med);
 }
 .site-header.is-solid {
   background: rgba(245, 243, 239, .9);
   box-shadow: 0 1px 0 var(--line);
+}
+
+/* Поверх героя шапка светлая — чёрный логотип на фото не читается.
+   Как только появляется фон (.is-solid при скролле) — возвращается тёмная. */
+body.hero-page .site-header:not(.is-solid) { color: #fff; }
+body.hero-page .site-header:not(.is-solid) .site-nav a { color: rgba(255, 255, 255, .78); }
+body.hero-page .site-header:not(.is-solid) .site-nav a:hover,
+body.hero-page .site-header:not(.is-solid) .site-nav a[aria-current="page"] { color: #fff; }
+body.hero-page .site-header:not(.is-solid) .fin-toggle {
+  border-color: rgba(255, 255, 255, .5);
+  background: rgba(24, 22, 20, .28);
+}
+body.hero-page .site-header:not(.is-solid) .fin-toggle button { color: rgba(255, 255, 255, .8); }
+body.hero-page .site-header:not(.is-solid) .fin-toggle button[aria-pressed="true"] {
+  background: #fff;
+  color: #191919;
+}
+body.hero-page .site-header:not(.is-solid) .fin-toggle .dot { border-color: rgba(255, 255, 255, .55); }
+body.hero-page .site-header:not(.is-solid) .fin-toggle button[aria-pressed="true"] .dot {
+  border-color: rgba(25, 25, 25, .35);
 }
 .header-inner {
   width: 100%; max-width: var(--container);
@@ -191,7 +211,34 @@ html.qa .hero { min-height: 720px; }
 .fin-toggle .dot--w { background: #FFFFFF; }
 .fin-toggle button[aria-pressed="true"] .dot { border-color: rgba(255,255,255,.5); }
 
-.nav-burger { display: none; }
+.nav-foot { display: none; }
+
+/* Бургер: три линии, превращающиеся в крестик */
+.nav-burger {
+  display: none;
+  width: 44px; height: 44px;
+  place-items: center;
+  margin-right: calc(var(--gutter) * -0.35);
+}
+.burger-box {
+  position: relative;
+  display: block;
+  width: 22px; height: 14px;
+}
+.burger-box i {
+  position: absolute;
+  left: 0;
+  width: 100%; height: 1.6px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform .42s var(--ease-out), opacity .2s ease;
+}
+.burger-box i:nth-child(1) { top: 0; }
+.burger-box i:nth-child(2) { top: 6.2px; }
+.burger-box i:nth-child(3) { top: 12.4px; }
+.nav-burger[aria-expanded="true"] .burger-box i:nth-child(1) { transform: translateY(6.2px) rotate(45deg); }
+.nav-burger[aria-expanded="true"] .burger-box i:nth-child(2) { opacity: 0; transform: scaleX(.4); }
+.nav-burger[aria-expanded="true"] .burger-box i:nth-child(3) { transform: translateY(-6.2px) rotate(-45deg); }
 
 /* ═══ ДУО-КАРТИНКИ: чёрный / белый вариант ════════════════════── */
 .duo { position: relative; display: block; }
@@ -532,7 +579,10 @@ html.fin-w .duo .v-b { opacity: 0; }
   background: rgba(22, 21, 19, .55);
 }
 .pm-layer.is-open { display: flex; }
-body.pm-open { overflow: hidden; }
+body.pm-open, body.nav-open { overflow: hidden; }
+
+/* при открытой шторке шапка не должна оставаться «геройски» светлой */
+body.nav-open .site-header { background: transparent; box-shadow: none; }
 
 .pm {
   position: relative;
@@ -692,21 +742,95 @@ body.pm-open { overflow: hidden; }
 
 @media (max-width: 860px) {
   :root { --header-h: 62px; }
+
+  /* ── Мобильное меню: полноэкранная панель ─────────────────── */
   .site-nav {
-    position: fixed; inset: var(--header-h) 0 auto 0; z-index: 39;
-    flex-direction: column; gap: 0;
+    position: fixed;
+    inset: 0;
+    z-index: 39;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    margin: 0;
     background: var(--bg);
-    box-shadow: 0 24px 40px -20px rgba(25,22,18,.25);
-    padding: 8px var(--gutter) 20px;
-    display: none;
+    padding: calc(var(--header-h) + 26px) var(--gutter) calc(30px + env(safe-area-inset-bottom, 0px));
+    /* шторка раскрывается сверху вниз */
+    clip-path: inset(0 0 100% 0);
+    opacity: 0;
+    visibility: hidden;
+    transition: clip-path .58s var(--ease-out), opacity .3s ease, visibility 0s linear .58s;
   }
-  .site-nav.is-open { display: flex; }
-  .site-nav a { padding-block: 13px; border-bottom: 1px solid var(--line); font-size: 1.05rem; }
+  .site-nav.is-open {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    visibility: visible;
+    transition: clip-path .58s var(--ease-out), opacity .2s ease, visibility 0s;
+  }
+
+  .site-nav a {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: clamp(2rem, 10vw, 2.9rem);
+    letter-spacing: -.02em;
+    line-height: 1.1;
+    padding-block: clamp(8px, 1.6vh, 14px);
+    border: none;
+    /* пункты подъезжают снизу со сдвигом */
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity .4s ease, transform .55s var(--ease-out);
+  }
+  .site-nav.is-open a { opacity: 1; transform: none; }
+  .site-nav.is-open a:nth-of-type(1) { transition-delay: .16s; }
+  .site-nav.is-open a:nth-of-type(2) { transition-delay: .22s; }
+  .site-nav.is-open a:nth-of-type(3) { transition-delay: .28s; }
+  /* шторка светлая — пункты тёмные даже поверх героя
+     (только цвет, чтобы не перебить анимацию появления) */
+  body.hero-page .site-header:not(.is-solid) .site-nav a,
+  .site-nav a { color: var(--ink); }
+  body.hero-page .site-header:not(.is-solid) .site-nav a[aria-current="page"],
+  .site-nav a[aria-current="page"] { color: var(--dim); }
+  .site-nav a:active { transform: scale(.985); }
+
+  /* контакты внизу шторки */
+  .nav-foot {
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: calc(30px + env(safe-area-inset-bottom, 0px));
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .4s ease .3s, transform .5s var(--ease-out) .3s;
+  }
+  .site-nav.is-open .nav-foot { opacity: 1; transform: none; }
+  body.hero-page .site-header:not(.is-solid) .nav-foot a,
+  .nav-foot a {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: .9375rem;
+    letter-spacing: 0;
+    color: var(--dim);
+    padding: 0;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  /* бургер прижат к правому краю */
+  .header-controls { margin-left: auto; }
   .nav-burger {
-    display: grid; place-items: center;
-    width: 40px; height: 40px;
-    margin-left: 4px;
+    display: grid;
+    margin-left: 2px;
+    z-index: 41;
+    position: relative;
   }
+  /* открытая шторка светлая — бургер всегда тёмный */
+  body.nav-open .site-header .nav-burger { color: var(--ink); }
   .fin-toggle button span.lbl { display: none; }
   .fin-toggle button { padding: 8px 10px; }
   /* min-height вместе с aspect-ratio навязывал ширину больше экрана */
@@ -791,21 +915,6 @@ body.pm-open { overflow: hidden; }
   .page-head .t-label,
   .section-head .t-label { font-size: .625rem; letter-spacing: .17em; }
 
-  /* шапка поверх героя — светлая: чёрный логотип на фото не читается */
-  body.hero-page .site-header:not(.is-solid) { color: #fff; }
-  body.hero-page .site-header:not(.is-solid) .fin-toggle {
-    border-color: rgba(255, 255, 255, .5);
-    background: rgba(24, 22, 20, .3);
-  }
-  body.hero-page .site-header:not(.is-solid) .fin-toggle button { color: rgba(255, 255, 255, .8); }
-  body.hero-page .site-header:not(.is-solid) .fin-toggle button[aria-pressed="true"] {
-    background: #fff;
-    color: #191919;
-  }
-  body.hero-page .site-header:not(.is-solid) .fin-toggle .dot { border-color: rgba(255, 255, 255, .55); }
-  body.hero-page .site-header:not(.is-solid) .fin-toggle button[aria-pressed="true"] .dot {
-    border-color: rgba(25, 25, 25, .35);
-  }
 }
 
 /* низкие экраны (iPhone SE и подобные) — плотнее по вертикали */
