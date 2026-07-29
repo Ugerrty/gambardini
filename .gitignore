@@ -2,3 +2,7 @@ card/_snaps/
 _snaps/
 _shot.mjs
 _probe.html
+node_modules/
+_upscale.mjs
+package.json
+package-lock.json

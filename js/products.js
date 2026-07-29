@@ -16,7 +16,7 @@
       mount: 'скрытый крепёж «замочная скважина»',
       desc: 'Три функции в одном профиле: сверху — полка под телефон, в нише — упаковка влажных салфеток, снизу на скрытом крючке — рулон. Кромки скруглены, крепёж не виден вовсе.',
       imgB: 'img/g02-b.png', imgW: 'img/g02-w.png',
-      lifeB: 'img/life-g02-b.jpg', lifeW: 'img/life-g02-w.jpg',
+      lifeB: 'img/life-g02-b.webp', lifeW: 'img/life-g02-w.webp',
     },
     {
       id: 'g01', code: 'G01-32',
@@ -28,7 +28,7 @@
       mount: 'скрытый крепёж «замочная скважина»',
       desc: 'Высокий задний борт не даёт флаконам соскользнуть, снизу — крючок для мочалки. Логотип вырезан лазером в металле — никаких наклеек. Выдерживает полный набор косметики.',
       imgB: 'img/g01-b.png', imgW: 'img/g01-w.png',
-      lifeB: 'img/life-g01-b.jpg', lifeW: 'img/life-g01-w.jpg',
+      lifeB: 'img/life-g01-b.webp', lifeW: 'img/life-g01-w.webp',
     },
     {
       id: 'g043', code: 'G04-3',
@@ -40,7 +40,7 @@
       mount: 'скрытый крепёж, 2 точки',
       desc: 'Три круглых крючка на общей пластине: полотенца, халат, щётка для сухого массажа. Круглая форма не оставляет заломов на ткани.',
       imgB: 'img/g043-b.png', imgW: 'img/g043-w.png',
-      lifeB: 'img/life-g043-b.jpg', lifeW: 'img/life-g043-w.jpg',
+      lifeB: 'img/life-g043-b.webp', lifeW: 'img/life-g043-w.webp',
     },
     {
       id: 'g03', code: 'G03',
@@ -85,7 +85,7 @@
       mount: 'клеевой монтаж, без сверления',
       desc: 'Самый компактный предмет каталога: гнутая пластина с логотипом, в которую просто продевается полотенце. Идеален у раковины и на кухне.',
       imgB: 'img/g05-b.png', imgW: 'img/g05-w.png',
-      lifeB: 'img/life-g0506-b.jpg', lifeW: 'img/life-g0506-w.jpg',
+      lifeB: 'img/life-g0506-b.webp', lifeW: 'img/life-g0506-w.webp',
     },
   ];
 
