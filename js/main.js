@@ -21,10 +21,58 @@
   }
   window.gbLenis = lenis;
 
-  /* ── Шапка ────────────────────────────────────────────────── */
+  /* ── Прелоадер (только первый заход в сессии) ─────────────── */
+  (function preloader() {
+    const pl = document.querySelector('.preloader');
+    const finish = () => {
+      doc.classList.add('ready');
+      doc.classList.remove('hold');
+      try { sessionStorage.setItem('gb-pl', '1'); } catch (e) { /* — */ }
+      if (pl) {
+        pl.classList.add('done');
+        setTimeout(() => pl.remove(), 900);
+      }
+    };
+    if (!doc.classList.contains('hold')) { doc.classList.add('ready'); return; }
+    /* держим ровно столько, сколько нужно шрифтам и первому кадру */
+    let done = false;
+    const go = () => { if (!done) { done = true; finish(); } };
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => setTimeout(go, 350));
+    }
+    setTimeout(go, 1300); /* потолок — прелоадер не имеет права залипать */
+  })();
+
+  /* ── Переходы между страницами ────────────────────────────── */
+  document.addEventListener('click', (e) => {
+    if (REDUCED) return;
+    if (e.defaultPrevented || e.button !== 0) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest('a[href]');
+    if (!a || a.target || a.hasAttribute('download')) return;
+    const href = a.getAttribute('href');
+    /* только внутренние переходы между страницами сайта */
+    if (!/^[a-z-]+\.html(#.*)?$/.test(href)) return;
+    if (href.split('#')[0] === location.pathname.split('/').pop()) return;
+    e.preventDefault();
+    document.body.classList.add('leaving');
+    setTimeout(() => { location.href = href; }, 210);
+  });
+  /* возврат из bfcache — страница должна ожить */
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) document.body.classList.remove('leaving');
+  });
+
+  /* ── Шапка и параллакс героя ──────────────────────────────── */
   const header = document.querySelector('.site-header');
+  const heroMedia = document.querySelector('.hero-media');
   function onScroll() {
-    if (header) header.classList.toggle('is-solid', (window.scrollY || 0) > 10);
+    const y = window.scrollY || 0;
+    if (header) header.classList.toggle('is-solid', y > 10);
+    /* фото отстаёт от скролла — глубина без пересчёта лейаута */
+    if (heroMedia && !REDUCED && y < window.innerHeight * 1.2) {
+      heroMedia.style.transform = 'translate3d(0,' + (y * 0.16).toFixed(1) + 'px,0)';
+    }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   if (lenis) lenis.on('scroll', onScroll);
