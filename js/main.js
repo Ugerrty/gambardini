@@ -38,7 +38,7 @@
     accept() {
       try { localStorage.setItem(CONSENT_KEY, '1'); } catch (e) { /* — */ }
       /* донести сессионные значения до постоянного хранилища */
-      ['gb-fin', 'gb-cart'].forEach((k) => {
+      ['gb-fin', 'gb-cart', 'gb-co'].forEach((k) => {
         let v = null;
         try { v = sessionStorage.getItem(k); } catch (e) { /* — */ }
         if (v !== null) { try { localStorage.setItem(k, v); } catch (e) { /* — */ } }
@@ -47,7 +47,7 @@
     decline() {
       try { localStorage.setItem(CONSENT_KEY, '0'); } catch (e) { /* — */ }
       /* стираем уже сохранённое: остаётся только текущая сессия */
-      ['gb-fin', 'gb-cart'].forEach((k) => {
+      ['gb-fin', 'gb-cart', 'gb-co'].forEach((k) => {
         try { localStorage.removeItem(k); } catch (e) { /* — */ }
       });
     },
@@ -237,73 +237,33 @@
   window.addEventListener('load', refit);
   window.addEventListener('resize', refit, { passive: true });
 
-  /* ── Плашка «§00 · Хранение» (cookies) ────────────────────── */
+  /* ── Плашка cookies ───────────────────────────────────────── */
   (function ckBar() {
     if (getConsent() !== null) return;    /* выбор уже сделан */
 
     const bar = document.createElement('div');
     bar.className = 'ck-bar';
     bar.setAttribute('role', 'region');
-    bar.setAttribute('aria-label', 'Хранение данных');
+    bar.setAttribute('aria-label', 'Cookies');
     bar.innerHTML =
-      '<span class="ck-idx" aria-hidden="true">§00 · Хранение</span>' +
-      '<p class="ck-text">Мы гнём сталь, а&nbsp;не&nbsp;данные. Сайт запоминает две вещи: выбранный цвет и&nbsp;вашу заявку. Аналитики и&nbsp;рекламных трекеров нет.</p>' +
+      '<p class="ck-text">Мы используем cookies, чтобы сайт запоминал выбранный цвет и&nbsp;товары в&nbsp;корзине. Без аналитики и&nbsp;рекламы.</p>' +
       '<span class="ck-actions">' +
-        '<button class="ck-more" type="button">Что храним</button>' +
-        '<button class="ck-ok" type="button">Понятно</button>' +
+        '<button class="ck-no" type="button">Отказаться</button>' +
+        '<button class="ck-ok" type="button">Принять</button>' +
       '</span>';
     document.body.appendChild(bar);
     document.body.classList.add('has-ck');
 
-    const spec = document.createElement('div');
-    spec.className = 'ck-layer';
-    spec.hidden = true;
-    const row = (k, v, t) =>
-      '<div class="ck-row"><dt>' + k + '</dt><dd>' + v + '</dd><dd class="ck-t">' + t + '</dd></div>';
-    spec.innerHTML =
-      '<div class="ck-card" role="dialog" aria-modal="true" aria-label="Что храним">' +
-        '<button class="ck-close" type="button" aria-label="Закрыть">×</button>' +
-        '<p class="t-label">Хранение · спецификация</p>' +
-        '<dl class="ck-table">' +
-          row('gb-fin', 'выбранный цвет', 'до очистки браузера') +
-          row('gb-cart', 'состав заявки', 'до отправки заявки') +
-          row('gb-ck', 'отметка об этой плашке', 'до очистки браузера') +
-          row('аналитика · реклама', 'отсутствуют', '—') +
-        '</dl>' +
-        '<p class="ck-note">Это технические записи в&nbsp;вашем браузере — они никуда не&nbsp;отправляются.</p>' +
-        '<div class="ck-card-actions">' +
-          '<button class="btn btn--ink" type="button" data-ck="ok">Хранить на этом устройстве</button>' +
-          '<button class="ck-session" type="button" data-ck="session">Только текущая сессия</button>' +
-        '</div>' +
-      '</div>';
-    document.body.appendChild(spec);
-
-    /* деталь ложится на стол после реза — с паузой, чтобы не спорить с героем */
     setTimeout(() => bar.classList.add('is-in'), 1400);
 
-    function hideAll() {
+    function hide() {
       bar.classList.remove('is-in');
       document.body.classList.remove('has-ck');
-      spec.hidden = true;
-      setTimeout(() => { bar.remove(); spec.remove(); }, 550);
+      setTimeout(() => bar.remove(), 550);
     }
-    bar.querySelector('.ck-ok').addEventListener('click', () => { gbConsent.accept(); hideAll(); });
-    bar.querySelector('.ck-more').addEventListener('click', () => {
-      spec.hidden = false;
-      void spec.offsetWidth;
-      spec.classList.add('is-open');
-    });
-    spec.addEventListener('click', (e) => {
-      if (e.target === spec) { spec.classList.remove('is-open'); spec.hidden = true; return; }
-      const b = e.target.closest('[data-ck], .ck-close');
-      if (!b) return;
-      if (b.classList.contains('ck-close')) { spec.classList.remove('is-open'); spec.hidden = true; return; }
-      if (b.dataset.ck === 'ok') { gbConsent.accept(); hideAll(); }
-      if (b.dataset.ck === 'session') { gbConsent.decline(); hideAll(); }
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !spec.hidden) { spec.classList.remove('is-open'); spec.hidden = true; }
-    });
+    /* отказ = ничего не храним дольше текущей сессии */
+    bar.querySelector('.ck-ok').addEventListener('click', () => { gbConsent.accept(); hide(); });
+    bar.querySelector('.ck-no').addEventListener('click', () => { gbConsent.decline(); hide(); });
   })();
 
   /* ── Появления ────────────────────────────────────────────── */
