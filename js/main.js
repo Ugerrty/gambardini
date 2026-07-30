@@ -8,6 +8,51 @@
   const doc = document.documentElement;
   const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ── Хранилище с учётом согласия ──────────────────────────────
+     До выбора и при «Принять» пишем в localStorage (переживает
+     закрытие сайта), при «Только сессия» — только sessionStorage.
+     Читаем отовсюду: приоритет у localStorage. */
+  const CONSENT_KEY = 'gb-ck';
+  function getConsent() {
+    try { return localStorage.getItem(CONSENT_KEY); } catch (e) { return null; }
+  }
+  const store = {
+    get(k) {
+      try { const v = localStorage.getItem(k); if (v !== null) return v; } catch (e) { /* — */ }
+      try { return sessionStorage.getItem(k); } catch (e) { return null; }
+    },
+    set(k, v) {
+      try { sessionStorage.setItem(k, v); } catch (e) { /* — */ }
+      if (getConsent() !== '0') {
+        try { localStorage.setItem(k, v); } catch (e) { /* — */ }
+      }
+    },
+    del(k) {
+      try { localStorage.removeItem(k); } catch (e) { /* — */ }
+      try { sessionStorage.removeItem(k); } catch (e) { /* — */ }
+    },
+  };
+  window.gbStore = store;
+  window.gbConsent = {
+    get: getConsent,
+    accept() {
+      try { localStorage.setItem(CONSENT_KEY, '1'); } catch (e) { /* — */ }
+      /* донести сессионные значения до постоянного хранилища */
+      ['gb-fin', 'gb-cart'].forEach((k) => {
+        let v = null;
+        try { v = sessionStorage.getItem(k); } catch (e) { /* — */ }
+        if (v !== null) { try { localStorage.setItem(k, v); } catch (e) { /* — */ } }
+      });
+    },
+    decline() {
+      try { localStorage.setItem(CONSENT_KEY, '0'); } catch (e) { /* — */ }
+      /* стираем уже сохранённое: остаётся только текущая сессия */
+      ['gb-fin', 'gb-cart'].forEach((k) => {
+        try { localStorage.removeItem(k); } catch (e) { /* — */ }
+      });
+    },
+  };
+
   /* QA-режим для тестовых снимков */
   if (location.search.indexOf('motion=off') > -1) doc.classList.add('qa');
 
@@ -140,7 +185,7 @@
   }
   function setFin(f) {
     doc.classList.toggle('fin-w', f === 'w');
-    try { localStorage.setItem('gb-fin', f); } catch (e) { /* приватный режим */ }
+    store.set('gb-fin', f);
     syncFin();
   }
   document.addEventListener('click', (e) => {
@@ -166,12 +211,100 @@
     const size = Math.min(100 * (target / measured) * 0.97, 116);
     el.style.fontSize = size.toFixed(2) + 'px';
   }
-  fitWordmark();
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => requestAnimationFrame(() => { fitWordmark(); syncPill(true); }));
+  /* Гигантский wordmark футера: кегль ровно по ширине контейнера.
+     CSS-clamp — только стартовое приближение: на широких экранах
+     трекинг съедал последнюю букву, на узких оставлял поля */
+  function fitGiant() {
+    document.querySelectorAll('.footer-giant').forEach((p) => {
+      const el = p.querySelector('i') || p.querySelector('span');
+      if (!el) return;
+      const target = p.clientWidth;
+      if (!target) return;
+      el.style.fontSize = '100px';
+      const w = el.getBoundingClientRect().width;
+      if (!w) { el.style.fontSize = ''; return; }
+      el.style.fontSize = (100 * (target / w) * 0.995).toFixed(2) + 'px';
+    });
   }
-  window.addEventListener('load', () => { fitWordmark(); syncPill(true); });
-  window.addEventListener('resize', () => { fitWordmark(); syncPill(true); }, { passive: true });
+
+  const refit = () => { fitWordmark(); fitGiant(); syncPill(true); };
+  fitWordmark();
+  fitGiant();
+  if (document.fonts && document.fonts.ready) {
+    /* без rAF: в фоновой вкладке кадры не идут, а мерить можно и так */
+    document.fonts.ready.then(() => { refit(); setTimeout(refit, 80); });
+  }
+  window.addEventListener('load', refit);
+  window.addEventListener('resize', refit, { passive: true });
+
+  /* ── Плашка «§00 · Хранение» (cookies) ────────────────────── */
+  (function ckBar() {
+    if (getConsent() !== null) return;    /* выбор уже сделан */
+
+    const bar = document.createElement('div');
+    bar.className = 'ck-bar';
+    bar.setAttribute('role', 'region');
+    bar.setAttribute('aria-label', 'Хранение данных');
+    bar.innerHTML =
+      '<span class="ck-idx" aria-hidden="true">§00 · Хранение</span>' +
+      '<p class="ck-text">Мы гнём сталь, а&nbsp;не&nbsp;данные. Сайт запоминает две вещи: выбранный цвет и&nbsp;вашу заявку. Аналитики и&nbsp;рекламных трекеров нет.</p>' +
+      '<span class="ck-actions">' +
+        '<button class="ck-more" type="button">Что храним</button>' +
+        '<button class="ck-ok" type="button">Понятно</button>' +
+      '</span>';
+    document.body.appendChild(bar);
+    document.body.classList.add('has-ck');
+
+    const spec = document.createElement('div');
+    spec.className = 'ck-layer';
+    spec.hidden = true;
+    const row = (k, v, t) =>
+      '<div class="ck-row"><dt>' + k + '</dt><dd>' + v + '</dd><dd class="ck-t">' + t + '</dd></div>';
+    spec.innerHTML =
+      '<div class="ck-card" role="dialog" aria-modal="true" aria-label="Что храним">' +
+        '<button class="ck-close" type="button" aria-label="Закрыть">×</button>' +
+        '<p class="t-label">Хранение · спецификация</p>' +
+        '<dl class="ck-table">' +
+          row('gb-fin', 'выбранный цвет', 'до очистки браузера') +
+          row('gb-cart', 'состав заявки', 'до отправки заявки') +
+          row('gb-ck', 'отметка об этой плашке', 'до очистки браузера') +
+          row('аналитика · реклама', 'отсутствуют', '—') +
+        '</dl>' +
+        '<p class="ck-note">Это технические записи в&nbsp;вашем браузере — они никуда не&nbsp;отправляются.</p>' +
+        '<div class="ck-card-actions">' +
+          '<button class="btn btn--ink" type="button" data-ck="ok">Хранить на этом устройстве</button>' +
+          '<button class="ck-session" type="button" data-ck="session">Только текущая сессия</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(spec);
+
+    /* деталь ложится на стол после реза — с паузой, чтобы не спорить с героем */
+    setTimeout(() => bar.classList.add('is-in'), 1400);
+
+    function hideAll() {
+      bar.classList.remove('is-in');
+      document.body.classList.remove('has-ck');
+      spec.hidden = true;
+      setTimeout(() => { bar.remove(); spec.remove(); }, 550);
+    }
+    bar.querySelector('.ck-ok').addEventListener('click', () => { gbConsent.accept(); hideAll(); });
+    bar.querySelector('.ck-more').addEventListener('click', () => {
+      spec.hidden = false;
+      void spec.offsetWidth;
+      spec.classList.add('is-open');
+    });
+    spec.addEventListener('click', (e) => {
+      if (e.target === spec) { spec.classList.remove('is-open'); spec.hidden = true; return; }
+      const b = e.target.closest('[data-ck], .ck-close');
+      if (!b) return;
+      if (b.classList.contains('ck-close')) { spec.classList.remove('is-open'); spec.hidden = true; return; }
+      if (b.dataset.ck === 'ok') { gbConsent.accept(); hideAll(); }
+      if (b.dataset.ck === 'session') { gbConsent.decline(); hideAll(); }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !spec.hidden) { spec.classList.remove('is-open'); spec.hidden = true; }
+    });
+  })();
 
   /* ── Появления ────────────────────────────────────────────── */
   const revealed = document.querySelectorAll('[data-reveal]');

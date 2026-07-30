@@ -23,7 +23,7 @@
       var d = document.documentElement;
       d.classList.add('js');
       var f;
-      try { f = localStorage.getItem('gb-fin'); } catch (e) { f = null; }
+      try { f = localStorage.getItem('gb-fin') || sessionStorage.getItem('gb-fin'); } catch (e) { f = null; }
       if (location.search.indexOf('fin=w') > -1) f = 'w';
       if (location.search.indexOf('fin=b') > -1) f = 'b';
       if (f === 'w') d.classList.add('fin-w');
@@ -32,7 +32,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=32">
+  <link rel="stylesheet" href="css/style.css?v=33">
 </head>
 <body>
 
@@ -104,14 +104,14 @@
           <p class="pm-desc" id="pm-desc"></p>
           <dl class="pm-specs" id="pm-specs"></dl>
           <div class="pm-actions">
-            <a class="btn btn--ink" id="pm-order" href="mailto:hello@gambardini.ru">Заказать</a>
+            <button class="btn btn--ink" type="button" id="pm-add">В заявку</button>
             <div class="pm-nav">
               <button class="btn btn--ghost" type="button" id="pm-prev" aria-label="Предыдущий предмет">←</button>
               <span class="pm-count" id="pm-count" aria-live="polite">01&nbsp;/&nbsp;07</span>
               <button class="btn btn--ghost" type="button" id="pm-next" aria-label="Следующий предмет">→</button>
             </div>
           </div>
-          <p class="pm-alt">Или по&nbsp;телефону: <a href="tel:+74951203874">+7&nbsp;495&nbsp;120-38-74</a> · <button class="pm-copy" type="button" id="pm-copy" aria-live="polite">скопировать заявку</button></p>
+          <p class="pm-alt">Или сразу: <a id="pm-order" href="mailto:hello@gambardini.ru">письмом</a> · <a href="tel:+74951203874">+7&nbsp;495&nbsp;120-38-74</a> · <button class="pm-copy" type="button" id="pm-copy" aria-live="polite">скопировать заявку</button></p>
         </div>
     </article>
   </div>
@@ -149,8 +149,9 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="js/products.js?v=32"></script>
-  <script src="js/main.js?v=32"></script>
-  <script src="js/catalog.js?v=32"></script>
+  <script src="js/products.js?v=33"></script>
+  <script src="js/main.js?v=33"></script>
+  <script src="js/cart.js?v=33"></script>
+  <script src="js/catalog.js?v=33"></script>
 </body>
 </html>

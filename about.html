@@ -23,7 +23,7 @@
       var d = document.documentElement;
       d.classList.add('js');
       var f;
-      try { f = localStorage.getItem('gb-fin'); } catch (e) { f = null; }
+      try { f = localStorage.getItem('gb-fin') || sessionStorage.getItem('gb-fin'); } catch (e) { f = null; }
       if (location.search.indexOf('fin=w') > -1) f = 'w';
       if (location.search.indexOf('fin=b') > -1) f = 'b';
       if (f === 'w') d.classList.add('fin-w');
@@ -32,7 +32,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=32">
+  <link rel="stylesheet" href="css/style.css?v=33">
 </head>
 <body>
 
@@ -67,72 +67,215 @@
     <div class="container page-head">
       <p class="t-label" data-reveal>О бренде</p>
       <h1 class="t-head lines" data-reveal aria-label="Меньше предмета — больше дома"><span class="ln" aria-hidden="true"><i>Меньше предмета —</i></span><span class="ln" aria-hidden="true"><i>больше дома</i></span></h1>
+      <p class="note" data-reveal data-delay="120">Аксессуары для ванной и&nbsp;дома из&nbsp;гнутой стали 1,5&nbsp;мм. Лазерная резка, гибка, полимерное покрытие. Сделано в&nbsp;Москве.</p>
     </div>
 
-    <section class="section" style="padding-top: clamp(20px, 3vh, 36px)">
-      <div class="container about-hero">
-        <div class="col" data-reveal>
-          <p class="lead">Мы делаем стальные вещи, которые не&nbsp;спорят с&nbsp;интерьером — они в&nbsp;нём растворяются.</p>
-          <p style="margin-top: 22px">GAMBARDINI начинался с&nbsp;простого раздражения: держатели и&nbsp;полки в&nbsp;магазинах либо блестят хромом и&nbsp;винтами, либо разваливаются через год. Мы захотели третий вариант — тихий, прочный и&nbsp;графичный.</p>
-          <p>Каждый предмет — это один лист стали: лазерная резка, точная гибка, полимерное покрытие. Логотип не&nbsp;наклеен, а&nbsp;вырезан в&nbsp;металле. Крепёж спрятан за&nbsp;пластиной. Углы скруглены так, чтобы о&nbsp;них нельзя было пораниться.</p>
-          <p>Делаем в&nbsp;Москве — от&nbsp;раскроя листа до&nbsp;упаковки.</p>
-        </div>
-        <div class="about-media" data-reveal data-delay="120">
-          <span class="duo">
-            <img class="v-b" src="img/life-g02-b.webp" alt="Чёрный держатель GAMBARDINI в интерьере ванной" loading="lazy">
-            <img class="v-w" src="img/life-g02-w.webp" alt="Белый держатель GAMBARDINI в интерьере ванной" loading="lazy">
-          </span>
-        </div>
-      </div>
+    <!-- ── фото-пауза ────────────────────────────────────────── -->
+    <section class="pause" data-reveal>
+      <span class="duo">
+        <img class="v-b" src="img/hero-b.webp" alt="Чёрная стальная полка GAMBARDINI с косметикой" loading="lazy"
+             srcset="img/hero-b.webp 1254w, img/hero-b@2x.webp 2508w" sizes="100vw">
+        <img class="v-w" src="img/hero-w.webp" alt="Белая стальная полка GAMBARDINI с косметикой" loading="lazy"
+             srcset="img/hero-w.webp 1254w, img/hero-w@2x.webp 2508w" sizes="100vw">
+      </span>
+      <span class="t-label pause-cap">Сталь 1,5&nbsp;мм · чёрный и&nbsp;белый · Москва</span>
     </section>
 
-    <section class="section" style="padding-top: 0">
+    <!-- ── 01 · ПОЗИЦИЯ ──────────────────────────────────────── -->
+    <section class="section">
       <div class="container">
-        <div class="section-head">
-          <p class="t-label" data-reveal>Как это сделано</p>
-          <h2 class="t-head lines" data-reveal aria-label="Один лист стали — и ничего лишнего">
-            <span class="ln" aria-hidden="true"><i>Один лист стали —</i></span>
-            <span class="ln" aria-hidden="true"><i>и&nbsp;ничего лишнего</i></span>
-          </h2>
+        <div class="sec-top" data-reveal>
+          <span class="t-label">Позиция</span>
+          <span class="sec-n">01</span>
         </div>
-        <div class="tiles">
-          <div class="tile" data-reveal>
-            <span class="t-label">01 · Раскрой</span>
-            <h3>Лазерная резка</h3>
-            <p>Контур, отверстия крепежа и&nbsp;логотип вырезаются за&nbsp;один проход — поэтому у&nbsp;предметов нет сварных швов и&nbsp;наклеек.</p>
-          </div>
-          <div class="tile" data-reveal data-delay="70">
-            <span class="t-label">02 · Гибка</span>
-            <h3>Точная геометрия</h3>
-            <p>Каждый изгиб — с&nbsp;одинаковым радиусом. Именно он делает вещи узнаваемыми: мягкий контур при&nbsp;строгой форме.</p>
-          </div>
-          <div class="tile" data-reveal data-delay="140">
-            <span class="t-label">03 · Покрытие</span>
-            <h3>Полимерное, матовое</h3>
-            <p>Чёрный и&nbsp;белый — глубокие матовые поверхности, которые не&nbsp;боятся воды, пара и&nbsp;уборки. Отпечатков пальцев не&nbsp;видно.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" style="padding-top: 0">
-      <div class="container">
-        <div class="dark-cta" data-reveal>
-          <div>
-            <span class="t-label">Каталог</span>
-            <h2 class="t-head lines" data-reveal aria-label="Семь предметов. Два цвета.">
-              <span class="ln" aria-hidden="true"><i>Семь предметов.</i></span>
-              <span class="ln" aria-hidden="true"><i>Два&nbsp;цвета.</i></span>
+        <div class="pos-grid">
+          <div class="col">
+            <h2 class="t-head lines" data-reveal aria-label="Не хром и не пластик">
+              <span class="ln" aria-hidden="true"><i>Не хром</i></span>
+              <span class="ln" aria-hidden="true"><i>и&nbsp;не&nbsp;пластик</i></span>
             </h2>
-            <p>Полки, держатели и&nbsp;крючки, которые собираются в&nbsp;единый комплект — в&nbsp;чёрном или белом.</p>
-            <a class="btn btn--light" href="catalog.html">Открыть каталог</a>
+            <p data-reveal data-delay="90">Большинство аксессуаров для ванной — блестящий хром, пластик и&nbsp;клеёные крючки, которые разваливаются через год. Мы делаем третий вариант — тихий, прочный и&nbsp;графичный.</p>
+            <p data-reveal data-delay="150">Логотип не&nbsp;наклеен, а&nbsp;вырезан в&nbsp;металле. Крепёж спрятан за&nbsp;пластиной. Углы скруглены так, чтобы о&nbsp;них нельзя было пораниться.</p>
           </div>
-          <div class="cta-media" aria-hidden="true">
-            <span class="duo">
-              <img class="v-b" src="img/life-g01-b.webp" alt="" loading="lazy">
-              <img class="v-w" src="img/life-g01-w.webp" alt="" loading="lazy">
+          <div class="pos-media" data-reveal data-delay="120">
+            <span class="duo duo--contain">
+              <img class="v-b" src="img/g02-b.webp" srcset="img/g02-b-sm.webp 750w, img/g02-b.webp 1500w" sizes="(max-width: 1000px) 92vw, 40vw" alt="Держатель туалетной бумаги G02, чёрная сталь" loading="lazy" decoding="async">
+              <img class="v-w" src="img/g02-w.webp" srcset="img/g02-w-sm.webp 750w, img/g02-w.webp 1500w" sizes="(max-width: 1000px) 92vw, 40vw" alt="Держатель туалетной бумаги G02, белая сталь" loading="lazy" decoding="async">
             </span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 02 · В ЦИФРАХ ─────────────────────────────────────── -->
+    <section class="section" style="padding-top: 0">
+      <div class="container">
+        <div class="sec-top" data-reveal>
+          <span class="t-label">Коротко, в цифрах</span>
+          <span class="sec-n">02</span>
+        </div>
+        <div class="facts">
+          <div class="fact lines" data-reveal><b class="ln"><i>1,5&nbsp;мм</i></b><span class="t-label">сталь листа</span></div>
+          <div class="fact lines" data-reveal><b class="ln"><i>7</i></b><span class="t-label">предметов</span></div>
+          <div class="fact lines" data-reveal><b class="ln"><i>2</i></b><span class="t-label">цвета покрытия</span></div>
+          <div class="fact lines" data-reveal><b class="ln"><i>690–2290&nbsp;₽</i></b><span class="t-label">вся линейка</span></div>
+          <div class="fact lines" data-reveal><b class="ln"><i>Москва</i></b><span class="t-label">производство</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 03 · МАТЕРИАЛ (тёмная) ────────────────────────────── -->
+    <section class="mat">
+      <div class="container">
+        <div class="sec-top" data-reveal>
+          <span class="t-label">Материал</span>
+          <span class="sec-n">03</span>
+        </div>
+        <div class="mat-grid">
+          <div class="mat-text">
+            <h2 class="t-head lines" data-reveal aria-label="Сталь 1,5 мм">
+              <span class="ln" aria-hidden="true"><i>Сталь</i></span>
+              <span class="ln" aria-hidden="true"><i>1,5&nbsp;мм</i></span>
+            </h2>
+            <p data-reveal data-delay="90">Лист 1,5&nbsp;мм держит форму сам — без рёбер жёсткости и&nbsp;сварки.</p>
+            <p data-reveal data-delay="140">Контур, отверстия крепежа и&nbsp;логотип вырезаются лазером за&nbsp;один проход, поэтому на&nbsp;предметах нет швов и&nbsp;наклеек.</p>
+            <p data-reveal data-delay="190">Полимерный слой — глубокий матовый чёрный или белый. Не&nbsp;боится воды, пара и&nbsp;уборки; отпечатков пальцев не&nbsp;видно.</p>
+          </div>
+          <div class="crops">
+            <figure class="crop-item" data-reveal>
+              <span class="crop"><span class="duo">
+                <img class="v-b" src="img/g02-b-sm.webp" style="--z: 2.1; --o: 30% 34%" alt="Радиус гиба стального листа, чёрное покрытие" loading="lazy" decoding="async">
+                <img class="v-w" src="img/g02-w-sm.webp" style="--z: 2.1; --o: 30% 34%" alt="Радиус гиба стального листа, белое покрытие" loading="lazy" decoding="async">
+              </span></span>
+              <figcaption class="t-label crop-cap">Радиус гиба</figcaption>
+            </figure>
+            <figure class="crop-item" data-reveal data-delay="120">
+              <span class="crop"><span class="duo">
+                <img class="v-b" src="img/g01-b-sm.webp" style="--z: 2.3; --o: 55% 30%" alt="Кромка лазерного реза, чёрное покрытие" loading="lazy" decoding="async">
+                <img class="v-w" src="img/g01-w-sm.webp" style="--z: 2.3; --o: 55% 30%" alt="Кромка лазерного реза, белое покрытие" loading="lazy" decoding="async">
+              </span></span>
+              <figcaption class="t-label crop-cap">Кромка реза</figcaption>
+            </figure>
+            <figure class="crop-item" data-reveal data-delay="240">
+              <span class="crop"><span class="duo">
+                <img class="v-b" src="img/g043-b-sm.webp" style="--z: 2.4; --o: 50% 32%" alt="Матовая фактура полимерного покрытия, чёрный" loading="lazy" decoding="async">
+                <img class="v-w" src="img/g043-w-sm.webp" style="--z: 2.4; --o: 50% 32%" alt="Матовая фактура полимерного покрытия, белый" loading="lazy" decoding="async">
+              </span></span>
+              <figcaption class="t-label crop-cap">Матовое покрытие</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 04 · ПРОИЗВОДСТВО ─────────────────────────────────── -->
+    <section class="section">
+      <div class="container">
+        <div class="sec-top" data-reveal>
+          <span class="t-label">Производство</span>
+          <span class="sec-n">04</span>
+        </div>
+        <div class="section-head">
+          <h2 class="t-head lines" data-reveal aria-label="От листа до предмета">
+            <span class="ln" aria-hidden="true"><i>От листа</i></span>
+            <span class="ln" aria-hidden="true"><i>до&nbsp;предмета</i></span>
+          </h2>
+        </div>
+        <div class="proc">
+          <div class="proc-row" data-reveal>
+            <span class="proc-n" aria-hidden="true">01</span>
+            <h3 class="proc-name">Лазерная резка</h3>
+            <p>Контур, отверстия и&nbsp;логотип вырезаются из&nbsp;листа за&nbsp;один проход. Поэтому нет сварных швов и&nbsp;наклеек — логотип прорезан в&nbsp;металле.</p>
+            <span class="proc-thumb"><span class="duo">
+              <img class="v-b" src="img/g06-b-sm.webp" style="--z: 1.8; --o: 50% 30%" alt="Крючок-клипса из стали, чёрный" loading="lazy" decoding="async">
+              <img class="v-w" src="img/g06-w-sm.webp" style="--z: 1.8; --o: 50% 30%" alt="Крючок-клипса из стали, белый" loading="lazy" decoding="async">
+            </span></span>
+          </div>
+          <div class="proc-row" data-reveal>
+            <span class="proc-n" aria-hidden="true">02</span>
+            <h3 class="proc-name">Гибка</h3>
+            <p>Каждый изгиб — с&nbsp;одинаковым радиусом на&nbsp;всех предметах коллекции. Мягкий контур при&nbsp;строгой форме — это он.</p>
+            <span class="proc-thumb"><span class="duo">
+              <img class="v-b" src="img/g04-b-sm.webp" style="--z: 1.7; --o: 50% 42%" alt="Крючок круглый из гнутой стали, чёрный" loading="lazy" decoding="async">
+              <img class="v-w" src="img/g04-w-sm.webp" style="--z: 1.7; --o: 50% 42%" alt="Крючок круглый из гнутой стали, белый" loading="lazy" decoding="async">
+            </span></span>
+          </div>
+          <div class="proc-row" data-reveal>
+            <span class="proc-n" aria-hidden="true">03</span>
+            <h3 class="proc-name">Полимерное покрытие</h3>
+            <p>Матовый слой, чёрный или белый. Выдерживает воду, пар и&nbsp;уборку — цвет не&nbsp;выгорает и&nbsp;не&nbsp;желтеет.</p>
+            <span class="proc-thumb"><span class="duo">
+              <img class="v-b" src="img/g05-b-sm.webp" style="--z: 1.8; --o: 50% 38%" alt="Компактный крючок-клипса, чёрный" loading="lazy" decoding="async">
+              <img class="v-w" src="img/g05-w-sm.webp" style="--z: 1.8; --o: 50% 38%" alt="Компактный крючок-клипса, белый" loading="lazy" decoding="async">
+            </span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 05 · ПРЕДМЕТЫ ─────────────────────────────────────── -->
+    <section class="section" style="padding-top: 0">
+      <div class="container">
+        <div class="sec-top" data-reveal>
+          <span class="t-label">Предметы</span>
+          <span class="sec-n">05</span>
+        </div>
+        <div class="shelf">
+          <a class="shelf-item" href="catalog.html#g02" data-reveal>
+            <span class="shelf-media"><span class="duo duo--contain">
+              <img class="v-b" src="img/g02-b-sm.webp" alt="Держатель туалетной бумаги, чёрный" loading="lazy" decoding="async">
+              <img class="v-w" src="img/g02-w-sm.webp" alt="Держатель туалетной бумаги, белый" loading="lazy" decoding="async">
+            </span></span>
+            <span class="shelf-line"><span>Держатель бумаги</span><span class="dots" aria-hidden="true"></span><span class="price">2&nbsp;290&nbsp;₽</span></span>
+          </a>
+          <a class="shelf-item" href="catalog.html#g01" data-reveal data-delay="60">
+            <span class="shelf-media"><span class="duo duo--contain">
+              <img class="v-b" src="img/g01-b-sm.webp" alt="Полка настенная 32 см, чёрная" loading="lazy" decoding="async">
+              <img class="v-w" src="img/g01-w-sm.webp" alt="Полка настенная 32 см, белая" loading="lazy" decoding="async">
+            </span></span>
+            <span class="shelf-line"><span>Полка 32&nbsp;см</span><span class="dots" aria-hidden="true"></span><span class="price">1&nbsp;990&nbsp;₽</span></span>
+          </a>
+          <a class="shelf-item" href="catalog.html#g043" data-reveal data-delay="120">
+            <span class="shelf-media"><span class="duo duo--contain">
+              <img class="v-b" src="img/g043-b-sm.webp" alt="Вешалка на три крючка, чёрная" loading="lazy" decoding="async">
+              <img class="v-w" src="img/g043-w-sm.webp" alt="Вешалка на три крючка, белая" loading="lazy" decoding="async">
+            </span></span>
+            <span class="shelf-line"><span>Вешалка на&nbsp;три крючка</span><span class="dots" aria-hidden="true"></span><span class="price">1&nbsp;690&nbsp;₽</span></span>
+          </a>
+          <a class="shelf-item" href="catalog.html#g03" data-reveal data-delay="180">
+            <span class="shelf-media"><span class="duo duo--contain">
+              <img class="v-b" src="img/g03-b-sm.webp" alt="Держатель для фена, чёрный" loading="lazy" decoding="async">
+              <img class="v-w" src="img/g03-w-sm.webp" alt="Держатель для фена, белый" loading="lazy" decoding="async">
+            </span></span>
+            <span class="shelf-line"><span>Держатель фена</span><span class="dots" aria-hidden="true"></span><span class="price">1&nbsp;490&nbsp;₽</span></span>
+          </a>
+          <a class="shelf-item" href="catalog.html#g04" data-reveal data-delay="240">
+            <span class="shelf-media"><span class="duo duo--contain">
+              <img class="v-b" src="img/g04-b-sm.webp" alt="Крючок круглый, чёрный" loading="lazy" decoding="async">
+              <img class="v-w" src="img/g04-w-sm.webp" alt="Крючок круглый, белый" loading="lazy" decoding="async">
+            </span></span>
+            <span class="shelf-line"><span>Крючок круглый</span><span class="dots" aria-hidden="true"></span><span class="price">890&nbsp;₽</span></span>
+          </a>
+          <a class="shelf-item" href="catalog.html#g06" data-reveal data-delay="300">
+            <span class="shelf-media"><span class="duo duo--contain">
+              <img class="v-b" src="img/g06-b-sm.webp" alt="Крючок-клипса широкий, чёрный" loading="lazy" decoding="async">
+              <img class="v-w" src="img/g06-w-sm.webp" alt="Крючок-клипса широкий, белый" loading="lazy" decoding="async">
+            </span></span>
+            <span class="shelf-line"><span>Клипса широкая</span><span class="dots" aria-hidden="true"></span><span class="price">790&nbsp;₽</span></span>
+          </a>
+          <a class="shelf-item" href="catalog.html#g05" data-reveal data-delay="360">
+            <span class="shelf-media"><span class="duo duo--contain">
+              <img class="v-b" src="img/g05-b-sm.webp" alt="Крючок-клипса, чёрный" loading="lazy" decoding="async">
+              <img class="v-w" src="img/g05-w-sm.webp" alt="Крючок-клипса, белый" loading="lazy" decoding="async">
+            </span></span>
+            <span class="shelf-line"><span>Клипса</span><span class="dots" aria-hidden="true"></span><span class="price">690&nbsp;₽</span></span>
+          </a>
+        </div>
+        <div class="letter" data-reveal>
+          <p>Мы делаем семь предметов из&nbsp;стали. Каждый режем лазером, гнём и&nbsp;красим в&nbsp;Москве. Больше нам добавить нечего — остальное скажет вещь.</p>
+          <span class="wordmark">Gambardini</span>
+          <span class="t-label">Москва</span>
+          <a class="btn btn--ink" href="catalog.html">Открыть каталог</a>
         </div>
       </div>
     </section>
@@ -171,7 +314,8 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="js/products.js?v=32"></script>
-  <script src="js/main.js?v=32"></script>
+  <script src="js/products.js?v=33"></script>
+  <script src="js/main.js?v=33"></script>
+  <script src="js/cart.js?v=33"></script>
 </body>
 </html>

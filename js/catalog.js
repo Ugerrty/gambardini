@@ -340,6 +340,18 @@
   document.getElementById('pm-next').addEventListener('click', () => openModal(current + 1));
   const prevBtn = document.getElementById('pm-prev');
   if (prevBtn) prevBtn.addEventListener('click', () => openModal(current - 1));
+
+  /* «В заявку»: кладём текущий товар в выбранном цвете */
+  const addBtn = document.getElementById('pm-add');
+  let addTimer = null;
+  if (addBtn) addBtn.addEventListener('click', () => {
+    if (!window.gbCart) return;
+    const fin = document.documentElement.classList.contains('fin-w') ? 'w' : 'b';
+    gbCart.add(P[current].id, fin);
+    addBtn.textContent = 'Добавлено ✓';
+    clearTimeout(addTimer);
+    addTimer = setTimeout(() => { addBtn.textContent = 'В заявку'; }, 1600);
+  });
   layer.addEventListener('click', (e) => { if (e.target === layer) closeModal(); });
 
   document.addEventListener('keydown', (e) => {
