@@ -56,9 +56,12 @@
   /* QA-режим для тестовых снимков */
   if (location.search.indexOf('motion=off') > -1) doc.classList.add('qa');
 
-  /* ── Плавный скролл ───────────────────────────────────────── */
+  /* ── Плавный скролл ───────────────────────────────────────────
+     Только десктоп с мышью: на телефонах JS-скролл спорит с нативным
+     и даёт рывки — там остаётся системная прокрутка, она плавнее */
+  const FINE = matchMedia('(hover: hover) and (pointer: fine)').matches;
   let lenis = null;
-  if (!REDUCED && window.Lenis) {
+  if (!REDUCED && FINE && window.Lenis) {
     lenis = new Lenis({ lerp: 0.09 });
     doc.classList.add('lenis');
     const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
@@ -66,26 +69,21 @@
   }
   window.gbLenis = lenis;
 
-  /* ── Прелоадер (только первый заход в сессии) ─────────────── */
+  /* ── Заставка (каждый заход на главную, всегда доигрывает) ── */
   (function preloader() {
     const pl = document.querySelector('.preloader');
     const finish = () => {
       doc.classList.add('ready');
       doc.classList.remove('hold');
-      try { sessionStorage.setItem('gb-pl', '1'); } catch (e) { /* — */ }
       if (pl) {
         pl.classList.add('done');
         setTimeout(() => pl.remove(), 900);
       }
     };
     if (!doc.classList.contains('hold')) { doc.classList.add('ready'); return; }
-    /* держим ровно столько, сколько нужно шрифтам и первому кадру */
-    let done = false;
-    const go = () => { if (!done) { done = true; finish(); } };
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => setTimeout(go, 350));
-    }
-    setTimeout(go, 1300); /* потолок — прелоадер не имеет права залипать */
+    if (REDUCED) { finish(); return; }
+    /* фиксированный таймлайн: буквы + линия успевают доиграть */
+    setTimeout(finish, 1700);
   })();
 
   /* ── Переходы между страницами ────────────────────────────── */
@@ -114,8 +112,9 @@
   function onScroll() {
     const y = window.scrollY || 0;
     if (header) header.classList.toggle('is-solid', y > 10);
-    /* фото отстаёт от скролла — глубина без пересчёта лейаута */
-    if (heroMedia && !REDUCED && y < window.innerHeight * 1.2) {
+    /* фото отстаёт от скролла — глубина без пересчёта лейаута.
+       Только десктоп: на телефоне transform каждый кадр = рывки */
+    if (heroMedia && !REDUCED && FINE && y < window.innerHeight * 1.2) {
       heroMedia.style.transform = 'translate3d(0,' + (y * 0.16).toFixed(1) + 'px,0)';
     }
   }

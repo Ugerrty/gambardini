@@ -27,9 +27,8 @@
       if (location.search.indexOf('fin=w') > -1) f = 'w';
       if (location.search.indexOf('fin=b') > -1) f = 'b';
       if (f === 'w') d.classList.add('fin-w');
-      /* первый заход в сессии — короткий прелоадер, появления удерживаются */
-      var first; try { first = !sessionStorage.getItem('gb-pl'); } catch (e) { first = false; }
-      if (first && location.search.indexOf('motion=off') === -1) d.classList.add('hold');
+      /* заставка играет при каждом заходе на главную */
+      if (location.search.indexOf('motion=off') === -1) d.classList.add('hold');
     })();
   </script>
   <link rel="preload" as="image"
@@ -38,11 +37,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=34">
+  <link rel="stylesheet" href="css/style.css?v=35">
 </head>
 <body class="hero-page">
 
-  <div class="preloader" aria-hidden="true"><span class="pl-mark">Gambardini</span></div>
+  <div class="preloader" aria-hidden="true">
+    <span class="pl-mark"><i>G</i><i>a</i><i>m</i><i>b</i><i>a</i><i>r</i><i>d</i><i>i</i><i>n</i><i>i</i></span>
+    <span class="pl-line"></span>
+  </div>
 
   <a class="skip-link" href="#main">К содержанию</a>
 
@@ -105,7 +107,6 @@
       <div class="container">
         <div class="sec-top" data-reveal>
           <span class="t-label">Сигнатура бренда</span>
-          <span class="sec-n">01</span>
         </div>
         <div class="section-head section-head--center">
           <h2 class="t-head lines" data-reveal aria-label="Один предмет. Два характера.">
@@ -135,7 +136,6 @@
       <div class="container">
         <div class="sec-top" data-reveal>
           <span class="t-label">Каталог</span>
-          <span class="sec-n">02</span>
         </div>
         <div class="section-head">
           <h2 class="t-head lines" data-reveal aria-label="Семь предметов, которые наводят порядок">
@@ -210,7 +210,6 @@
       <div class="container">
         <div class="sec-top" data-reveal>
           <span class="t-label">Материал и монтаж</span>
-          <span class="sec-n">03</span>
         </div>
         <div class="tiles">
           <div class="tile" data-reveal>
@@ -237,7 +236,6 @@
       <div class="container">
         <div class="sec-top" data-reveal>
           <span class="t-label">В интерьере</span>
-          <span class="sec-n">04</span>
         </div>
         <div class="gallery">
           <span class="shot" data-reveal><span class="duo">
@@ -318,8 +316,8 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="js/products.js?v=34"></script>
-  <script src="js/main.js?v=34"></script>
-  <script src="js/cart.js?v=34"></script>
+  <script src="js/products.js?v=35"></script>
+  <script src="js/main.js?v=35"></script>
+  <script src="js/cart.js?v=35"></script>
 </body>
 </html>
