@@ -116,11 +116,26 @@
   }
 
   /* ── «Чёрный / Белый» — сигнатура сайта ───────────────────── */
+  /* пилюля тумблера скользит под активную кнопку; размеры зависят
+     от шрифта, поэтому после его загрузки и на resize — мгновенная
+     подгонка без анимации */
+  function syncPill(instant) {
+    document.querySelectorAll('.fin-toggle, .split-ui').forEach((g) => {
+      const pill = g.querySelector('.fin-pill');
+      const on = g.querySelector('button[aria-pressed="true"]');
+      if (!pill || !on) return;
+      if (instant) pill.style.transition = 'none';
+      pill.style.width = on.offsetWidth + 'px';
+      pill.style.transform = 'translateX(' + on.offsetLeft + 'px)';
+      if (instant) { void pill.offsetWidth; pill.style.transition = ''; }
+    });
+  }
   function syncFin() {
     const white = doc.classList.contains('fin-w');
     document.querySelectorAll('[data-fin]').forEach((b) => {
       b.setAttribute('aria-pressed', String((b.dataset.fin === 'w') === white));
     });
+    syncPill();
     document.dispatchEvent(new CustomEvent('gb:fin', { detail: { white } }));
   }
   function setFin(f) {
@@ -153,10 +168,10 @@
   }
   fitWordmark();
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => requestAnimationFrame(fitWordmark));
+    document.fonts.ready.then(() => requestAnimationFrame(() => { fitWordmark(); syncPill(true); }));
   }
-  window.addEventListener('load', fitWordmark);
-  window.addEventListener('resize', fitWordmark, { passive: true });
+  window.addEventListener('load', () => { fitWordmark(); syncPill(true); });
+  window.addEventListener('resize', () => { fitWordmark(); syncPill(true); }, { passive: true });
 
   /* ── Появления ────────────────────────────────────────────── */
   const revealed = document.querySelectorAll('[data-reveal]');
@@ -167,6 +182,12 @@
           const el = en.target;
           if (el.dataset.delay) el.style.setProperty('--reveal-delay', el.dataset.delay + 'ms');
           el.classList.add('is-in');
+          /* по завершении появления возвращаем элементу его тайминги
+             (правило .is-done); таймер — на случай, если transitionend
+             не придёт (reduced motion, скрытая вкладка) */
+          const done = () => el.classList.add('is-done');
+          el.addEventListener('transitionend', done, { once: true });
+          setTimeout(done, 1400);
           io.unobserve(el);
         }
       });

@@ -5,7 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Каталог — GAMBARDINI · полки, держатели, крючки из стали</title>
   <meta name="description" content="Каталог GAMBARDINI: держатель туалетной бумаги с полкой, настенные полки, вешалки, крючки-клипсы. Сталь с полимерным покрытием, чёрный и белый цвет, цены в рублях.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='8' y='8' width='48' height='48' rx='12' fill='%23191919'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='700' font-size='28' fill='%23fff' text-anchor='middle'%3EG%3C/text%3E%3C/svg%3E">
+  <link rel="canonical" href="https://ugerrty.github.io/gambardini/catalog.html">
+  <meta name="theme-color" content="#F5F3EF">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GAMBARDINI">
+  <meta property="og:title" content="Каталог GAMBARDINI — семь предметов из стали">
+  <meta property="og:description" content="Полки, держатели и крючки-клипсы. Сталь 1,5 мм, чёрный и белый, цены в рублях.">
+  <meta property="og:url" content="https://ugerrty.github.io/gambardini/catalog.html">
+  <meta property="og:image" content="https://ugerrty.github.io/gambardini/img/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='8' y='8' width='48' height='48' rx='12' fill='%23191919'/%3E%3Cpath d='M40 24a12.5 12.5 0 1 0 4 9.5h-11' fill='none' stroke='%23fff' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E">
   <script>
     (function () {
       var d = document.documentElement;
@@ -20,7 +32,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=31">
+  <link rel="stylesheet" href="css/style.css?v=32">
 </head>
 <body>
 
@@ -40,6 +52,7 @@
       </nav>
       <div class="header-controls">
         <div class="fin-toggle" role="group" aria-label="Цвет изделий">
+          <span class="fin-pill" aria-hidden="true"></span>
           <button type="button" data-fin="b" aria-pressed="true"><span class="dot dot--b" aria-hidden="true"></span><span class="lbl">Чёрный</span></button>
           <button type="button" data-fin="w" aria-pressed="false"><span class="dot dot--w" aria-hidden="true"></span><span class="lbl">Белый</span></button>
         </div>
@@ -52,7 +65,7 @@
 
   <main id="main">
     <div class="container page-head">
-      <p class="t-label" data-reveal>Каталог · 7 позиций · чёрный и белый</p>
+      <p class="t-label" data-reveal>Каталог&nbsp;· 7&nbsp;позиций&nbsp;· чёрный и&nbsp;белый</p>
       <h1 class="t-head lines" data-reveal aria-label="Каталог"><span class="ln" aria-hidden="true"><i>Каталог</i></span></h1>
       <p class="note" data-reveal data-delay="120">Вся коллекция — из&nbsp;стали 1,5&nbsp;мм с&nbsp;полимерным покрытием. Выберите предмет, чтобы посмотреть его в&nbsp;интерьере, размеры и&nbsp;способ монтажа. Цвет переключается в&nbsp;шапке — сразу для&nbsp;всего каталога.</p>
     </div>
@@ -67,8 +80,12 @@
       </div>
     </section>
 
-    <!-- ── КАРТОЧКА ТОВАРА ───────────────────────────────────── -->
-    <div class="pm-layer" id="pm-layer" role="dialog" aria-modal="true" aria-labelledby="pm-name" hidden>
+  </main>
+
+  <!-- ── КАРТОЧКА ТОВАРА ─────────────────────────────────────────
+       вне <main>: у main при переходах анимируется transform,
+       а transform родителя ломает position:fixed слоя -->
+  <div class="pm-layer" id="pm-layer" role="dialog" aria-modal="true" aria-labelledby="pm-name" hidden>
       <article class="pm" data-lenis-prevent>
         <button class="pm-close" type="button" id="pm-close" aria-label="Закрыть карточку">×</button>
         <div class="pm-media" id="pm-media">
@@ -88,12 +105,16 @@
           <dl class="pm-specs" id="pm-specs"></dl>
           <div class="pm-actions">
             <a class="btn btn--ink" id="pm-order" href="mailto:hello@gambardini.ru">Заказать</a>
-            <button class="btn btn--ghost" type="button" id="pm-next">Следующий предмет</button>
+            <div class="pm-nav">
+              <button class="btn btn--ghost" type="button" id="pm-prev" aria-label="Предыдущий предмет">←</button>
+              <span class="pm-count" id="pm-count" aria-live="polite">01&nbsp;/&nbsp;07</span>
+              <button class="btn btn--ghost" type="button" id="pm-next" aria-label="Следующий предмет">→</button>
+            </div>
           </div>
+          <p class="pm-alt">Или по&nbsp;телефону: <a href="tel:+74951203874">+7&nbsp;495&nbsp;120-38-74</a> · <button class="pm-copy" type="button" id="pm-copy" aria-live="polite">скопировать заявку</button></p>
         </div>
-      </article>
-    </div>
-  </main>
+    </article>
+  </div>
 
   <footer class="site-footer">
     <div class="container">
@@ -119,7 +140,7 @@
           </ul>
         </div>
       </div>
-      <p class="footer-giant" aria-hidden="true"><span>Gambardini</span></p>
+      <p class="footer-giant lines" data-reveal aria-hidden="true"><span class="ln"><i>Gambardini</i></span></p>
       <div class="footer-base">
         <span>© 2026 GAMBARDINI</span>
         <span>сталь · чёрный · белый</span>
@@ -128,8 +149,8 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="js/products.js?v=31"></script>
-  <script src="js/main.js?v=31"></script>
-  <script src="js/catalog.js?v=31"></script>
+  <script src="js/products.js?v=32"></script>
+  <script src="js/main.js?v=32"></script>
+  <script src="js/catalog.js?v=32"></script>
 </body>
 </html>

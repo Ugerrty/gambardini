@@ -29,7 +29,9 @@
         </span>
       </span>`;
     }
-    return `<span class="p-media"><span class="duo duo--contain">
+    /* --ds — поэлементный масштаб: мелкие крючки кадрированы
+       в исходниках с большими полями и без него тонут в карточке */
+    return `<span class="p-media"><span class="duo duo--contain" style="--ds:${p.scale || 1}">
       <img class="v-b" src="${p.imgB}" ${rset(p.imgB)} sizes="${R_SIZES}" alt="${p.name}, чёрный" loading="lazy" decoding="async">
       <img class="v-w" src="${p.imgW}" ${rset(p.imgW)} sizes="${R_SIZES}" alt="${p.name}, белый" loading="lazy" decoding="async">
     </span></span>`;
@@ -47,6 +49,16 @@
       </span>
     </button>`).join(''));
 
+  /* служебная плитка закрывает пустой хвост сетки из семи позиций
+     и ведёт в подбор комплекта */
+  cards.insertAdjacentHTML('beforeend',
+    '<a class="p-card p-card--cta" href="contacts.html" data-reveal>' +
+      '<span class="t-label">Подбор комплекта</span>' +
+      '<span class="cta-big t-head">Не уверены, что подойдёт к вашей плитке?</span>' +
+      '<span class="cta-note">Пришлите фото ванной — соберём комплект под интерьер и посчитаем доставку.</span>' +
+      '<span class="cta-go">Написать нам <i aria-hidden="true">→</i></span>' +
+    '</a>');
+
   /* поздние reveal-элементы — наблюдаем вручную */
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
@@ -55,6 +67,10 @@
           const el = en.target;
           if (el.dataset.delay) el.style.setProperty('--reveal-delay', el.dataset.delay + 'ms');
           el.classList.add('is-in');
+          /* вернуть карточке её тайминги ховера (правило .is-done) */
+          const done = () => el.classList.add('is-done');
+          el.addEventListener('transitionend', done, { once: true });
+          setTimeout(done, 1400);
           io.unobserve(el);
         }
       });
@@ -111,24 +127,54 @@
       specRow('Монтаж', p.mount),
       specRow('Цвета', 'чёрный матовый · белый матовый'),
     ].join('');
+    const count = document.getElementById('pm-count');
+    if (count) {
+      count.textContent = String(i + 1).padStart(2, '0') + ' / ' +
+        String(P.length).padStart(2, '0');
+    }
     syncOrderLink();
   }
 
+  function orderText(p) {
+    return 'Здравствуйте!\n\nХочу заказать: ' + p.code + ' · ' + p.name +
+      '\nЦвет: ' + finName() + '\nЦена по сайту: ' + GB.fmtPrice(p.price) +
+      '\n\nГород и удобный способ доставки: ';
+  }
   function syncOrderLink() {
     const p = P[current];
     const order = document.getElementById('pm-order');
-    const body = 'Здравствуйте!\n\nХочу заказать: ' + p.code + ' · ' + p.name +
-      '\nЦвет: ' + finName() + '\nЦена по сайту: ' + GB.fmtPrice(p.price) +
-      '\n\nГород и удобный способ доставки: ';
     order.setAttribute('href', 'mailto:hello@gambardini.ru?subject=' +
       encodeURIComponent('Заказ ' + p.code + ' — ' + p.name) +
-      '&body=' + encodeURIComponent(body));
+      '&body=' + encodeURIComponent(orderText(p)));
   }
   document.addEventListener('gb:fin', syncOrderLink);
+
+  /* запасной канал: заявка копируется в буфер — для тех, у кого
+     не настроен почтовый клиент */
+  const copyBtn = document.getElementById('pm-copy');
+  let copyTimer = null;
+  if (copyBtn) copyBtn.addEventListener('click', () => {
+    const flash = (t) => {
+      copyBtn.textContent = t;
+      clearTimeout(copyTimer);
+      copyTimer = setTimeout(() => { copyBtn.textContent = 'скопировать заявку'; }, 2800);
+    };
+    const text = orderText(P[current]) + '\n\n→ hello@gambardini.ru';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(
+        () => flash('скопировано — вставьте в любой мессенджер'),
+        () => flash('не вышло — напишите на hello@gambardini.ru')
+      );
+    } else flash('не вышло — напишите на hello@gambardini.ru');
+  });
 
   const sheet = layer.querySelector('.pm');
   const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let closeTimer = null;
+  /* история: открытие кладёт запись поверх чистого URL, чтобы
+     системная «Назад» закрывала карточку, а не уводила со страницы */
+  let pushed = false;      /* наша запись сейчас в истории */
+  let ignorePop = false;   /* закрытие кнопкой уже отработано — popstate глушим */
 
   function openModal(i, keepHash) {
     const wasOpen = !layer.hidden;
@@ -154,7 +200,16 @@
     layer.classList.add('is-open');
 
     if (!keepHash) {
-      try { history.replaceState(null, '', '#' + P[current].id); } catch (e) { /* — */ }
+      try {
+        if (pushed || (history.state && history.state.pm)) {
+          history.replaceState({ pm: 1 }, '', '#' + P[current].id);
+        } else {
+          history.pushState({ pm: 1 }, '', '#' + P[current].id);
+          pushed = true;
+        }
+      } catch (e) { /* — */ }
+    } else {
+      try { history.replaceState({ pm: 1 }, '', '#' + P[current].id); } catch (e) { /* — */ }
     }
     /* при листании озвучиваем новый товар — фокус на заголовок,
        при первом открытии оставляем его на кнопке закрытия */
@@ -162,14 +217,14 @@
     if (target) target.focus({ preventScroll: true });
   }
 
-  function closeModal() {
+  /* собственно закрытие — без работы с историей */
+  function doClose() {
     if (layer.hidden) return;
     layer.classList.remove('is-open');
     sheet.classList.remove('is-dragging');
     sheet.style.transform = '';         /* шторка уезжает вниз по CSS */
     document.body.classList.remove('pm-open');
     if (window.gbLenis) gbLenis.start();
-    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* — */ }
 
     /* возвращаем фокус наружу; если исходный элемент исчез — на карточку товара */
     const back = (lastFocus && document.contains(lastFocus) && !layer.contains(lastFocus))
@@ -184,9 +239,36 @@
     closeTimer = setTimeout(() => { layer.hidden = true; }, REDUCED ? 0 : 480);
   }
 
+  /* закрытие из интерфейса: снимаем и нашу запись в истории */
+  function closeModal() {
+    if (layer.hidden) return;
+    doClose();
+    if (pushed) {
+      pushed = false;
+      ignorePop = true;
+      try { history.back(); } catch (e) { /* — */ }
+    } else {
+      try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* — */ }
+    }
+  }
+
+  /* системная «Назад» закрывает карточку, «Вперёд» возвращает её */
+  window.addEventListener('popstate', (e) => {
+    if (ignorePop) { ignorePop = false; return; }
+    if (e.state && e.state.pm) {
+      const id = location.hash.replace('#', '');
+      const k = P.findIndex((p) => p.id === id);
+      if (k >= 0) { pushed = true; openModal(k, true); }
+    } else if (!layer.hidden) {
+      pushed = false;
+      doClose();
+    }
+  });
+
   cards.addEventListener('click', (e) => {
     const card = e.target.closest('.p-card');
     if (!card) return;
+    if (!card.dataset.id) return;   /* сервисная CTA-плитка — обычная ссылка */
     openModal(P.findIndex((p) => p.id === card.dataset.id));
   });
 
@@ -256,6 +338,8 @@
     grip.addEventListener('touchcancel', () => { if (active) reset(); });
   })();
   document.getElementById('pm-next').addEventListener('click', () => openModal(current + 1));
+  const prevBtn = document.getElementById('pm-prev');
+  if (prevBtn) prevBtn.addEventListener('click', () => openModal(current - 1));
   layer.addEventListener('click', (e) => { if (e.target === layer) closeModal(); });
 
   document.addEventListener('keydown', (e) => {
