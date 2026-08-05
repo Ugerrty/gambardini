@@ -69,22 +69,10 @@
   }
   window.gbLenis = lenis;
 
-  /* ── Заставка (каждый заход на главную, всегда доигрывает) ── */
-  (function preloader() {
-    const pl = document.querySelector('.preloader');
-    const finish = () => {
-      doc.classList.add('ready');
-      doc.classList.remove('hold');
-      if (pl) {
-        pl.classList.add('done');
-        setTimeout(() => pl.remove(), 900);
-      }
-    };
-    if (!doc.classList.contains('hold')) { doc.classList.add('ready'); return; }
-    if (REDUCED) { finish(); return; }
-    /* фиксированный таймлайн: буквы + линия успевают доиграть */
-    setTimeout(finish, 1700);
-  })();
+  /* ── Готовность: запускает медленный отъезд камеры героя.
+     Пауза в кадр — иначе класс успевает встать до первой
+     отрисовки и переход не проигрывается ─────────────────────── */
+  setTimeout(() => doc.classList.add('ready'), 80);
 
   /* ── Переходы между страницами ────────────────────────────── */
   document.addEventListener('click', (e) => {
